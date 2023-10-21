@@ -4,18 +4,26 @@ function HelloWorld() {
   const [data, setData] = useState(null);
 
   useEffect(() => {
-    // Define the API URL
     const apiUrl = 'http://localhost:8000/api';
+    const abortController = new AbortController();
 
-    // Fetch data from the API
-    fetch(apiUrl)
+    fetch(apiUrl, { signal: abortController.signal })
       .then((response) => response.json())
       .then((result) => {
         setData(result);
       })
       .catch((error) => {
-        console.error('Error fetching data:', error);
+        if (error.name === 'AbortError') {
+          // Ignore the error if it's an abort due to unmounting
+        } else {
+          console.error('Error fetching data:', error);
+        }
       });
+
+    // Cleanup function to abort the request when the component unmounts
+    return () => {
+      abortController.abort();
+    };
   }, []);
 
   return (
