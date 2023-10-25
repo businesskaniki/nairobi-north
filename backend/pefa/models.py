@@ -9,6 +9,7 @@ structures.
 import uuid
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.db import models
+from rest_framework_simplejwt.tokens import RefreshToken
 
 
 # Custom manager for the UserProfile model
@@ -66,7 +67,9 @@ class UserProfile(AbstractBaseUser):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     email = models.EmailField(unique=True, max_length=200, verbose_name="email")
     username = models.CharField(max_length=255, unique=True)
+    profile_picture = models.ImageField(upload_to='profile_pics/', default='default_profile.png')
     first_name = models.CharField(max_length=200, null=True)
+    is_verified = models.BooleanField(default=False)
     last_name = models.CharField(max_length=200, null=True)
     is_admin = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)  # Indicates if the account is active
@@ -97,3 +100,10 @@ class UserProfile(AbstractBaseUser):
     # Define how the user instance is represented as a string
     def __str__(self):
         return f"{self.username}"
+    
+    def tokens(self):
+        refresh = RefreshToken.for_user(self)
+        return {
+            'refresh': str(refresh),
+            'access': str(refresh.access_token)
+        }

@@ -1,10 +1,24 @@
-import React from 'react'
-import HelloWorld from './components/HelloWorld'
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Nav from "./components/Nav/Nav";
+import Login from "./components/Auth/Login";
+import Register from "./components/Auth/Register";
 
-const App = () => {
+function App() {
+  document.title = "naiobi north east";
   return (
-    <div> <HelloWorld /> </div>
-  )
+    <Router>
+      <div className="App">
+        <Nav />
+        <div className="Content">
+          <Routes>
+            <Route path="/register" Component={Register} />
+            <Route path="/login" Component={Login} />
+          </Routes>
+          {/* we want to protect these routes */}
+        </div>
+      </div>
+    </Router>
+  );
 }
 
-export default App
+export default App;
