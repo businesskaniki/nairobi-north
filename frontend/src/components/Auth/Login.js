@@ -1,9 +1,8 @@
 import { useRef, useState, useEffect } from "react";
-import { Link } from "react-router-dom"; // Import Font Awesome CSS
+import { Link } from "react-router-dom";
 import CryptoJS from "crypto-js";
 import Cookies from "js-cookie";
 import "./auth.css";
-
 
 import axios from "./axios";
 const LOGIN_URL = "login/";
@@ -54,9 +53,12 @@ const Login = () => {
         "refreshtoken"
       ).toString();
       const ciphId = CryptoJS.AES.encrypt(strId, "user_id").toString();
-      Cookies.set('ref-tok-en', ciphrefresh, { secure: true, sameSite: "none" });
+      Cookies.set("ref-tok-en", ciphrefresh, {
+        secure: true,
+        sameSite: "none",
+      });
       Cookies.set("userId", ciphId, { secure: true, sameSite: "none" });
-      sessionStorage.setItem("role", roles);
+      localStorage.setItem("role", roles);
       setEmail("");
       setPwd("");
       setSuccess(true);
@@ -75,53 +77,55 @@ const Login = () => {
   };
 
   return (
-  
-        <div className="logindiv">
-          <p>{errMsg && <p className="error-message">{errMsg}</p>}</p>
-          <form className="wrapper" onSubmit={handleSubmit}>
-            <h2>LOGIN</h2>
-            <section className="group">
-              <input
-                type="text"
-                size="30"
-                className="input"
-                name="email"
-                ref={emailRef}
-                autoComplete="off"
-                onChange={(e) => setEmail(e.target.value)}
-                value={email}
-                required
-              />
-              <label htmlFor="email" className="label">
-                Email
-              </label>
-              <div ref={errRef} tabIndex={-1}></div>{" "}
-              {/* Assign errRef to a div */}
-            </section>
-            <section className="group">
-              <input
-                type="password"
-                minLength="8"
-                className="input"
-                name="password"
-                onChange={(e) => setPwd(e.target.value)}
-                value={pwd}
-                required
-              />
-              <label htmlFor="password" className="label">
-                Password
-              </label>
-              <div ref={errRef} tabIndex={-1}></div>{" "}
-              {/* Assign errRef to a div */}
-            </section>
-            <button type="submit" className="btn">
-              LOGIN
-            </button>
-            <button type="button" className="btn">
-              <Link to={"/register"}>SIGN UP</Link>
-            </button>
-          </form>
+    <div className="logindiv">
+      <p>{errMsg && <p className="error-message">{errMsg}</p>}</p>
+      <form className="wrapper" onSubmit={handleSubmit}>
+        <h2>LOGIN</h2>
+        <section className="group">
+          <input
+            type="text"
+            size="30"
+            className="input"
+            name="email"
+            ref={emailRef}
+            autoComplete="off"
+            onChange={(e) => setEmail(e.target.value)}
+            value={email}
+            required
+          />
+          <label htmlFor="email" className="label">
+            Email
+          </label>
+          <div ref={errRef} tabIndex={-1}></div> {/* Assign errRef to a div */}
+        </section>
+        <section className="group">
+          <input
+            type="password"
+            minLength="8"
+            className="input"
+            name="password"
+            onChange={(e) => setPwd(e.target.value)}
+            value={pwd}
+            required
+          />
+          <label htmlFor="password" className="label">
+            Password
+          </label>
+          <div ref={errRef} tabIndex={-1}></div> {/* Assign errRef to a div */}
+        </section>
+        <button type="submit" className="btn">
+          LOGIN
+        </button>
+        <div className="twobtn">
+          <button type="button" className="btn">
+            <Link to={"/register"}>sign up</Link>
+          </button>
+          <button type="button" className="btn">
+            <Link to={"/reset_password"}>reset password</Link>
+          </button>
         </div>
+      </form>
+    </div>
   );
 };
 

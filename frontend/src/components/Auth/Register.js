@@ -31,9 +31,6 @@ const Register = () => {
   const [firstName, setFirstName] = useState("");
   const [validFirstName, setValidFirstName] = useState(false);
   const [FirstNameFocus, setFirstNameFocus] = useState(false);
-
-  const [profilePic, setProfilePic] = useState(null);
-
   const [lastName, setLastName] = useState("");
   const [validLastName, setValidLastName] = useState(false);
   const [lastNameFocus, setLastNameFocus] = useState(false);
@@ -102,7 +99,6 @@ const Register = () => {
           email: email,
           first_name: firstName,
           last_name: lastName,
-          profilepic: profilePic,
         }),
         {
           headers: { "Content-Type": "application/json" },
