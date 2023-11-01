@@ -1,8 +1,4 @@
-import {
-  BrowserRouter as Router,
-  Route,
-  Routes,
-} from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Cookies from "js-cookie";
 import Nav from "./components/Nav/Nav";
 import Login from "./components/Auth/Login";
@@ -11,12 +7,17 @@ import ResetPassword from "./components/Auth/ResetPassword";
 import ResetPasswordForm from "./components/Auth/ResetPasswordForm";
 import NotFound from "./components/NotFound";
 import Admin from "./components/Dashboard/Admin";
-import PrivateRoute from "./components/Auth/PrivateRoutes";
+import PrivateRoute from "./Helpers/PrivateRoutes";
 import Home from "./components/Home/Home";
+import ProfileSettings from "./components/profile/ProfileSettings";
+import Churches from "./components/churches/Churches";
+import Ministries from "./components/ministries/Ministries";
+import Events from "./components/events/Events";
+import Gallery from "./components/gallery/Gallery";
+import Church from "./components/churches/Church";
 
 function App() {
-  document.title = "naiobi north east";
-
+  document.title = "Naiobi North East";
   const accessToken = Cookies.get("ac-tok-en");
   const isAuthenticated = accessToken;
   const isAdmin = localStorage.getItem("role");
@@ -28,12 +29,22 @@ function App() {
           <Routes>
             <Route exact path="/" element={<Home />} />
             <Route path="/register" Component={Register} />
+            <Route path="/churches" Component={Churches} />
             <Route path="/login" Component={Login} />
             <Route path="/reset_password" Component={ResetPassword} />
+            <Route path="/ministries" Component={Ministries} />
+            <Route path="/events" Component={Events} />
+            <Route path="/sermons" Component={Gallery} />
+
+            <Route
+              path="/church/:name"
+              element={<Church />}
+            />
             <Route
               path="/reset_password/confirm"
               Component={ResetPasswordForm}
             />
+            <Route path="/settings/:name" element={<ProfileSettings />} />
             <Route
               path="/dashboard"
               element={

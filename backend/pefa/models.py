@@ -10,6 +10,7 @@ import uuid
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.db import models
 from rest_framework_simplejwt.tokens import RefreshToken
+from django.core.validators import RegexValidator
 
 
 # Custom manager for the UserProfile model
@@ -57,8 +58,26 @@ class AccountManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
+class Department(models.Model):
+    """
+    Represents a department within the organization.
+
+    This model stores information about different departments or units
+    within the organization. Each department can have a unique name
+    and other related attributes.
+
+    Fields:
+    - name (str): The name of the department.
+    - Add other fields related to the department as needed.
+    """
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    name = models.CharField(max_length=100)
 
 # Custom user model based on AbstractBaseUser
+phone_regex = RegexValidator(
+        regex=r'^\+?1?\d{9,15}$',
+        message="Phone number must be entered in the format: '+999999999'. Up to 15 digits allowed."
+    )
 class UserProfile(AbstractBaseUser):
     """
     Fields for the user profile
@@ -69,19 +88,23 @@ class UserProfile(AbstractBaseUser):
     username = models.CharField(max_length=255, unique=True)
     profile_picture = models.ImageField(upload_to='profile_pics/', default='default_profile.png')
     first_name = models.CharField(max_length=200, null=True)
-    is_verified = models.BooleanField(default=False)
     last_name = models.CharField(max_length=200, null=True)
+    departments = models.ManyToManyField(Department)
+    residence = models.CharField(max_length=100)
+    phone_number = models.CharField(validators=[phone_regex], max_length=10, blank=True)
+    gender = models.CharField(max_length=4)
+    is_verified = models.BooleanField(default=False)
     is_admin = models.BooleanField(default=False)
-    is_active = models.BooleanField(default=True)  # Indicates if the account is active
-    is_staff = models.BooleanField(default=False)  # Indicates staff status
-    is_superuser = models.BooleanField(default=False)  # Indicates superuser status
+    is_active = models.BooleanField(default=True)
+    is_staff = models.BooleanField(default=False)
+    is_superuser = models.BooleanField(default=False)
 
-    USERNAME_FIELD = "email"  # Use email as the unique identifier for login
+    USERNAME_FIELD = "email"
     REQUIRED_FIELDS = [
         "username"
-    ]  # Fields required for user creation (in addition to email)
+    ]
 
-    objects = AccountManager()  # Custom manager for the UserProfile model
+    objects = AccountManager()
 
     # Check if the user has a specific permission
     def has_perm(self):
@@ -100,7 +123,7 @@ class UserProfile(AbstractBaseUser):
     # Define how the user instance is represented as a string
     def __str__(self):
         return f"{self.username}"
-    
+    #creating the tokens
     def tokens(self):
         refresh = RefreshToken.for_user(self)
         return {

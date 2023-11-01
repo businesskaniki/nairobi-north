@@ -1,5 +1,7 @@
 import { useRef, useState, useEffect } from "react";
 import { Navigate } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
+
 import {
   faCheck,
   faTimes,
@@ -8,7 +10,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "./axios";
 import { Link } from "react-router-dom";
-import "./auth.css";
+import "../../styles/auth.css";
 
 const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -90,7 +92,7 @@ const Register = () => {
     }
 
     try {
-      const response = await axios.post(
+      await axios.post(
         REGISTER_URL,
         JSON.stringify({
           username: user,
@@ -104,16 +106,13 @@ const Register = () => {
           headers: { "Content-Type": "application/json" },
         }
       );
-      // TODO: remove console.logs before deployment
-      console.log(JSON.stringify(response?.data));
-      //console.log(JSON.stringify(response))
       setSuccess(true);
       setUser("");
       setPwd("");
       setMatchPwd("");
-      setRedirectTo("/");
+      setRedirectTo("/login");
     } catch (err) {
-      console.log(err.response.data.message);
+      setErrMsg(err.response?.message);
       if (!err?.response) {
         setErrMsg("No Server Response");
       } else if (err.response?.status === 400) {
@@ -130,17 +129,31 @@ const Register = () => {
       {success ? (
         <>
           <Navigate to={redirectTo} />
-          <p>Registration successful! You can now log in.</p>
+          {toast.success("Registration was Successful!", {
+            position: "top-right",
+            autoClose: 2500,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+          })}
         </>
       ) : (
         <div className="logindiv">
-          <p
-            ref={errRef}
-            className={errMsg ? "errmsg" : "offscreen"}
-            aria-live="assertive"
-          >
-            {errMsg}
-          </p>
+          {errMsg
+            ? toast.error(errMsg, {
+                position: "top-right",
+                autoClose: 2500,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+              })
+            : null}
           <h1>Register</h1>
           <form
             className="wrapper"
@@ -405,6 +418,7 @@ const Register = () => {
               <Link to="/login">Sign In</Link>
             </span>
           </p>
+          <ToastContainer />
         </div>
       )}
     </>

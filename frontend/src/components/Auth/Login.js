@@ -1,12 +1,14 @@
 import { useRef, useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import CryptoJS from "crypto-js";
 import Cookies from "js-cookie";
-import "./auth.css";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+import "../../styles/auth.css";
 
 import axios from "./axios";
 const LOGIN_URL = "login/";
-
 const Login = () => {
   const emailRef = useRef(null);
   const errRef = useRef(null);
@@ -45,7 +47,6 @@ const Login = () => {
         "accesstoken"
       ).toString();
       Cookies.set("ac-tok-en", ciphtoken, { secure: true, sameSite: "none" });
-      const roles = data.admin;
       const user_id = data.id;
       const strId = user_id.toString();
       const ciphrefresh = CryptoJS.AES.encrypt(
@@ -58,7 +59,7 @@ const Login = () => {
         sameSite: "none",
       });
       Cookies.set("userId", ciphId, { secure: true, sameSite: "none" });
-      localStorage.setItem("role", roles);
+      localStorage.setItem("", response);
       setEmail("");
       setPwd("");
       setSuccess(true);
@@ -78,7 +79,17 @@ const Login = () => {
 
   return (
     <div className="logindiv">
-      <p>{errMsg && <p className="error-message">{errMsg}</p>}</p>
+      {errMsg &&
+        toast.error(errMsg, {
+          position: "top-right",
+          autoClose: 2500,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "colored",
+        })}
       <form className="wrapper" onSubmit={handleSubmit}>
         <h2>LOGIN</h2>
         <section className="group">
@@ -96,7 +107,7 @@ const Login = () => {
           <label htmlFor="email" className="label">
             Email
           </label>
-          <div ref={errRef} tabIndex={-1}></div> {/* Assign errRef to a div */}
+          <div ref={errRef} tabIndex={-1}></div>
         </section>
         <section className="group">
           <input
@@ -111,11 +122,29 @@ const Login = () => {
           <label htmlFor="password" className="label">
             Password
           </label>
-          <div ref={errRef} tabIndex={-1}></div> {/* Assign errRef to a div */}
+          <div ref={errRef} tabIndex={-1}></div>
         </section>
         <button type="submit" className="btn">
           LOGIN
         </button>
+        <div>
+          {success ? (
+            <div>
+              {toast.success("Login Successful!", {
+                position: "top-right",
+                autoClose: 2500,
+                hideProgressBar: true,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "colored",
+              })}
+              <Navigate to="/" />
+            </div>
+          ) : null}
+        </div>
+
         <div className="twobtn">
           <button type="button" className="btn">
             <Link to={"/register"}>sign up</Link>
@@ -125,6 +154,7 @@ const Login = () => {
           </button>
         </div>
       </form>
+      <ToastContainer />
     </div>
   );
 };

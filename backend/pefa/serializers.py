@@ -200,14 +200,7 @@ class UserProfileSerializer(serializers.ModelSerializer):
         """
 
         model = UserProfile
-        fields = [
-            "id",
-            "email",
-            "username",
-            "first_name",
-            "last_name",
-            "profile_picture",
-        ]
+        exclude = ['password']
         read_only_fields = ["id"]
 
     def update(self, instance, validated_data):

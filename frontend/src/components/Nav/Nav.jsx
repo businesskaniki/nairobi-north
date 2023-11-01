@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { Link } from "react-scroll";
-import "./nav.scss";
+import AuthChecker from "../../Helpers/AuthChecker";
+import LogoutButton from "../Auth/LogOut";
+import "../../styles/nav.scss";
 
 const Nav = () => {
   const [isDropdownVisible, setDropdownVisible] = useState("notvisible");
+  const username = "nicholas-maina";
 
   const handleMouseEnter = () => {
     setDropdownVisible("visible");
@@ -30,7 +33,7 @@ const Nav = () => {
   return (
     <header>
       <nav className="navbar container">
-        <h4>pefa nairobi north</h4>
+        <h4>Pefa Nairobi North</h4>
         <div className="navbar__menu">
           <ul className="navbar__list">
             <li>
@@ -45,37 +48,54 @@ const Nav = () => {
               <Link to="#contact">Contact</Link>
             </li>
             <li>
-              <NavLink exact to="/gallery">
-                Gallery
+              <NavLink to="churches">Churches</NavLink>
+            </li>
+            <li>
+              <NavLink to="ministries">Ministries</NavLink>
+            </li>
+            <li>
+              <NavLink to="events">Events</NavLink>
+            </li>
+            <li>
+              <NavLink exact to="/sermons">
+                Sermons
               </NavLink>
             </li>
           </ul>
           <div className="navbar__buttons">
-            <NavLink to="/login" className="navbar__buttons-login">
-              Login
-            </NavLink>
-            <button className="navbar__buttons-register">
-              <NavLink to="/register">NEW</NavLink>
-            </button>
-            <div
-              className="profile-picture"
-              onMouseEnter={handleMouseEnter}
-              onMouseLeave={handleMouseLeave}
-            >
-              <img
-                src="https://t4.ftcdn.net/jpg/03/83/25/83/240_F_383258331_D8imaEMl8Q3lf7EKU2Pi78Cn0R7KkW9o.jpg"
-                alt=""
-              />
+            <AuthChecker
+              compo={
+                <div
+                  className="profile-picture"
+                  onMouseEnter={handleMouseEnter}
+                  onMouseLeave={handleMouseLeave}
+                >
+                  <img
+                    src="https://t4.ftcdn.net/jpg/03/83/25/83/240_F_383258331_D8imaEMl8Q3lf7EKU2Pi78Cn0R7KkW9o.jpg"
+                    alt=""
+                  />
 
-              <div className={`navbar-dropdown ${isDropdownVisible}`}>
-                <p>hey nichols</p>
-                <div className="drop-links">
-                  <Link>settings</Link>
-                  <Link>prayer request</Link>
+                  <div className={`navbar-dropdown ${isDropdownVisible}`}>
+                    <p>hey nichols</p>
+                    <div className="drop-links">
+                      <NavLink to={`settings/${username}`}>settings</NavLink>
+                      <Link>prayer request</Link>
+                    </div>
+                    <LogoutButton />
+                  </div>
                 </div>
-                <button>logout</button>
-              </div>
-            </div>
+              }
+              logins={
+                <div className="buttons">
+                  <NavLink to="/login" className="navbar__buttons-login">
+                    Login
+                  </NavLink>
+                  <button className="navbar__buttons-register">
+                    <NavLink to="/register">NEW</NavLink>
+                  </button>
+                </div>
+              }
+            />
           </div>
         </div>
         <div className="demo">
