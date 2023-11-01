@@ -29,3 +29,4 @@ dj_database_url
 psycopg2-binary
 django
 djangorestframework-simplejwt
+drf-yasg
