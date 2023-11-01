@@ -197,6 +197,39 @@ class Church(models.Model):
         videos = Video.objects.filter(church=self)
         return {"images": images, "videos": videos}
 
+    def get_all_ministries(self):
+        """
+        Retrieve all events associated with the church.
+        """
+        return Ministry.objects.filter(church=self)
+
+    def get_all_events(self,church):
+        """
+        get all events
+        
+        """
+        return Event.objects.filter(church=church)
+    def get_all_church_officials(self):
+        """
+        Retrieve all church officials associated with the church.
+        """
+        return ChurchOfficial.objects.filter(church=self)
+
+    def get_all_sermons(self):
+        """
+        Retrieve all sermons associated with the church.
+        """
+        return Sermon.objects.filter(church=self)
+
+class EventManager(models.Manager):
+    """events manager"""
+
+    def events_for_church(self, church):
+        """
+        Retrieve all events associated with the given church.
+        """
+        return self.filter(church=church)
+
 
 class Event(models.Model):
     """
@@ -217,12 +250,22 @@ class Event(models.Model):
         related_name="events",
         help_text="Select the associated church",
     )
+    objects = EventManager()
 
     def __str__(self):
         """
         Returns the string representation of the event (event name).
         """
         return f"{self.name}"
+
+
+class MinistryManager(models.Manager):
+    """ministry manager"""
+    def ministries_for_church(self, church):
+        """
+        Retrieve all ministries associated with the given church.
+        """
+        return self.filter(church=church)
 
 
 class Ministry(models.Model):
@@ -252,7 +295,9 @@ class Ministry(models.Model):
         """
         images = Image.objects.filter(ministries=self)
         videos = Video.objects.filter(ministries=self)
-        return {"images": images, "videos":videos}
+        return {"images": images, "videos": videos}
+
+    objects = MinistryManager()
 
     def __str__(self):
         """
@@ -334,8 +379,9 @@ class Video(models.Model):
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     video = models.FileField(
-        upload_to="church_gallery_videos/", help_text="Select or upload a video file",
-        validators=[FileExtensionValidator(allowed_extensions=['mp4', 'avi', 'mov'])]
+        upload_to="church_gallery_videos/",
+        help_text="Select or upload a video file",
+        validators=[FileExtensionValidator(allowed_extensions=["mp4", "avi", "mov"])],
     )
     title = models.CharField(max_length=100, help_text="Enter the video title")
     description = models.TextField(help_text="Enter a detailed video description")
@@ -389,6 +435,18 @@ class PrayerRequest(models.Model):
         """
         return f"{self.title}"
 
+class ChurchOfficialManager(models.Manager):
+    """officials manager"""
+    def get_queryset(self):
+        """method for getting church managers for a spesific church"""
+        return super().get_queryset().filter(church=self)
+
+
+class SermonManager(models.Manager):
+    """manager for sermons"""
+    def get_queryset(self):
+        """method for getting sermons for a spesific church"""
+        return super().get_queryset().filter(church=self)
 
 class ChurchOfficial(models.Model):
     """
@@ -417,6 +475,7 @@ class ChurchOfficial(models.Model):
             FileExtensionValidator(allowed_extensions=["jpg", "jpeg", "png", "gif"])
         ],
     )
+    objects = ChurchOfficialManager()
 
     def __str__(self):
         return f"{self.name}"
@@ -455,7 +514,7 @@ class Sermon(models.Model):
         upload_to="sermon_videos/",
         blank=True,
         help_text="Upload a video related to the sermon (optional)",
-        validators=[FileExtensionValidator(allowed_extensions=['mp4', 'avi', 'mov'])]
+        validators=[FileExtensionValidator(allowed_extensions=["mp4", "avi", "mov"])],
     )
     church = models.ForeignKey(
         Church,
@@ -463,6 +522,7 @@ class Sermon(models.Model):
         related_name="sermons",
         help_text="Select the associated church",
     )
+    objects = SermonManager()
 
     def __str__(self):
         return f"{self.title}"

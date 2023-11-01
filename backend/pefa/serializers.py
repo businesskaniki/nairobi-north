@@ -3,13 +3,23 @@ Module docstring: This module contains serializers for user profiles and related
 """
 
 from rest_framework import serializers
-from django.contrib.auth import authenticate, get_user_model
-from .models import UserProfile
 from rest_framework.exceptions import AuthenticationFailed
-from rest_framework_simplejwt.tokens import RefreshToken, TokenError
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
-from django.utils.encoding import smart_str, force_str, smart_bytes, DjangoUnicodeDecodeError
-from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
+from django.contrib.auth import authenticate, get_user_model
+from django.utils.encoding import force_str
+from django.utils.http import urlsafe_base64_decode
+
+from backend.pefa.models import (
+    UserProfile,
+    Church,
+    Event,
+    Ministry,
+    Image,
+    Video,
+    PrayerRequest,
+    ChurchOfficial,
+    Sermon,
+)
 
 User = get_user_model()
 
@@ -78,11 +88,14 @@ class RegisterSerializer(serializers.ModelSerializer):
 
 
 class EmailVerificationSerializer(serializers.ModelSerializer):
+    """email verification serializer"""
     token = serializers.CharField(max_length=555)
 
     class Meta:
+        """meta class"""
         model = User
-        fields = ['token']
+        fields = ["token"]
+
 
 class LoginSerializer(serializers.Serializer):
     """
@@ -119,44 +132,50 @@ class LoginSerializer(serializers.Serializer):
         # Placeholder method, can be left empty
         pass
 
+
+# pylint: disable=W0223
+
+
 class ResetPasswordEmailRequestSerializer(serializers.Serializer):
+    """ "reset password serializer"""
+
     email = serializers.EmailField(min_length=2)
 
     redirect_url = serializers.CharField(max_length=500, required=False)
 
     class Meta:
-        fields = ['email']
+        """meta"""
+
+        fields = ["email"]
 
 
+# pylint: disable=W0223
 class SetNewPasswordSerializer(serializers.Serializer):
-    password = serializers.CharField(
-        min_length=6, max_length=68, write_only=True)
-    token = serializers.CharField(
-        min_length=1, write_only=True)
-    uidb64 = serializers.CharField(
-        min_length=1, write_only=True)
+    """
+    Serializer for setting a new password after a password reset request.
+    """
 
-    class Meta:
-        fields = ['password', 'token', 'uidb64']
+    password = serializers.CharField(min_length=6, max_length=68, write_only=True)
+    token = serializers.CharField(min_length=1, write_only=True)
+    uidb64 = serializers.CharField(min_length=1, write_only=True)
 
     def validate(self, attrs):
         try:
-            password = attrs.get('password')
-            token = attrs.get('token')
-            uidb64 = attrs.get('uidb64')
+            password = attrs.get("password")
+            token = attrs.get("token")
+            uidb64 = attrs.get("uidb64")
 
-            id = force_str(urlsafe_base64_decode(uidb64))
-            user = User.objects.get(id=id)
+            userid = force_str(urlsafe_base64_decode(uidb64))
+            user = User.objects.get(id=userid)
             if not PasswordResetTokenGenerator().check_token(user, token):
-                raise AuthenticationFailed('The reset link is invalid', 401)
+                raise AuthenticationFailed("The reset link is invalid", 401)
 
             user.set_password(password)
             user.save()
 
-            return (user)
+            return user
         except Exception as e:
-            raise AuthenticationFailed('The reset link is invalid', 401)
-        return super().validate(attrs)
+            raise AuthenticationFailed("invalid link", 401) from e
 
 
 class LogoutSerializer(serializers.Serializer):
@@ -188,7 +207,6 @@ class LogoutSerializer(serializers.Serializer):
         pass
 
 
-
 class UserProfileSerializer(serializers.ModelSerializer):
     """
     Serializer for the UserProfile model, used for updating and deleting user profiles.
@@ -200,7 +218,7 @@ class UserProfileSerializer(serializers.ModelSerializer):
         """
 
         model = UserProfile
-        exclude = ['password']
+        exclude = ["password"]
         read_only_fields = ["id"]
 
     def update(self, instance, validated_data):
@@ -211,7 +229,9 @@ class UserProfileSerializer(serializers.ModelSerializer):
         instance.username = validated_data.get("username", instance.username)
         instance.first_name = validated_data.get("first_name", instance.first_name)
         instance.last_name = validated_data.get("last_name", instance.last_name)
-        instance.profile_picture = validated_data.get("profile_picture", instance.profile_picture)
+        instance.profile_picture = validated_data.get(
+            "profile_picture", instance.profile_picture
+        )
 
         instance.save()
         return instance
@@ -221,3 +241,106 @@ class UserProfileSerializer(serializers.ModelSerializer):
         Delete the UserProfile instance.
         """
         instance.delete()
+
+
+class ChurchSerializer(serializers.ModelSerializer):
+    """
+    Serializer for the Church model.
+    """
+
+    class Meta:
+        """meta class"""
+
+        model = Church
+        fields = "__all__"
+        read_only_fields = ["id"]
+
+
+class EventSerializer(serializers.ModelSerializer):
+    """
+    serializer for the evnts"""
+
+    class Meta:
+        """meta class"""
+
+        model = Event
+        fields = "__all__"
+        read_only_fields = ["id"]
+
+
+class MinistrySerializer(serializers.ModelSerializer):
+    """
+    Serializer for the Ministry model.
+    """
+
+    class Meta:
+        """meta class"""
+
+        model = Ministry
+        fields = "__all__"
+        read_only_fields = ["id"]
+
+
+class ImageSerializer(serializers.ModelSerializer):
+    """
+    Serializer for the Image model.
+    """
+
+    class Meta:
+        """meta class"""
+
+        model = Image
+        fields = "__all__"
+        read_only_fields = ["id"]
+
+
+class VideoSerializer(serializers.ModelSerializer):
+    """
+    Serializer for the Video model.
+    """
+
+    class Meta:
+        """meta class"""
+
+        model = Video
+        fields = "__all__"
+        read_only_fields = ["id"]
+
+
+class PrayerRequestSerializer(serializers.ModelSerializer):
+    """
+    Serializer for the PrayerRequest model.
+    """
+
+    class Meta:
+        """meta class"""
+
+        model = PrayerRequest
+        fields = "__all__"
+        read_only_fields = ["id"]
+
+
+class ChurchOfficialSerializer(serializers.ModelSerializer):
+    """
+    Serializer for the ChurchOfficial model.
+    """
+
+    class Meta:
+        """meta class"""
+
+        model = ChurchOfficial
+        fields = "__all__"
+        read_only_fields = ["id"]
+
+
+class SermonSerializer(serializers.ModelSerializer):
+    """
+    Serializer for the Sermon model.
+    """
+
+    class Meta:
+        """meta class"""
+
+        model = Sermon
+        fields = "__all__"
+        read_only_fields = ["id"]

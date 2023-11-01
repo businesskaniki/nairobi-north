@@ -29,10 +29,10 @@ from django.http import JsonResponse
 from drf_yasg.utils import swagger_auto_schema
 from drf_yasg import openapi
 
-from .models import UserProfile
-from .renderers import UserRenderer
-from .utils import Util
-from .serializers import (
+from backend.pefa.models import UserProfile
+from backend.pefa.renderers import UserRenderer
+from backend.pefa.utils import Util
+from backend.pefa.serializers import (
     RegisterSerializer,
     SetNewPasswordSerializer,
     ResetPasswordEmailRequestSerializer,
@@ -46,9 +46,17 @@ from .serializers import (
 
 class CustomRedirect(HttpResponsePermanentRedirect):
     """
-    A custom HTTP permanent redirect response that allows specifying custom schemes in addition to 'http' and 'https'.
+     A custom HTTP permanent redirect response that
+     allows specifying custom schemes in addition to 
+     'http' and 'https'.
 
-    This class extends the `HttpResponsePermanentRedirect` class provided by Django to support redirecting to URLs with custom schemes. By default, it allows the 'http' and 'https' schemes, but you can add additional schemes by modifying the `allowed_schemes` list.
+    This class extends the 
+    `HttpResponsePermanentRedirect`
+    class provided by Django to support
+    redirecting to URLs with custom schemes. 
+    By default, it allows the 'http' and 'https' 
+    schemes, but you can add additional schemes by 
+    modifying the `allowed_schemes` list.
 
     Example:
     ```python
@@ -57,11 +65,11 @@ class CustomRedirect(HttpResponsePermanentRedirect):
     ```
 
     Attributes:
-        allowed_schemes (list): A list of allowed URL schemes. By default, it includes the 'http' and 'https' schemes, but you can extend it with custom schemes as needed.
-
-    See Django's `HttpResponsePermanentRedirect` for more details on how to use this class: https://docs.djangoproject.com/en/stable/ref/request-response/#django.http.HttpResponsePermanentRedirect
+        allowed_schemes (list):
+        A list of allowed URL schemes. By default, 
+        it includes the 'http' and 'https' schemes, 
+        but you can extend it with custom schemes as needed.
     """
-
     allowed_schemes = [os.environ.get("APP_SCHEME"), "http", "https"]
 
 
@@ -254,7 +262,9 @@ class RequestPasswordResetEmail(generics.GenericAPIView):
             }
             Util.send_email(data)
         return Response(
-            {"success": "An email with the reset password link has been sent to your email"},
+            {
+                "success": "An email with the reset password link has been sent to your email"
+            },
             status=status.HTTP_200_OK,
         )
 

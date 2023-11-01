@@ -9,7 +9,7 @@ from django.urls import path,re_path
 from rest_framework_simplejwt.views import (
     TokenRefreshView,
 )
-from .views import (
+from backend.pefa.views import (
     RegisterView,
     LoginView,
     UserProfileListView,
