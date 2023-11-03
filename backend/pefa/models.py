@@ -9,6 +9,7 @@ structures.
 import uuid
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.db import models
+from django.utils import timezone
 from django.core.validators import RegexValidator, FileExtensionValidator
 
 
@@ -141,6 +142,38 @@ class UserProfile(AbstractBaseUser):
         return {"refresh": str(refresh), "access": str(refresh.access_token)}
 
 
+class ChurchManager(models.Manager):
+    def get_church_with_media(self, church_id):
+        """
+        Retrieve a church with its associated images and videos.
+        """
+        return self.get(pk=church_id).prefetch_related("images", "videos")
+
+    def get_church_with_ministries(self, church_id):
+        """
+        Retrieve a church with its associated ministries.
+        """
+        return self.get(pk=church_id).prefetch_related("ministries")
+
+    def get_church_with_events(self, church_id):
+        """
+        Retrieve a church with its associated events.
+        """
+        return self.get(pk=church_id).prefetch_related("events")
+
+    def get_church_with_church_officials(self, church_id):
+        """
+        Retrieve a church with its associated church officials.
+        """
+        return self.get(pk=church_id).prefetch_related("churchofficials")
+
+    def get_church_with_sermons(self, church_id):
+        """
+        Retrieve a church with its associated sermons.
+        """
+        return self.get(pk=church_id).prefetch_related("sermons")
+
+
 class Church(models.Model):
     """
     church model and methods
@@ -197,6 +230,52 @@ class Church(models.Model):
         videos = Video.objects.filter(church=self)
         return {"images": images, "videos": videos}
 
+    def get_all_ministries(self):
+        """
+        Retrieve all events associated with the church.
+        """
+        return Ministry.objects.filter(church=self)
+
+    def get_all_events(self, church):
+        """
+        get all events
+
+        """
+        return Event.objects.filter(church=church)
+
+    def get_all_church_officials(self):
+        """
+        Retrieve all church officials associated with the church.
+        """
+        return ChurchOfficial.objects.filter(church=self)
+
+    def get_all_sermons(self):
+        """
+        Retrieve all sermons associated with the church.
+        """
+        return Sermon.objects.filter(church=self)
+
+    def get_all_prayer_requests(self):
+        """
+        Retrieve all sermons associated with the church.
+        """
+        return PrayerRequest.objects.filter(church=self)
+    
+    objects = ChurchManager()
+
+
+class EventManager(models.Manager):
+    def upcoming_events(self):
+        """
+        Return a queryset of upcoming events.
+        """
+        return self.filter(date__gte=timezone.now())
+
+    def past_events(self):
+        """
+        Return a queryset of past events.
+        """
+        return self.filter(date__lt=timezone.now())
 
 class Event(models.Model):
     """
@@ -217,12 +296,23 @@ class Event(models.Model):
         related_name="events",
         help_text="Select the associated church",
     )
+    objects = EventManager()
 
     def __str__(self):
         """
         Returns the string representation of the event (event name).
         """
         return f"{self.name}"
+
+
+class MinistryManager(models.Manager):
+    """ministry manager"""
+
+    def ministries_for_church(self, church):
+        """
+        Retrieve all ministries associated with the given church.
+        """
+        return self.filter(church=church)
 
 
 class Ministry(models.Model):
@@ -252,7 +342,9 @@ class Ministry(models.Model):
         """
         images = Image.objects.filter(ministries=self)
         videos = Video.objects.filter(ministries=self)
-        return {"images": images, "videos":videos}
+        return {"images": images, "videos": videos}
+
+    objects = MinistryManager()
 
     def __str__(self):
         """
@@ -268,11 +360,6 @@ class ImageManager(models.Manager):
     This manager provides methods for retrieving and managing images associated with a church.
     """
 
-    def get_queryset(self):
-        """
-        get_queryset(self): Returns a queryset of images associated with the church.
-        """
-        return super().get_queryset().filter(church=self)
 
 
 class Image(models.Model):
@@ -318,12 +405,6 @@ class VideoManager(models.Manager):
     This manager provides methods for retrieving and managing videos associated with a church.
     """
 
-    def get_queryset(self):
-        """
-        get_queryset(self): Returns a queryset of videos associated with the church.
-        """
-        return super().get_queryset().filter(church=self)
-
 
 class Video(models.Model):
     """
@@ -334,8 +415,9 @@ class Video(models.Model):
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     video = models.FileField(
-        upload_to="church_gallery_videos/", help_text="Select or upload a video file",
-        validators=[FileExtensionValidator(allowed_extensions=['mp4', 'avi', 'mov'])]
+        upload_to="church_gallery_videos/",
+        help_text="Select or upload a video file",
+        validators=[FileExtensionValidator(allowed_extensions=["mp4", "avi", "mov"])],
     )
     title = models.CharField(max_length=100, help_text="Enter the video title")
     description = models.TextField(help_text="Enter a detailed video description")
@@ -355,6 +437,20 @@ class Video(models.Model):
         Returns the string representation of the video (video title).
         """
         return f"{self.title}"
+
+
+class PrayerRequestManager(models.Manager):
+    def get_prayer_request_with_church(self, request_id):
+        """
+        Retrieve a prayer request with its associated church.
+        """
+        return self.get(pk=request_id).select_related("church")
+
+    def get_prayer_requests_for_church(self, church_id):
+        """
+        Retrieve all prayer requests associated with a specific church.
+        """
+        return self.filter(church_id=church_id)
 
 
 class PrayerRequest(models.Model):
@@ -389,6 +485,17 @@ class PrayerRequest(models.Model):
         """
         return f"{self.title}"
 
+    objects = PrayerRequestManager()
+
+
+class ChurchOfficialManager(models.Manager):
+    """officials manager"""
+
+
+class SermonManager(models.Manager):
+    """manager for sermons"""
+
+
 
 class ChurchOfficial(models.Model):
     """
@@ -397,6 +504,7 @@ class ChurchOfficial(models.Model):
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=100, help_text="Enter the name of the official")
+    church = models.ForeignKey(Church, on_delete=models.CASCADE)
     position = models.CharField(
         max_length=50,
         help_text="Select the position of the official",
@@ -417,6 +525,7 @@ class ChurchOfficial(models.Model):
             FileExtensionValidator(allowed_extensions=["jpg", "jpeg", "png", "gif"])
         ],
     )
+    objects = ChurchOfficialManager()
 
     def __str__(self):
         return f"{self.name}"
@@ -455,7 +564,7 @@ class Sermon(models.Model):
         upload_to="sermon_videos/",
         blank=True,
         help_text="Upload a video related to the sermon (optional)",
-        validators=[FileExtensionValidator(allowed_extensions=['mp4', 'avi', 'mov'])]
+        validators=[FileExtensionValidator(allowed_extensions=["mp4", "avi", "mov"])],
     )
     church = models.ForeignKey(
         Church,
@@ -463,6 +572,7 @@ class Sermon(models.Model):
         related_name="sermons",
         help_text="Select the associated church",
     )
+    objects = SermonManager()
 
     def __str__(self):
         return f"{self.title}"
