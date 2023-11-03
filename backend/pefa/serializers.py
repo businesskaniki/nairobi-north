@@ -9,7 +9,8 @@ from django.contrib.auth import authenticate, get_user_model
 from django.utils.encoding import force_str
 from django.utils.http import urlsafe_base64_decode
 
-from backend.pefa.models import (
+#pylint: disable=E0402
+from .models import (
     UserProfile,
     Church,
     Event,
@@ -243,17 +244,7 @@ class UserProfileSerializer(serializers.ModelSerializer):
         instance.delete()
 
 
-class ChurchSerializer(serializers.ModelSerializer):
-    """
-    Serializer for the Church model.
-    """
 
-    class Meta:
-        """meta class"""
-
-        model = Church
-        fields = "__all__"
-        read_only_fields = ["id"]
 
 
 class EventSerializer(serializers.ModelSerializer):
@@ -279,7 +270,14 @@ class MinistrySerializer(serializers.ModelSerializer):
         model = Ministry
         fields = "__all__"
         read_only_fields = ["id"]
+    all_media = serializers.SerializerMethodField()
 
+
+    def get_all_media(self, obj):
+        return {
+            "images": ImageSerializer(obj.get_all_media()["images"], many=True).data,
+            "videos": VideoSerializer(obj.get_all_media()["videos"], many=True).data
+        }
 
 class ImageSerializer(serializers.ModelSerializer):
     """
@@ -344,3 +342,37 @@ class SermonSerializer(serializers.ModelSerializer):
         model = Sermon
         fields = "__all__"
         read_only_fields = ["id"]
+
+
+class ChurchSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Church
+        fields = '__all__'
+
+    all_media = serializers.SerializerMethodField()
+    all_ministries = serializers.SerializerMethodField()
+    all_events = serializers.SerializerMethodField()
+    all_church_officials = serializers.SerializerMethodField()
+    all_sermons = serializers.SerializerMethodField()
+    all_prayers = serializers.SerializerMethodField()
+
+    def get_all_media(self, obj):
+        return {
+            "images": ImageSerializer(obj.get_all_media()["images"], many=True).data,
+            "videos": VideoSerializer(obj.get_all_media()["videos"], many=True).data
+        }
+
+    def get_all_ministries(self, obj):
+        return MinistrySerializer(obj.get_all_ministries(), many=True).data
+
+    def get_all_events(self, obj):
+        return EventSerializer(obj.get_all_events(obj), many=True).data
+
+    def get_all_church_officials(self, obj):
+        return ChurchOfficialSerializer(obj.get_all_church_officials(), many=True).data
+
+    def get_all_sermons(self, obj):
+        return SermonSerializer(obj.get_all_sermons(), many=True).data
+    
+    def get_all_prayer_request(self,obj):
+        return PrayerRequestSerializer(obj.get_all_prayer_request(),many=True).data

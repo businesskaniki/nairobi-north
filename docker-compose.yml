@@ -10,6 +10,8 @@ services:
       context: ./backend
     ports:
       - "8000:8000"
+    depends_on:
+      - db
   frontend:
     build:
       context: ./frontend
@@ -26,7 +28,16 @@ services:
     depends_on:
       - backend
       - frontend
+  db:
+    image: postgres:latest
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_DB: mydb
+      POSTGRES_USER: myuser
+      POSTGRES_PASSWORD: mypassword
 
 volumes:
   static:
   frontend:
+  db_data:

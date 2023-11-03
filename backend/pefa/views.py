@@ -29,10 +29,21 @@ from django.http import JsonResponse
 from drf_yasg.utils import swagger_auto_schema
 from drf_yasg import openapi
 
-from backend.pefa.models import UserProfile
-from backend.pefa.renderers import UserRenderer
-from backend.pefa.utils import Util
-from backend.pefa.serializers import (
+# pylint: disable=E0402
+from .models import (
+    UserProfile,
+    Church,
+    Event,
+    Ministry,
+    Image,
+    PrayerRequest,
+    Video,
+    ChurchOfficial,
+    Sermon,
+)
+from .renderers import UserRenderer
+from .utils import Util
+from .serializers import (
     RegisterSerializer,
     SetNewPasswordSerializer,
     ResetPasswordEmailRequestSerializer,
@@ -41,21 +52,29 @@ from backend.pefa.serializers import (
     LogoutSerializer,
     AllUserProfileSerializer,
     UserProfileSerializer,
+    ChurchOfficialSerializer,
+    EventSerializer,
+    MinistrySerializer,
+    ImageSerializer,
+    VideoSerializer,
+    PrayerRequestSerializer,
+    SermonSerializer,
+    ChurchSerializer,
 )
 
 
 class CustomRedirect(HttpResponsePermanentRedirect):
     """
      A custom HTTP permanent redirect response that
-     allows specifying custom schemes in addition to 
+     allows specifying custom schemes in addition to
      'http' and 'https'.
 
-    This class extends the 
+    This class extends the
     `HttpResponsePermanentRedirect`
     class provided by Django to support
-    redirecting to URLs with custom schemes. 
-    By default, it allows the 'http' and 'https' 
-    schemes, but you can add additional schemes by 
+    redirecting to URLs with custom schemes.
+    By default, it allows the 'http' and 'https'
+    schemes, but you can add additional schemes by
     modifying the `allowed_schemes` list.
 
     Example:
@@ -66,10 +85,11 @@ class CustomRedirect(HttpResponsePermanentRedirect):
 
     Attributes:
         allowed_schemes (list):
-        A list of allowed URL schemes. By default, 
-        it includes the 'http' and 'https' schemes, 
+        A list of allowed URL schemes. By default,
+        it includes the 'http' and 'https' schemes,
         but you can extend it with custom schemes as needed.
     """
+
     allowed_schemes = [os.environ.get("APP_SCHEME"), "http", "https"]
 
 
@@ -497,3 +517,132 @@ class LogoutAPIView(generics.GenericAPIView):
         serializer.save()
 
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+class IsVerifiedAdminOrReadOnly(BasePermission):
+    """
+    Custom permission class to check if the user is a verified admin or has read-only access.
+    """
+
+    def has_permission(self, request, view):
+        if request.method in ("GET", "HEAD", "OPTIONS","PATCH"):
+            return True
+
+        return request.user.is_authenticated and  request.user.is_admin
+
+    def has_object_permission(self, request, view, obj):
+        if request.method in ("GET", "HEAD", "OPTIONS"):
+            return True
+
+        return request.user.is_authenticated and request.user.is_verified and request.user.is_admin
+
+class IsAuthenticatedAndIsOwnerOrReadOnly(BasePermission):
+    """
+    Custom permission class to check if the user is authenticated and is the owner of the object.
+    Users can only update or delete their own objects.
+    """
+
+    def has_object_permission(self, request, view, obj):
+        # Allow GET, HEAD, and OPTIONS requests for all users
+        if request.method in ("GET", "HEAD", "OPTIONS"):
+            return True
+
+        # Check if the user is authenticated
+        if not request.user.is_authenticated:
+            return False
+
+        # Check if the user is the owner of the object
+        return obj.owner == request.user
+class ChurchListCreateView(generics.ListCreateAPIView):
+    permission_classes = [IsVerifiedAdminOrReadOnly]
+    queryset = Church.objects.all()
+    serializer_class = ChurchSerializer
+
+
+class ChurchRetrieveUpdateDeleteView(generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = [IsVerifiedAdminOrReadOnly]
+    queryset = Church.objects.all()
+    serializer_class = ChurchSerializer
+
+
+class EventListCreateView(generics.ListCreateAPIView):
+    permission_classes = [IsVerifiedAdminOrReadOnly]
+    queryset = Event.objects.all()
+    serializer_class = EventSerializer
+
+
+class EventRetrieveUpdateDeleteView(generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = [IsVerifiedAdminOrReadOnly]
+    queryset = Event.objects.all()
+    serializer_class = EventSerializer
+
+
+class MinistryListCreateView(generics.ListCreateAPIView):
+    permission_classes = [IsVerifiedAdminOrReadOnly]
+    queryset = Ministry.objects.all()
+    serializer_class = MinistrySerializer
+
+
+class MinistryRetrieveUpdateDeleteView(generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = [IsVerifiedAdminOrReadOnly]
+    queryset = Ministry.objects.all()
+    serializer_class = MinistrySerializer
+
+
+class ImageListCreateView(generics.ListCreateAPIView):
+    permission_classes = [IsVerifiedAdminOrReadOnly]
+    queryset = Image.objects.all()
+    serializer_class = ImageSerializer
+
+
+class ImageRetrieveUpdateDeleteView(generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = [IsVerifiedAdminOrReadOnly]
+    queryset = Image.objects.all()
+    serializer_class = ImageSerializer
+
+
+class VideoListCreateView(generics.ListCreateAPIView):
+    permission_classes = [IsVerifiedAdminOrReadOnly]
+    queryset = Video.objects.all()
+    serializer_class = VideoSerializer
+
+
+class VideoRetrieveUpdateDeleteView(generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = [IsVerifiedAdminOrReadOnly]
+    queryset = Video.objects.all()
+    serializer_class = VideoSerializer
+
+
+class PrayerRequestListCreateView(generics.ListCreateAPIView):
+    queryset = PrayerRequest.objects.all()
+    serializer_class = PrayerRequestSerializer
+
+
+class PrayerRequestRetrieveUpdateDeleteView(generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = [IsAuthenticatedAndIsOwnerOrReadOnly]
+    queryset = PrayerRequest.objects.all()
+    serializer_class = PrayerRequestSerializer
+
+
+class ChurchOfficialListCreateView(generics.ListCreateAPIView):
+    permission_classes = [IsVerifiedAdminOrReadOnly]
+    queryset = ChurchOfficial.objects.all()
+    serializer_class = ChurchOfficialSerializer
+
+
+class ChurchOfficialRetrieveUpdateDeleteView(generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = [IsVerifiedAdminOrReadOnly]
+    queryset = ChurchOfficial.objects.all()
+    serializer_class = ChurchOfficialSerializer
+
+
+class SermonListCreateView(generics.ListCreateAPIView):
+    permission_classes = [IsVerifiedAdminOrReadOnly]
+    queryset = Sermon.objects.all()
+    serializer_class = SermonSerializer
+
+
+class SermonRetrieveUpdateDeleteView(generics.RetrieveUpdateDestroyAPIView):
+    permission_classes = [IsVerifiedAdminOrReadOnly]
+    queryset = Sermon.objects.all()
+    serializer_class = SermonSerializer
