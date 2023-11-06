@@ -59,7 +59,7 @@ const Login = () => {
         sameSite: "none",
       });
       Cookies.set("userId", ciphId, { secure: true, sameSite: "none" });
-      localStorage.setItem("", response);
+      localStorage.setItem("user", response.data.admin);
       setEmail("");
       setPwd("");
       setSuccess(true);

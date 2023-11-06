@@ -1,73 +1,34 @@
-import React from 'react'
-import ChurchComponent from './ChurchComponent'
-import "../../styles/churches.css"
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { getChurches } from "../../redux/Churches/churches";
+import ChurchComponent from "../ReusableComponents/ChurchComponent";
+import { fetchEvents } from "../../redux/Events/events";
+import "../../styles/churches.css";
 
 const Churches = () => {
-  const cardData = [
-    {
-      title: 'Card 1',
-      image: 'url_to_image_1',
-      description: 'This is Card 1.',
-    },
-    {
-      title: 'Card 1',
-      image: 'url_to_image_1',
-      description: 'This is Card 1.',
-    },
-    {
-      title: 'Card 1',
-      image: 'url_to_image_1',
-      description: 'This is Card 1.',
-    },
-    {
-      title: 'Card 1',
-      image: 'url_to_image_1',
-      description: 'This is Card 1.',
-    },
-    {
-      title: 'Card 1',
-      image: 'url_to_image_1',
-      description: 'This is Card 1.',
-    },
-    {
-      title: 'Card 1',
-      image: 'url_to_image_1',
-      description: 'This is Card 1.',
-    },
-    {
-      title: 'Card 1',
-      image: 'url_to_image_1',
-      description: 'This is Card 1.',
-    },
-    {
-      title: 'Card 1',
-      image: 'url_to_image_1',
-      description: 'This is Card 1.',
-    },
-    {
-      title: 'Card 1',
-      image: 'url_to_image_1',
-      description: 'This is Card 1.',
-    },
-    {
-      title: 'Card 1',
-      image: 'url_to_image_1',
-      description: 'This is Card 1.',
-    },
-    // Add data for other cards here
-  ];
+  const dispatch = useDispatch();
+  const churchesData = useSelector((state) => state.churches);
+  console.log("Component re-rendered");
+  useEffect(() => {
+    if (churchesData.churches.length === 0) {
+      dispatch(getChurches());
+      dispatch(fetchEvents())
+    }
+      
+  }, [dispatch,churchesData.churches]);
+
+  
+  console.log(useSelector((state) => state));
+  
   return (
     <div className="card-container">
-    {cardData.map((card, index) => (
-      <ChurchComponent
-        key={index}
-        title={card.title}
-        image={card.image}
-        description={card.description}
-      />
-    ))}
-  </div>
-  )
-}
+      {
+        churchesData.churches.map((church) => (
+          <ChurchComponent id={church.id} />
+        ))
+      }
+    </div>
+  );
+};
 
-export default Churches
+export default Churches;

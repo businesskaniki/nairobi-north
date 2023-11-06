@@ -8,6 +8,7 @@ const LOGOUT_URL = "logout/";
 const LogoutButton = () => {
   const handleLogout = async () => {
     const decryptedToken = getDecryptedToken();
+    console.log(decryptedToken);
     try {
       await axios.post(LOGOUT_URL, {
         withCredentials: true,
@@ -17,7 +18,9 @@ const LogoutButton = () => {
       });
 
       Cookies.remove("ac-tok-en");
-    } catch (error) {}
+    } catch (error) {
+      console.log(error.message);
+    }
   };
 
   return <button onClick={handleLogout}>Logout</button>;
