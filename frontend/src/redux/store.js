@@ -4,13 +4,18 @@ import churchReducers from "./Churches/churchReducers";
 import eventsReducer from "./Events/eventsReducer";
 import imageReducer from "./Images/imageReducer";
 import videosReducer from "./Videos/videosReducer";
-
+import ministriesReducer from "./Ministries/ministriesReducer";
+import prayeReducer from "./prayerRequests/prayeReducer";
+import sermonsReducer from "./Sermons/sermonsReducer";
 
 const rootReducer = combineReducers({
-  churches:churchReducers,
-  events:eventsReducer,
-  images:imageReducer,
-  videos:videosReducer,
+  churches: churchReducers,
+  events: eventsReducer,
+  images: imageReducer,
+  videos: videosReducer,
+  ministries: ministriesReducer,
+  prayers: prayeReducer,
+  sermoms:sermonsReducer
 });
 const store = configureStore({ reducer: rootReducer, middleware: [thunk] });
 

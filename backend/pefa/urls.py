@@ -10,7 +10,8 @@ from django.urls import path, re_path
 from rest_framework_simplejwt.views import (
     TokenRefreshView,
 )
-#pylint: disable=E0402
+
+# pylint: disable=E0402
 from .views import (
     RegisterView,
     LoginView,
