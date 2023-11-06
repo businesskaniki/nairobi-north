@@ -1,0 +1,9 @@
+export const BASE_URL = "http://localhost:8000/api/";
+export const GET_CHURCHES = "churches/GET_CHURCHES";
+export const ADD_CHURCH = "churches/GET_CHURCHES";
+export const DELETE_CHURCH = "churches/DELETE_CHURCHES";
+export const EDIT_CHURCH = "churches/EDIT_CHURCHES";
+export const GET_EVENT = "churches/GET_EVENT";
+export const ADD_EVENT = "churches/GET_EVENT";
+export const DELETE_EVENT = "churches/DELETE_EVENT";
+export const EDIT_EVENT = "churches/EDIT_EVENT";

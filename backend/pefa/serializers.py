@@ -354,7 +354,7 @@ class ChurchSerializer(serializers.ModelSerializer):
     all_events = serializers.SerializerMethodField()
     all_church_officials = serializers.SerializerMethodField()
     all_sermons = serializers.SerializerMethodField()
-    all_prayers = serializers.SerializerMethodField()
+    all_prayer_requests = serializers.SerializerMethodField()
 
     def get_all_media(self, obj):
         return {
@@ -374,5 +374,5 @@ class ChurchSerializer(serializers.ModelSerializer):
     def get_all_sermons(self, obj):
         return SermonSerializer(obj.get_all_sermons(), many=True).data
     
-    def get_all_prayer_request(self,obj):
-        return PrayerRequestSerializer(obj.get_all_prayer_request(),many=True).data
+    def get_all_prayer_requests(self,obj):
+        return PrayerRequestSerializer(obj.get_all_prayer_requests(),many=True).data

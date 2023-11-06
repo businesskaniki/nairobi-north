@@ -4,7 +4,8 @@ API views for user registration, login, user profile management, and authenticat
 This module contains Django views and URL configurations for handling user registration,
 authentication, user profile management, and CRUD operations for Tag, Photo, and Video objects.
 """
-
+from django.conf import settings
+from django.conf.urls.static import static
 from django.urls import path, re_path
 from rest_framework_simplejwt.views import (
     TokenRefreshView,
@@ -124,3 +125,5 @@ urlpatterns = [
         name="sermon-retrieve-update-delete",
     ),
 ]
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

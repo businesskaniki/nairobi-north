@@ -15,12 +15,14 @@ import Ministries from "./components/ministries/Ministries";
 import Events from "./components/events/Events";
 import Gallery from "./components/gallery/Gallery";
 import Church from "./components/churches/Church";
+import AddChurch from "./components/Dashboard/churches/AddChurch"
+
 
 function App() {
   document.title = "Naiobi North East";
   const accessToken = Cookies.get("ac-tok-en");
   const isAuthenticated = accessToken;
-  const isAdmin = localStorage.getItem("role");
+  const isAdmin = localStorage.getItem("user");
   return (
     <Router>
       <div className="App">
@@ -35,7 +37,7 @@ function App() {
             <Route path="/ministries" Component={Ministries} />
             <Route path="/events" Component={Events} />
             <Route path="/sermons" Component={Gallery} />
-
+            <Route path="/addchurch" Component={AddChurch} />
             <Route
               path="/church/:name"
               element={<Church />}

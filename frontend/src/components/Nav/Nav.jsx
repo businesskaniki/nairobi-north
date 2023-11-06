@@ -40,9 +40,9 @@ const Nav = () => {
               <NavLink to="/">Home</NavLink>
             </li>
             <li>
-              <NavLink to="about" smooth={true} duration={500}>
+              <Link className="links" to="#about" smooth={true} duration={500}>
                 About
-              </NavLink>
+              </Link>
             </li>
             <li>
               <Link to="#contact">Contact</Link>
