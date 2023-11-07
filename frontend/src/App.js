@@ -13,7 +13,7 @@ import ProfileSettings from "./components/profile/ProfileSettings";
 import Churches from "./components/churches/Churches";
 import Ministries from "./components/ministries/Ministries";
 import Events from "./components/events/Events";
-import Gallery from "./components/gallery/Gallery";
+import Gallery from "./components/sermons/Sermons";
 import Church from "./components/churches/Church";
 import AddChurch from "./components/Dashboard/churches/AddChurch"
 
