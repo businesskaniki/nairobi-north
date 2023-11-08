@@ -16,6 +16,7 @@ import Events from "./components/events/Events";
 import Gallery from "./components/sermons/Sermons";
 import Church from "./components/churches/Church";
 import AddChurch from "./components/Dashboard/churches/AddChurch"
+import FAQ from "./components/FAQ/Faq";
 
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
           <Routes>
             <Route exact path="/" element={<Home />} />
             <Route path="/register" Component={Register} />
+            <Route path="/FAQ" Component={FAQ} />
             <Route path="/churches" Component={Churches} />
             <Route path="/login" Component={Login} />
             <Route path="/reset_password" Component={ResetPassword} />

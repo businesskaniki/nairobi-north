@@ -1,0 +1,118 @@
+* {
+    box-sizing: border-box;
+}
+
+.ministries-container {
+    background-color: white;
+    color: black;
+}
+
+.ministries-wraper {
+    padding: 2% 10%;
+
+}
+
+.ministries-heading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.ministries-heading h2 {
+    font-weight: 900;
+    font-size: 62px;
+}
+.ministries-heading h3{
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.mimistries-cards-cont {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    flex-direction: column;
+    padding-top: 3%;
+}
+
+.ministries-div-1, .ministries-div-2{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    gap: 20px;
+    padding-bottom: 2%;
+}
+
+.ministries-kings {
+    background-color: red;
+    width: 45%;
+    height: 33vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url("https://netstorage-legit.akamaized.net/images/7b704b1e3a07022c.png?imwidth=900");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.ministries-cards-cont> h4 {
+    font-weight: 900;
+    font-size: 30px;
+}
+
+.ministries-queens {
+    background-color: green;
+    width: 45%;
+    height: 33vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url("https://thisisafrica.me/wp-content/uploads/2016/12/LondonBlackChurch_01.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+
+
+.ministries-youths {
+    background-color: green;
+    width: 30%;
+    height: 33vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url("https://i.cdn.turner.com/cnn/2011/US/05/27/church.scandal/t1larg.scandal.gi.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.ministries-teens {
+    background-color: yellow;
+    width: 30%;
+    height: 33vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url("https://s3.us-east-1.amazonaws.com/youngpeople/Youth-choir-singing-outside-72px.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.children-ministry {
+    background-color: blue;
+    width: 30%;
+    height: 33vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url("https://i1.wp.com/winnerschapelsurrey.org/new/wp-content/uploads/2019/10/winners-chapel-surrey-childrens-church.jpg?fit=1080%2C719&ssl=1");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}

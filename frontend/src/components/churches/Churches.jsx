@@ -10,10 +10,8 @@ const Churches = () => {
   const churchesData = useSelector((state) => state.churches);
   console.log("Component re-rendered");
   useEffect(() => {
-    if (churchesData.churches.length === 0) {
       dispatch(getChurches());
       dispatch(fetchEvents())
-    }
       
   }, [dispatch,churchesData.churches]);
 

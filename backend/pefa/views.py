@@ -16,6 +16,7 @@ from rest_framework.permissions import (
     BasePermission,
     IsAdminUser,
 )
+from rest_framework.parsers import MultiPartParser, FormParser, JSONParser
 
 
 from django.contrib.sites.shortcuts import get_current_site
@@ -557,92 +558,108 @@ class ChurchListCreateView(generics.ListCreateAPIView):
     permission_classes = [IsVerifiedAdminOrReadOnly]
     queryset = Church.objects.all()
     serializer_class = ChurchSerializer
+    parser_classes = (MultiPartParser,FormParser,JSONParser)
 
 
 class ChurchRetrieveUpdateDeleteView(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [IsVerifiedAdminOrReadOnly]
     queryset = Church.objects.all()
     serializer_class = ChurchSerializer
+    parser_classes = (MultiPartParser,FormParser,JSONParser)
 
 
 class EventListCreateView(generics.ListCreateAPIView):
     permission_classes = [IsVerifiedAdminOrReadOnly]
     queryset = Event.objects.all()
     serializer_class = EventSerializer
+    parser_classes = (MultiPartParser,FormParser,JSONParser)
 
 
 class EventRetrieveUpdateDeleteView(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [IsVerifiedAdminOrReadOnly]
     queryset = Event.objects.all()
     serializer_class = EventSerializer
+    parser_classes = (MultiPartParser,FormParser,JSONParser)
 
 
 class MinistryListCreateView(generics.ListCreateAPIView):
     permission_classes = [IsVerifiedAdminOrReadOnly]
     queryset = Ministry.objects.all()
     serializer_class = MinistrySerializer
+    parser_classes = (MultiPartParser,FormParser,JSONParser)
 
 
 class MinistryRetrieveUpdateDeleteView(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [IsVerifiedAdminOrReadOnly]
     queryset = Ministry.objects.all()
     serializer_class = MinistrySerializer
+    parser_classes = (MultiPartParser,FormParser,JSONParser)
 
 
 class ImageListCreateView(generics.ListCreateAPIView):
     permission_classes = [IsVerifiedAdminOrReadOnly]
     queryset = Image.objects.all()
     serializer_class = ImageSerializer
+    parser_classes = (MultiPartParser,FormParser,JSONParser)
 
 
 class ImageRetrieveUpdateDeleteView(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [IsVerifiedAdminOrReadOnly]
     queryset = Image.objects.all()
     serializer_class = ImageSerializer
+    parser_classes = (MultiPartParser,FormParser,JSONParser)
 
 
 class VideoListCreateView(generics.ListCreateAPIView):
     permission_classes = [IsVerifiedAdminOrReadOnly]
     queryset = Video.objects.all()
     serializer_class = VideoSerializer
+    parser_classes = (MultiPartParser,FormParser,JSONParser)
 
 
 class VideoRetrieveUpdateDeleteView(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [IsVerifiedAdminOrReadOnly]
     queryset = Video.objects.all()
     serializer_class = VideoSerializer
+    parser_classes = (MultiPartParser,FormParser,JSONParser)
 
 
 class PrayerRequestListCreateView(generics.ListCreateAPIView):
     queryset = PrayerRequest.objects.all()
     serializer_class = PrayerRequestSerializer
+    parser_classes = (MultiPartParser,FormParser,JSONParser)
 
 
 class PrayerRequestRetrieveUpdateDeleteView(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [IsAuthenticatedAndIsOwnerOrReadOnly]
     queryset = PrayerRequest.objects.all()
     serializer_class = PrayerRequestSerializer
+    parser_classes = (MultiPartParser,FormParser,JSONParser)
 
 
 class ChurchOfficialListCreateView(generics.ListCreateAPIView):
     permission_classes = [IsVerifiedAdminOrReadOnly]
     queryset = ChurchOfficial.objects.all()
     serializer_class = ChurchOfficialSerializer
+    parser_classes = (MultiPartParser,FormParser,JSONParser)
 
 
 class ChurchOfficialRetrieveUpdateDeleteView(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [IsVerifiedAdminOrReadOnly]
     queryset = ChurchOfficial.objects.all()
     serializer_class = ChurchOfficialSerializer
+    parser_classes = (MultiPartParser,FormParser,JSONParser)
 
 
 class SermonListCreateView(generics.ListCreateAPIView):
     permission_classes = [IsVerifiedAdminOrReadOnly]
     queryset = Sermon.objects.all()
     serializer_class = SermonSerializer
+    parser_classes = (MultiPartParser,FormParser,JSONParser)
 
 
 class SermonRetrieveUpdateDeleteView(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [IsVerifiedAdminOrReadOnly]
     queryset = Sermon.objects.all()
     serializer_class = SermonSerializer
+    parser_classes = (MultiPartParser,FormParser,JSONParser)
