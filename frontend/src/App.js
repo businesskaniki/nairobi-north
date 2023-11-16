@@ -40,6 +40,7 @@ function App() {
             <Route path="/events" Component={Events} />
             <Route path="/sermons" Component={Gallery} />
             <Route path="/addchurch" Component={AddChurch} />
+            <Route path="/sermons/:id" Component={AddChurch} />
             <Route
               path="/church/:name"
               element={<Church />}

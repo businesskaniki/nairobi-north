@@ -12,22 +12,22 @@ const Ministries = () => {
             </div>
             <div className='mimistries-cards-cont'>
                 <div className="ministries-div-1">
-                    <div className="ministries-kings">
+                    <div className="ministries kings">
                         <h4>Kings</h4>
                     </div>
-                    <div className="ministries-queens">
+                    <div className="ministries queens">
                         <h4>Queens</h4>
                     </div>
                 </div>
                 <div className="ministries-div-2">
-                    <div className="ministries-youths">
+                    <div className="ministries youths">
                         <h4>Youths</h4>
                     </div>
-                    <div className="ministries-teens">
+                    <div className="ministries teens">
                         <h4>Tenns</h4>
                     </div>
-                    <div className="children-ministry">
-                        Children
+                    <div className="children ministries">
+                        <h4>Children</h4>
                     </div>
                 </div>
             </div>

@@ -51,9 +51,6 @@ const Nav = () => {
               <NavLink to="churches">Churches</NavLink>
             </li>
             <li>
-              <NavLink to="ministries">Ministries</NavLink>
-            </li>
-            <li>
               <NavLink to="events">Events</NavLink>
             </li>
             <li>
@@ -61,6 +58,15 @@ const Nav = () => {
                 Sermons
               </NavLink>
             </li>
+            <AuthChecker
+              compo={
+                <li>
+                  <NavLink exact to="/dashboard">
+                    Dashboard
+                  </NavLink>
+                </li>
+              }
+            />
           </ul>
           <div className="navbar__buttons">
             <AuthChecker

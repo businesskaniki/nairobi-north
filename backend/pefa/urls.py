@@ -37,7 +37,9 @@ from .views import (
     ChurchOfficialRetrieveUpdateDeleteView,
     SermonListCreateView,
     SermonRetrieveUpdateDeleteView,
+    SendEmailView,
 )
+
 
 urlpatterns = [
     path("register/", RegisterView.as_view(), name="register"),
@@ -124,4 +126,5 @@ urlpatterns = [
         SermonRetrieveUpdateDeleteView.as_view(),
         name="sermon-retrieve-update-delete",
     ),
+    path('send-emails/', SendEmailView.as_view(), name='send-emails'),
 ]

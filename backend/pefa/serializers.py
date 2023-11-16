@@ -376,3 +376,7 @@ class ChurchSerializer(serializers.ModelSerializer):
     
     def get_all_prayer_requests(self,obj):
         return PrayerRequestSerializer(obj.get_all_prayer_requests(),many=True).data
+    
+class EmailSerializer(serializers.Serializer):
+    message = serializers.CharField()
+

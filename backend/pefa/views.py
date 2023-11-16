@@ -61,6 +61,7 @@ from .serializers import (
     PrayerRequestSerializer,
     SermonSerializer,
     ChurchSerializer,
+    EmailSerializer
 )
 
 
@@ -127,14 +128,157 @@ class RegisterView(generics.GenericAPIView):
         user = UserProfile.objects.get(email=user_data["email"])
         token = RefreshToken.for_user(user).access_token
         current_site = get_current_site(request).domain
+        print(current_site,user)
+        app_name = "Pefa Nairobi North East"
         relativelink = reverse("email-verify")
         absurl = "http://" + current_site + relativelink + "?token=" + str(token)
-        email_body = (
-            f"hellow {user.username}"
-            + "please confirm your email"
-            + " Use the link below to verify your email \n"
-            + absurl
-        )
+        email_body = f"""
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Pefa Nairobi Noth </title>
+    <style>
+        body {{
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }}
+        .container {{
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+        }}
+        header {{
+            background: #0d47a1;
+            color: white;
+            padding-top: 30px;
+            min-height: 70px;
+            border-bottom: #e8491d 4px solid;
+        }}
+        header a {{
+            color: #ffffff;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 16px;
+        }}
+        header ul {{
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            overflow: hidden;
+        }}
+        header #branding {{
+            float: left;
+        }}
+        header #branding h1 {{
+            margin: 0;
+        }}
+        header .highlight, header a:hover {{
+            color: #e8491d;
+        }}
+        header a#login {{
+            float: right;
+            display: block;
+            background: #e8491d;
+            color: #ffffff;
+            text-align: center;
+            padding: 14px 20px 14px 20px;
+            text-decoration: none;
+        }}
+        header form {{
+            float: right;
+            margin-top: 30px;
+        }}
+        header input.search-bar {{
+            width: 300px;
+            height: 30px;
+            padding: 0px 10px;
+            float: left;
+            color: #5a5a5a;
+            border: #ffffff 2px solid;
+            font-weight: bold;
+        }}
+        header button#search-bar {{
+            float: left;
+            width: 70px;
+            height: 38px;
+            margin: 0;
+            padding: 0;
+            border: #ffffff 1px solid;
+            cursor: pointer;
+            background: #e8491d;
+            color: #ffffff;
+        }}
+        header button#search-bar:hover {{
+            color: #e8491d;
+            background: #ffffff;
+        }}
+        header button#login:hover {{
+            color: #e8491d;
+            background: #ffffff;
+        }}
+        main {{
+            padding: 20px 0;
+        }}
+        main h2 {{
+            color: #333;
+        }}
+        main p {{
+            font-size: 18px;
+            line-height: 1.6em;
+            color: #666;
+        }}
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div id="branding">
+                <h1><span class="highlight">{ app_name }</span></h1>
+            </div>
+            <nav>
+                <form>
+                    <input type="text" class="search-bar" placeholder="Search...">
+                    <button type="submit" id="search-bar">Search</button>
+                </form>
+            </nav>
+        </div>
+    </header>
+   <main>
+        <div class="container">
+            <h2>Welcome to{ app_name }!</h2>
+            <p>Dear {user.username},</p>
+            <p>We're excited to welcome you to { app_name }. Thank you for joining our community.</p>
+            <p>Feel free to explore our platform and discover all the amazing features we offer.</p>
+            <p>To get started, please confirm your email address by clicking the button below:</p>
+            <p>
+                <a href="{absurl}">
+                    <button style="background-color: #4CAF50; /* Green */
+                                   border: none;
+                                   color: white;
+                                   padding: 15px 32px;
+                                   text-align: center;
+                                   text-decoration: none;
+                                   display: inline-block;
+                                   font-size: 16px;
+                                   margin: 4px 2px;
+                                   cursor: pointer;
+                                   border-radius: 4px;">
+                        Confirm Email
+                    </button>
+                </a>
+            </p>
+            <p>If you have any questions or need assistance, don't hesitate to <a href="mailto:support@yourapp.com">contact our support team</a>.</p>
+            <p>Best regards,<br>{ app_name } Team</p>
+        </div>
+    </main>
+</body>
+</html>
+
+"""
         data = {
             "email_body": email_body,
             "to_email": user.email,
@@ -526,16 +670,21 @@ class IsVerifiedAdminOrReadOnly(BasePermission):
     """
 
     def has_permission(self, request, view):
-        if request.method in ("GET", "HEAD", "OPTIONS","PATCH"):
+        if request.method in ("GET", "HEAD", "OPTIONS", "PATCH"):
             return True
 
-        return request.user.is_authenticated and  request.user.is_admin
+        return request.user.is_authenticated and request.user.is_admin
 
     def has_object_permission(self, request, view, obj):
         if request.method in ("GET", "HEAD", "OPTIONS"):
             return True
 
-        return request.user.is_authenticated and request.user.is_verified and request.user.is_admin
+        return (
+            request.user.is_authenticated
+            and request.user.is_verified
+            and request.user.is_admin
+        )
+
 
 class IsAuthenticatedAndIsOwnerOrReadOnly(BasePermission):
     """
@@ -554,112 +703,145 @@ class IsAuthenticatedAndIsOwnerOrReadOnly(BasePermission):
 
         # Check if the user is the owner of the object
         return obj.owner == request.user
+
+
 class ChurchListCreateView(generics.ListCreateAPIView):
     permission_classes = [IsVerifiedAdminOrReadOnly]
     queryset = Church.objects.all()
     serializer_class = ChurchSerializer
-    parser_classes = (MultiPartParser,FormParser,JSONParser)
+    parser_classes = (MultiPartParser, FormParser, JSONParser)
 
 
 class ChurchRetrieveUpdateDeleteView(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [IsVerifiedAdminOrReadOnly]
     queryset = Church.objects.all()
     serializer_class = ChurchSerializer
-    parser_classes = (MultiPartParser,FormParser,JSONParser)
+    parser_classes = (MultiPartParser, FormParser, JSONParser)
 
 
 class EventListCreateView(generics.ListCreateAPIView):
     permission_classes = [IsVerifiedAdminOrReadOnly]
     queryset = Event.objects.all()
     serializer_class = EventSerializer
-    parser_classes = (MultiPartParser,FormParser,JSONParser)
+    parser_classes = (MultiPartParser, FormParser, JSONParser)
 
 
 class EventRetrieveUpdateDeleteView(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [IsVerifiedAdminOrReadOnly]
     queryset = Event.objects.all()
     serializer_class = EventSerializer
-    parser_classes = (MultiPartParser,FormParser,JSONParser)
+    parser_classes = (MultiPartParser, FormParser, JSONParser)
 
 
 class MinistryListCreateView(generics.ListCreateAPIView):
     permission_classes = [IsVerifiedAdminOrReadOnly]
     queryset = Ministry.objects.all()
     serializer_class = MinistrySerializer
-    parser_classes = (MultiPartParser,FormParser,JSONParser)
+    parser_classes = (MultiPartParser, FormParser, JSONParser)
 
 
 class MinistryRetrieveUpdateDeleteView(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [IsVerifiedAdminOrReadOnly]
     queryset = Ministry.objects.all()
     serializer_class = MinistrySerializer
-    parser_classes = (MultiPartParser,FormParser,JSONParser)
+    parser_classes = (MultiPartParser, FormParser, JSONParser)
 
 
 class ImageListCreateView(generics.ListCreateAPIView):
     permission_classes = [IsVerifiedAdminOrReadOnly]
     queryset = Image.objects.all()
     serializer_class = ImageSerializer
-    parser_classes = (MultiPartParser,FormParser,JSONParser)
+    parser_classes = (MultiPartParser, FormParser, JSONParser)
 
 
 class ImageRetrieveUpdateDeleteView(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [IsVerifiedAdminOrReadOnly]
     queryset = Image.objects.all()
     serializer_class = ImageSerializer
-    parser_classes = (MultiPartParser,FormParser,JSONParser)
+    parser_classes = (MultiPartParser, FormParser, JSONParser)
 
 
 class VideoListCreateView(generics.ListCreateAPIView):
     permission_classes = [IsVerifiedAdminOrReadOnly]
     queryset = Video.objects.all()
     serializer_class = VideoSerializer
-    parser_classes = (MultiPartParser,FormParser,JSONParser)
+    parser_classes = (MultiPartParser, FormParser, JSONParser)
 
 
 class VideoRetrieveUpdateDeleteView(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [IsVerifiedAdminOrReadOnly]
     queryset = Video.objects.all()
     serializer_class = VideoSerializer
-    parser_classes = (MultiPartParser,FormParser,JSONParser)
+    parser_classes = (MultiPartParser, FormParser, JSONParser)
 
 
 class PrayerRequestListCreateView(generics.ListCreateAPIView):
     queryset = PrayerRequest.objects.all()
     serializer_class = PrayerRequestSerializer
-    parser_classes = (MultiPartParser,FormParser,JSONParser)
+    parser_classes = (MultiPartParser, FormParser, JSONParser)
 
 
 class PrayerRequestRetrieveUpdateDeleteView(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [IsAuthenticatedAndIsOwnerOrReadOnly]
     queryset = PrayerRequest.objects.all()
     serializer_class = PrayerRequestSerializer
-    parser_classes = (MultiPartParser,FormParser,JSONParser)
+    parser_classes = (MultiPartParser, FormParser, JSONParser)
 
 
 class ChurchOfficialListCreateView(generics.ListCreateAPIView):
     permission_classes = [IsVerifiedAdminOrReadOnly]
     queryset = ChurchOfficial.objects.all()
     serializer_class = ChurchOfficialSerializer
-    parser_classes = (MultiPartParser,FormParser,JSONParser)
+    parser_classes = (MultiPartParser, FormParser, JSONParser)
 
 
 class ChurchOfficialRetrieveUpdateDeleteView(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [IsVerifiedAdminOrReadOnly]
     queryset = ChurchOfficial.objects.all()
     serializer_class = ChurchOfficialSerializer
-    parser_classes = (MultiPartParser,FormParser,JSONParser)
+    parser_classes = (MultiPartParser, FormParser, JSONParser)
 
 
 class SermonListCreateView(generics.ListCreateAPIView):
     permission_classes = [IsVerifiedAdminOrReadOnly]
     queryset = Sermon.objects.all()
     serializer_class = SermonSerializer
-    parser_classes = (MultiPartParser,FormParser,JSONParser)
+    parser_classes = (MultiPartParser, FormParser, JSONParser)
 
 
 class SermonRetrieveUpdateDeleteView(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [IsVerifiedAdminOrReadOnly]
     queryset = Sermon.objects.all()
     serializer_class = SermonSerializer
-    parser_classes = (MultiPartParser,FormParser,JSONParser)
+    parser_classes = (MultiPartParser, FormParser, JSONParser)
+
+
+class SendEmailView(APIView):
+    def post(self, request, *args, **kwargs):
+        try:
+            # Get all users
+            users = UserProfile.objects.all()
+
+            # Deserialize request data using the serializer
+            serializer = EmailSerializer(data=request.data)
+            serializer.is_valid(raise_exception=True)
+            message = serializer.validated_data["message"]
+
+            for user in users:
+                data = {
+                    "email_body": message,
+                    "to_email": user.email,
+                    "email_subject": "radon mail",
+                }
+
+                Util.send_email(data)
+
+            return Response(
+                {"status": "success", "message": "Emails sent to all users."},
+                status=status.HTTP_200_OK,
+            )
+        except Exception as e:
+            return Response(
+                {"status": "error", "message": str(e)},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            )

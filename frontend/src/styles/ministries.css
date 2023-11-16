@@ -45,7 +45,7 @@
     padding-bottom: 2%;
 }
 
-.ministries-kings {
+.kings {
     background-color: red;
     width: 45%;
     height: 33vh;
@@ -63,7 +63,7 @@
     font-size: 30px;
 }
 
-.ministries-queens {
+.queens {
     background-color: green;
     width: 45%;
     height: 33vh;
@@ -78,7 +78,7 @@
 
 
 
-.ministries-youths {
+.youths {
     background-color: green;
     width: 30%;
     height: 33vh;
@@ -91,7 +91,7 @@
     background-size: cover;
 }
 
-.ministries-teens {
+.teens {
     background-color: yellow;
     width: 30%;
     height: 33vh;
@@ -104,7 +104,7 @@
     background-size: cover;
 }
 
-.children-ministry {
+.children {
     background-color: blue;
     width: 30%;
     height: 33vh;
@@ -115,4 +115,14 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+}
+
+.ministries {
+    cursor: pointer;
+}
+
+.ministries h4 {
+    font-size: 60px;
+    color: white;
+    font-weight: 900;
 }
