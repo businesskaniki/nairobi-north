@@ -190,21 +190,12 @@ class LogoutSerializer(serializers.Serializer):
         super().__init__(*args, **kwargs)
         self.token = None
 
-    class Meta:
-        """
-        Meta class for LogoutSerializer with field definitions.
-        """
-
     def validate(self, attrs):
-        self.token = attrs["refresh"]
+        self.token = attrs.get("refresh")  # Using .get() to avoid KeyError
         return attrs
 
     def create(self, validated_data):
-        # Placeholder method, can be left empty
-        pass
-
-    def update(self, instance, validated_data):
-        # Placeholder method, can be left empty
+        # Placeholder method, as no model is being created or updated
         pass
 
 

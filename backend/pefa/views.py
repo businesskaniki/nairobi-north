@@ -6,6 +6,7 @@ import jwt
 
 
 from rest_framework import generics, status, views, permissions
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.views import APIView
@@ -630,38 +631,23 @@ class UserProfileDetail(generics.RetrieveUpdateDestroyAPIView):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
-class LogoutAPIView(generics.GenericAPIView):
-    """
-    User logout view.
-
-    Attributes:
-        serializer_class (Serializer): Serializer for logging out.
-        permission_classes (tuple): Permissions required for this view.
-
-    Method:
-        - post(request): Log the user out and return a no-content response.
-    """
-
-    serializer_class = LogoutSerializer
-    permission_classes = (permissions.IsAuthenticated,)
+class LogoutAPIView(APIView):
+    permission_classes = [IsAuthenticated]
 
     def post(self, request):
-        """
-        Log the user out and return a no-content response.
+        try:
+            refresh_token = request.data.get("refresh")
+            print(refresh_token)
+            if not refresh_token:
+                return Response({'detail': 'Refresh token is required.'}, status=status.HTTP_400_BAD_REQUEST)
 
-        This method handles user logout by processing a POST request. It validates the request using the serializer and logs the user out, then returns a no-content response to indicate a successful logout.
+            token = RefreshToken(refresh_token)
+            token.blacklist()
 
-        Args:
-            request (HttpRequest): The HTTP request object for user logout.
+            return Response({'detail': 'Successfully logged out.'}, status=status.HTTP_205_RESET_CONTENT)
+        except Exception as e:
+            return Response({'detail': 'Invalid token provided.'}, status=status.HTTP_400_BAD_REQUEST)
 
-        Returns:
-            Response: A no-content response indicating successful user logout.
-        """
-        serializer = self.serializer_class(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        serializer.save()
-
-        return Response(status=status.HTTP_204_NO_CONTENT)
 
 
 class IsVerifiedAdminOrReadOnly(BasePermission):

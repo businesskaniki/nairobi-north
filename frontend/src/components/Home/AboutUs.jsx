@@ -1,32 +1,30 @@
 import React from "react";
 import "../../styles/aboutus.css";
 import bible from "../../Assets/bible.jpeg";
+import { FaGripLinesVertical } from "react-icons/fa";
 
 const AboutUs = () => {
   return (
     <div className="about-container">
       <div className="about-wraper">
-        <h1 className="about-heading">Who Are We ?</h1>
-        <div className="about-desc">
-          <div className="about-text">
-            <p>
-              PEFA Nairobi North East is a warm and inclusive church community
-              in Nairobi. As part of the Pentecostal Evangelistic Fellowship of
-              Africa (PEFA), we're dedicated to spreading the message of faith,
-              hope, and love. With a diverse congregation and a strong
-              commitment to serving our local community, we strive to create a
-              place of worship where people can come together to grow in faith
-              and build meaningful relationships. Join us in our journey of
-              faith and community building.
-            </p>
-          </div>
-          <div
-            className="about-image"
-            style={{ backgroundImage: `url(${bible})` }}
-          ></div>
+        <div className="text-container">
+          <p className="welcome-txt">Welcome</p>
+          <h2 className="about-heading">We Are Glad You're Here</h2>
+          <h2 className="about-paragraph">
+            We are a community of unlikely friends following Jesus together. In
+            a divided world filled with tension, we feel called to create a rare
+            place where relationships are formed that don't make sense according
+            to the world. No matter your age or stage in life, we are united in
+            Jesus. It is our hope and prayer that we can help you to Know
+            Christ, Grow together in faith, and Go serve the world.
+          </h2>
+          <p className="about-link">About Us <FaGripLinesVertical /></p>
+        </div>
+        <div className="image-div">
+          <img src={bible} alt="bible" />
         </div>
       </div>
-    </div> 
+    </div>
   );
 };
 

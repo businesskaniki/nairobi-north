@@ -1,39 +1,67 @@
-import React from 'react'
-import "../../styles/ministries.css"
+import React from "react";
+import "../../styles/ministries.css";
+import sundaySch from "../../Assets/Sunday.png";
+import { FaGripLinesVertical } from "react-icons/fa";
 
 const Ministries = () => {
+  const containerStyle = {
+    backgroundImage: `url(${sundaySch})`,
+    backgroundColor: "black",
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+    width: "50%", 
+    height: "100%",
+  };
 
   return (
-    <div className='ministries-container'>
-        <div className='ministries-wraper'>
-            <div className="ministries-heading">
-                <h2>Ministries</h2>
-                <h3>We are pefa Nairobi North, a dynamic, family church with people of all ages.</h3>
+    <div className="ministries-container">
+      <div className="ministries-wraper">
+        <h2 className="ministries-heading">Get Connected</h2>
+        <div className="grid-container">
+          <div className="grid-item">
+            <div className="ministries-text">
+              <p className="ministry-name">Youth</p>
+              <h4 className="ministry-desc">
+                Impacting students in their relationship with Jesus.
+              </h4>
+              <p className="ministry-link">learn more<FaGripLinesVertical /></p>
             </div>
-            <div className='mimistries-cards-cont'>
-                <div className="ministries-div-1">
-                    <div className="ministries kings">
-                        <h4>Kings</h4>
-                    </div>
-                    <div className="ministries queens">
-                        <h4>Queens</h4>
-                    </div>
-                </div>
-                <div className="ministries-div-2">
-                    <div className="ministries youths">
-                        <h4>Youths</h4>
-                    </div>
-                    <div className="ministries teens">
-                        <h4>Tenns</h4>
-                    </div>
-                    <div className="children ministries">
-                        <h4>Children</h4>
-                    </div>
-                </div>
+            <div style={containerStyle} className="ministry-image"></div>
+          </div>
+          <div className="grid-item">
+            <div className="ministries-text">
+              <p className="ministry-name">Youth</p>
+              <h4 className="ministry-desc">
+                Impacting students in their relationship with Jesus.
+              </h4>
+              <p className="ministry-link">learn more<FaGripLinesVertical /></p>
             </div>
+            <div style={containerStyle} className="ministry-image"></div>
+          </div>
+          <div className="grid-item">
+            <div style={containerStyle} className="ministry-image"></div>
+            <div className="ministries-text">
+              <p className="ministry-name">Youth</p>
+              <h4 className="ministry-desc">
+                Impacting students in their relationship with Jesus.
+              </h4>
+              <p className="ministry-link">learn more<FaGripLinesVertical /></p>
+            </div>
+          </div>
+          <div className="grid-item">
+            <div style={containerStyle} className="ministry-image"></div>
+            <div className="ministries-text">
+              <p className="ministry-name">Youth</p>
+              <h4 className="ministry-desc">
+                Impacting students in their relationship with Jesus.
+              </h4>
+              <p className="ministry-link">learn more<FaGripLinesVertical /></p>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default Ministries
+export default Ministries;

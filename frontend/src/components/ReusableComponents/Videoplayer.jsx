@@ -6,8 +6,10 @@ const Videoplayer = ({ media }) => {
       <div class="video__thumbnail">
         <video
           id="my-video"
+          autoplay={false}
           class="video-js vjs-theme-fantasy"
           preload="auto"
+          controls 
           width="100%"
           height="100%"
           poster="https://wallpapercave.com/wp/wp3305861.jpg"

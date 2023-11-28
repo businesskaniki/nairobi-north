@@ -1,128 +1,90 @@
-* {
-    box-sizing: border-box;
-}
-
 .ministries-container {
-    background-color: white;
-    color: black;
+  background-color: skyblue;
+}
+.ministries-wraper {
+  padding: 0 10%;
 }
 
-.ministries-wraper {
-    padding: 2% 10%;
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  min-height: 300px;
+}
 
+.grid-item {
+  text-align: center;
+  min-height: 300px;
+  display: flex;
 }
 
 .ministries-heading {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-}
-.ministries-heading h2 {
-    font-weight: 900;
-    font-size: 62px;
-}
-.ministries-heading h3{
-    font-size: 22px;
-    font-weight: 700;
-}
-
-.mimistries-cards-cont {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    flex-direction: column;
-    padding-top: 3%;
+  color: rgb(255, 255, 255);
+  text-align: center;
+  font-weight: 800;
+  font-size: 3em;
+  line-height: 1.1;
+  margin: 0.35em;
+  font-family: "Poppins", sans-serif;
+  font-style: normal;
+  letter-spacing: 0em;
+  text-transform: none;
+  padding: 1em;
 }
 
-.ministries-div-1, .ministries-div-2{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    gap: 20px;
-    padding-bottom: 2%;
+.ministries-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  z-index: auto;
+  padding-top: 20px;
+  padding-right: 20px;
+  padding-bottom: 20px;
+  padding-left: 20px;
+  background-color: rgb(248, 248, 248);
+  width: 50%;
 }
 
-.kings {
-    background-color: red;
-    width: 45%;
-    height: 33vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-image: url("https://netstorage-legit.akamaized.net/images/7b704b1e3a07022c.png?imwidth=900");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+.ministry-imge {
+  width: 50%;
+}
+.ministry-name {
+  color: #504d66;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  font-family: "Poppins", sans-serif;
+  font-size: 1em;
+  line-height: 1.1;
+  text-transform: uppercase;
 }
 
-.ministries-cards-cont> h4 {
-    font-weight: 900;
-    font-size: 30px;
+.ministry-desc {
+  font-size: 1.5em;
+  line-height: 1.2;
+  color: rgb(0, 0, 0);
+  font-weight: 800;
+  margin-top: 0.35em;
+  font-family: "Poppins", sans-serif;
+  font-style: normal;
+  letter-spacing: 0em;
+  text-transform: none;
+  text-align: start;
 }
 
-.queens {
-    background-color: green;
-    width: 45%;
-    height: 33vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-image: url("https://thisisafrica.me/wp-content/uploads/2016/12/LondonBlackChurch_01.jpg");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-}
-
-
-
-.youths {
-    background-color: green;
-    width: 30%;
-    height: 33vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-image: url("https://i.cdn.turner.com/cnn/2011/US/05/27/church.scandal/t1larg.scandal.gi.jpg");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-}
-
-.teens {
-    background-color: yellow;
-    width: 30%;
-    height: 33vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-image: url("https://s3.us-east-1.amazonaws.com/youngpeople/Youth-choir-singing-outside-72px.jpg");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-}
-
-.children {
-    background-color: blue;
-    width: 30%;
-    height: 33vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-image: url("https://i1.wp.com/winnerschapelsurrey.org/new/wp-content/uploads/2019/10/winners-chapel-surrey-childrens-church.jpg?fit=1080%2C719&ssl=1");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-}
-
-.ministries {
-    cursor: pointer;
-}
-
-.ministries h4 {
-    font-size: 60px;
-    color: white;
-    font-weight: 900;
+.ministry-link {
+  display: flex;
+  align-items: center;
+  color: rgb(166, 166, 166);
+  font-size: 0.85em;
+  font-style: normal;
+  line-height: 1;
+  text-transform: uppercase;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  margin-right: calc(0.2em * -1);
+  margin-top: 2%;
 }

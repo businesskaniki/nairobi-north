@@ -1,22 +1,22 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
 
-const AuthChecker = ({ compo,logins }) => {
-  const isLoggedIn = Cookies.get('ac-tok-en') !== undefined;
+const AuthChecker = ({ compo, logins }) => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  if (isLoggedIn) {
-    return (
-      <div>
-        {compo}
-      </div>
-    );
-  } else {
-    return (
-      <div>
-        {logins}
-      </div>
-    );
-  }
+  useEffect(() => {
+    const checkLoginStatus = () => {
+      const loggedIn = Cookies.get('ac-tok-en') !== undefined;
+      setIsLoggedIn(loggedIn);
+    };
+
+    // Check login status on component mount
+    checkLoginStatus();
+  }, []);
+
+  return (
+    <div>{isLoggedIn ? compo : logins}</div>
+  );
 };
 
 export default AuthChecker;
