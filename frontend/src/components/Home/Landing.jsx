@@ -18,16 +18,16 @@ const Landing = () => {
           <Button
             icon={<FaRegArrowAltCircleRight />}
             type={"button"}
-            children={"sunay school"}
+            children={"New Here"}
             onClick={handleClick}
             style={{ backgroundColor: "skyblue", color: "black" }}
           />
           <Button
             icon={<FaRegArrowAltCircleRight />}
             type={"button"}
-            children={"sunay school"}
+            children={"Our Churches"}
             onClick={handleClick}
-            style={{ backgroundColor: "tranparent", color: "black" }}
+            style={{ backgroundColor: "white", color: "white" }}
           />
         </div>
       </div>

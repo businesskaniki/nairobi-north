@@ -3,9 +3,9 @@ import Landing from "./Landing"
 import Ministries from './Ministries'
 import Footer from './Footer'
 import AboutUs from './AboutUs'
-import UpCommingEvents from './UpCommingEvents'
 import Sermons from './Sermons'
 import Events from './Events'
+import PrayerRequest from './PrayerRequest'
 
 const Home = () => {
   return (
@@ -15,7 +15,7 @@ const Home = () => {
       <Ministries />
       <Sermons />
       <Events />
-      <UpCommingEvents />
+      <PrayerRequest />
       <Footer />
     </div>
   )
