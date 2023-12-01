@@ -1,4 +1,9 @@
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  useLocation,
+} from "react-router-dom";
 import Cookies from "js-cookie";
 import Nav from "./components/Nav/Nav";
 import Login from "./components/Auth/Login";
@@ -14,22 +19,34 @@ import Churches from "./components/churches/Churches";
 import Ministries from "./components/ministries/Ministries";
 import Events from "./components/events/Events";
 import Gallery from "./components/sermons/Sermons";
-import Church from "./components/churches/Church";
-import AddChurch from "./components/Dashboard/churches/AddChurch"
 import FAQ from "./components/FAQ/Faq";
 
-
 function App() {
+ 
+  return (
+    <Router>
+      <div className="App">
+        <div className="Content">
+          <Content />
+        </div>
+      </div>
+    </Router>
+  );
+}
+
+function Content() {
   document.title = "Naiobi North East";
   const accessToken = Cookies.get("ac-tok-en");
   const isAuthenticated = accessToken;
   const isAdmin = localStorage.getItem("user");
+  const location = useLocation();
+  const isDashboardRoute = location.pathname === "/dashboard";
+
   return (
-    <Router>
-      <div className="App">
-        <Nav />
-        <div className="Content">
-          <Routes>
+    <>
+      {!isDashboardRoute && <Nav />}
+      <div className="Content">
+      <Routes>
             <Route exact path="/" element={<Home />} />
             <Route path="/register" Component={Register} />
             <Route path="/FAQ" Component={FAQ} />
@@ -39,12 +56,6 @@ function App() {
             <Route path="/ministries" Component={Ministries} />
             <Route path="/events" Component={Events} />
             <Route path="/sermons" Component={Gallery} />
-            <Route path="/addchurch" Component={AddChurch} />
-            <Route path="/sermons/:id" Component={AddChurch} />
-            <Route
-              path="/church/:name"
-              element={<Church />}
-            />
             <Route
               path="/reset_password/confirm"
               Component={ResetPasswordForm}
@@ -62,9 +73,8 @@ function App() {
             />
             <Route path="*" element={<NotFound />} />
           </Routes>
-        </div>
       </div>
-    </Router>
+    </>
   );
 }
 
