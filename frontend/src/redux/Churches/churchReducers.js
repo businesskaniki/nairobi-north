@@ -26,6 +26,7 @@ const churchesSlice = createSlice({
         state.loading = false;
         state.error = action.error.message;
       });
+      
   },
 });
 

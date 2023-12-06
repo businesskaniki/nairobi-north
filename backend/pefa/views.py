@@ -17,7 +17,7 @@ from rest_framework.permissions import (
     BasePermission,
     IsAdminUser,
 )
-from rest_framework.parsers import MultiPartParser, FormParser, JSONParser
+from rest_framework.parsers import MultiPartParser, FormParser, JSONParser,FileUploadParser
 
 
 from django.contrib.sites.shortcuts import get_current_site
@@ -51,7 +51,6 @@ from .serializers import (
     ResetPasswordEmailRequestSerializer,
     EmailVerificationSerializer,
     LoginSerializer,
-    LogoutSerializer,
     AllUserProfileSerializer,
     UserProfileSerializer,
     ChurchOfficialSerializer,
@@ -695,7 +694,7 @@ class ChurchListCreateView(generics.ListCreateAPIView):
     permission_classes = [IsVerifiedAdminOrReadOnly]
     queryset = Church.objects.all()
     serializer_class = ChurchSerializer
-    parser_classes = (MultiPartParser, FormParser, JSONParser)
+    parser_classes = (MultiPartParser, FormParser, JSONParser,FileUploadParser)
 
 
 class ChurchRetrieveUpdateDeleteView(generics.RetrieveUpdateDestroyAPIView):

@@ -19,10 +19,10 @@ import Churches from "./components/churches/Churches";
 import Ministries from "./components/ministries/Ministries";
 import Events from "./components/events/Events";
 import Gallery from "./components/sermons/Sermons";
+import AdminChurchDetail from "./components/Dashboard/churches/AdminChurchDetail";
 import FAQ from "./components/FAQ/Faq";
 
 function App() {
- 
   return (
     <Router>
       <div className="App">
@@ -46,33 +46,31 @@ function Content() {
     <>
       {!isDashboardRoute && <Nav />}
       <div className="Content">
-      <Routes>
-            <Route exact path="/" element={<Home />} />
-            <Route path="/register" Component={Register} />
-            <Route path="/FAQ" Component={FAQ} />
-            <Route path="/churches" Component={Churches} />
-            <Route path="/login" Component={Login} />
-            <Route path="/reset_password" Component={ResetPassword} />
-            <Route path="/ministries" Component={Ministries} />
-            <Route path="/events" Component={Events} />
-            <Route path="/sermons" Component={Gallery} />
-            <Route
-              path="/reset_password/confirm"
-              Component={ResetPasswordForm}
-            />
-            <Route path="/settings/:name" element={<ProfileSettings />} />
-            <Route
-              path="/dashboard"
-              element={
-                <PrivateRoute
-                  isAuthenticated={isAuthenticated}
-                  isAdmin={isAdmin}
-                  child={<Admin />}
-                />
-              }
-            />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
+        <Routes>
+          <Route exact path="/" element={<Home />} />
+          <Route path="/register" Component={Register} />
+          <Route path="/FAQ" Component={FAQ} />
+          <Route path="/churches" Component={Churches} />
+          <Route path="/login" Component={Login} />
+          <Route path="/reset_password" Component={ResetPassword} />
+          <Route path="/ministries" Component={Ministries} />
+          <Route path="/events" Component={Events} />
+          <Route path="/sermons" Component={Gallery} />
+          <Route path="/church:detail" Component={<AdminChurchDetail />} />
+          <Route path="/reset_password/confirm" Component={ResetPasswordForm} />
+          <Route path="/settings/:uuid" element={<ProfileSettings />} />
+          <Route
+            path="/dashboard"
+            element={
+              <PrivateRoute
+                isAuthenticated={isAuthenticated}
+                isAdmin={isAdmin}
+                child={<Admin />}
+              />
+            }
+          />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
       </div>
     </>
   );

@@ -36,7 +36,7 @@ const Button = ({ onClick, type, children, hover,className,icon, style, ...rest 
       style={{ ...buttonStyles }}
       {...rest}
     >
-      <p style={pstyles}>{children}{icon}</p>
+      <p style={{...pstyles}}>{children}{icon}</p>
     </button>
   );
 };

@@ -56,6 +56,12 @@ const SideNav = () => {
                 <p>Home</p>
               </Link>
             </li>
+            <li onClick={() => handleComponentClick("ChurchAdmin")}>
+              <p>Churches</p>
+              <div className="icon">
+                <FaChurch />
+              </div>
+            </li>
             <li onClick={() => handleComponentClick("Ministries")}>
               <p>Ministries</p>
               <div className="icon">
@@ -74,12 +80,7 @@ const SideNav = () => {
                 <MdEvent />
               </div>
             </li>
-            <li onClick={() => handleComponentClick("ChurchAdmin")}>
-              <p>Churches</p>
-              <div className="icon">
-                <FaChurch />
-              </div>
-            </li>
+
             <li onClick={() => handleComponentClick("Members")}>
               <p>Members</p>
               <div className="icon">
