@@ -10,25 +10,23 @@ const LogoutButton = () => {
   const handleLogout = async () => {
     const decryptedToken = getDecryptedToken(); // Assuming this gets access token
     const refreshToken = getDecryptedRefreshToken(); // Fetching refresh token from cookies
-    console.log(refreshToken);
     try {
       await axios.post(
         LOGOUT_URL,
-        { refresh: refreshToken }, // Include refresh token in the request body
         {
           headers: {
+            withCredentials: true,
             Authorization: `Bearer ${decryptedToken}`,
             'Content-Type': 'application/json', 
           },
-          withCredentials: true,
+          
         }
       );
 
       Cookies.remove("ac-tok-en");
       // Additional logic if needed after successful logout
     } catch (error) {
-      console.log(error.message);
-      // Handle error, e.g., show error message to the user
+      console.log(error);
     }
   };
 

@@ -16,7 +16,6 @@ export const getChurches = createAsyncThunk(GET_CHURCHES, async () => {
     null,
     false
   );
-  console.log(response);
   return response || [];
 });
 

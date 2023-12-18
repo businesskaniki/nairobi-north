@@ -4,12 +4,13 @@ Module docstring: This module contains serializers for user profiles and related
 
 from rest_framework import serializers
 from rest_framework.exceptions import AuthenticationFailed
+from rest_framework_simplejwt.tokens import RefreshToken, TokenError
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
 from django.contrib.auth import authenticate, get_user_model
 from django.utils.encoding import force_str
 from django.utils.http import urlsafe_base64_decode
 
-#pylint: disable=E0402
+# pylint: disable=E0402
 from .models import (
     UserProfile,
     Church,
@@ -90,10 +91,12 @@ class RegisterSerializer(serializers.ModelSerializer):
 
 class EmailVerificationSerializer(serializers.ModelSerializer):
     """email verification serializer"""
+
     token = serializers.CharField(max_length=555)
 
     class Meta:
         """meta class"""
+
         model = User
         fields = ["token"]
 
@@ -180,24 +183,17 @@ class SetNewPasswordSerializer(serializers.Serializer):
 
 
 class LogoutSerializer(serializers.Serializer):
-    """
-    Serializer for user logout.
-    """
-
     refresh = serializers.CharField()
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.token = None
-
     def validate(self, attrs):
-        self.token = attrs.get("refresh")  # Using .get() to avoid KeyError
+        try:
+            refresh_token = attrs['refresh']
+            RefreshToken(refresh_token).blacklist()
+        except TokenError:
+            raise serializers.ValidationError('Token is invalid or expired.')
         return attrs
-
     def create(self, validated_data):
-        # Placeholder method, as no model is being created or updated
-        pass
-
+        return None
 
 class UserProfileSerializer(serializers.ModelSerializer):
     """
@@ -235,10 +231,9 @@ class UserProfileSerializer(serializers.ModelSerializer):
         instance.delete()
 
 
-
-
-
 class EventSerializer(serializers.ModelSerializer):
+    church_name = serializers.SerializerMethodField()
+
     """
     serializer for the evnts"""
 
@@ -246,8 +241,20 @@ class EventSerializer(serializers.ModelSerializer):
         """meta class"""
 
         model = Event
-        fields = "__all__"
+        fields = (
+            "id",
+            "name",
+            "poster",
+            "date",
+            "description",
+            "location",
+            "church",
+            "church_name",
+        )
         read_only_fields = ["id"]
+
+    def get_church_name(self, obj):
+        return obj.church.name if obj.church else None
 
 
 class MinistrySerializer(serializers.ModelSerializer):
@@ -261,14 +268,15 @@ class MinistrySerializer(serializers.ModelSerializer):
         model = Ministry
         fields = "__all__"
         read_only_fields = ["id"]
-    all_media = serializers.SerializerMethodField()
 
+    all_media = serializers.SerializerMethodField()
 
     def get_all_media(self, obj):
         return {
             "images": ImageSerializer(obj.get_all_media()["images"], many=True).data,
-            "videos": VideoSerializer(obj.get_all_media()["videos"], many=True).data
+            "videos": VideoSerializer(obj.get_all_media()["videos"], many=True).data,
         }
+
 
 class ImageSerializer(serializers.ModelSerializer):
     """
@@ -338,7 +346,7 @@ class SermonSerializer(serializers.ModelSerializer):
 class ChurchSerializer(serializers.ModelSerializer):
     class Meta:
         model = Church
-        fields = '__all__'
+        fields = "__all__"
 
     all_media = serializers.SerializerMethodField()
     all_ministries = serializers.SerializerMethodField()
@@ -350,7 +358,7 @@ class ChurchSerializer(serializers.ModelSerializer):
     def get_all_media(self, obj):
         return {
             "images": ImageSerializer(obj.get_all_media()["images"], many=True).data,
-            "videos": VideoSerializer(obj.get_all_media()["videos"], many=True).data
+            "videos": VideoSerializer(obj.get_all_media()["videos"], many=True).data,
         }
 
     def get_all_ministries(self, obj):
@@ -364,10 +372,10 @@ class ChurchSerializer(serializers.ModelSerializer):
 
     def get_all_sermons(self, obj):
         return SermonSerializer(obj.get_all_sermons(), many=True).data
-    
-    def get_all_prayer_requests(self,obj):
-        return PrayerRequestSerializer(obj.get_all_prayer_requests(),many=True).data
-    
+
+    def get_all_prayer_requests(self, obj):
+        return PrayerRequestSerializer(obj.get_all_prayer_requests(), many=True).data
+
+
 class EmailSerializer(serializers.Serializer):
     message = serializers.CharField()
-

@@ -28,7 +28,6 @@ export function getDecryptedRefreshToken() {
     try {
       const bytes = CryptoJS.AES.decrypt(encryptedRefreshToken, RefreshDecryptionkey);
       const decryptedRefreshToken = bytes.toString(CryptoJS.enc.Utf8);
-      console.log(decryptedRefreshToken);
       return decryptedRefreshToken;
     } catch (error) {
       console.error('Token decryption error:', error);

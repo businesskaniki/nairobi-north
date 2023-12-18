@@ -33,7 +33,6 @@ const ChurchAdmin = () => {
   const loading = useSelector((state) => state.churches.loading);
   const err = useSelector((state) => state.addchurch.error);
 
-  console.log(err);
   useEffect(() => {
     if (!churches.length) {
       dispatch(getChurches());

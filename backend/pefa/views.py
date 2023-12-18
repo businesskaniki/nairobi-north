@@ -3,6 +3,7 @@ API views for user registration, login, user profile management, and authenticat
 """
 import os
 import jwt
+import logging
 
 
 from rest_framework import generics, status, views, permissions
@@ -17,7 +18,12 @@ from rest_framework.permissions import (
     BasePermission,
     IsAdminUser,
 )
-from rest_framework.parsers import MultiPartParser, FormParser, JSONParser,FileUploadParser
+from rest_framework.parsers import (
+    MultiPartParser,
+    FormParser,
+    JSONParser,
+    FileUploadParser,
+)
 
 
 from django.contrib.sites.shortcuts import get_current_site
@@ -61,7 +67,8 @@ from .serializers import (
     PrayerRequestSerializer,
     SermonSerializer,
     ChurchSerializer,
-    EmailSerializer
+    EmailSerializer,
+    LogoutSerializer,
 )
 
 
@@ -128,7 +135,7 @@ class RegisterView(generics.GenericAPIView):
         user = UserProfile.objects.get(email=user_data["email"])
         token = RefreshToken.for_user(user).access_token
         current_site = get_current_site(request).domain
-        print(current_site,user)
+        print(current_site, user)
         app_name = "Pefa Nairobi North East"
         relativelink = reverse("email-verify")
         absurl = "http://" + current_site + relativelink + "?token=" + str(token)
@@ -629,24 +636,25 @@ class UserProfileDetail(generics.RetrieveUpdateDestroyAPIView):
         serializer.delete(instance)
         return Response(status=status.HTTP_204_NO_CONTENT)
 
-
 class LogoutAPIView(APIView):
+    """
+    this is the logout view
+    """
     permission_classes = [IsAuthenticated]
+    logger = logging.getLogger(__name__)
 
     def post(self, request):
+        """
+        check if its a post request
+        """
         try:
-            refresh_token = request.data.get("refresh")
-            print(refresh_token)
-            if not refresh_token:
-                return Response({'detail': 'Refresh token is required.'}, status=status.HTTP_400_BAD_REQUEST)
-
-            token = RefreshToken(refresh_token)
-            token.blacklist()
-
-            return Response({'detail': 'Successfully logged out.'}, status=status.HTTP_205_RESET_CONTENT)
-        except Exception as e:
-            return Response({'detail': 'Invalid token provided.'}, status=status.HTTP_400_BAD_REQUEST)
-
+            serializer = LogoutSerializer(data=request.data)
+            if serializer.is_valid():
+                serializer.save()
+                return Response({'detail': 'Successfully logged out.'}, status=status.HTTP_200_OK)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        except Exception:
+            return Response({'detail': 'An error occurred during logout.'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
 class IsVerifiedAdminOrReadOnly(BasePermission):
@@ -691,13 +699,21 @@ class IsAuthenticatedAndIsOwnerOrReadOnly(BasePermission):
 
 
 class ChurchListCreateView(generics.ListCreateAPIView):
+    """
+    this is the church view and only admins are allowd to create and update and delete the 
+    rest can only read
+    """
     permission_classes = [IsVerifiedAdminOrReadOnly]
     queryset = Church.objects.all()
     serializer_class = ChurchSerializer
-    parser_classes = (MultiPartParser, FormParser, JSONParser,FileUploadParser)
+    parser_classes = (MultiPartParser, FormParser, JSONParser, FileUploadParser)
 
 
 class ChurchRetrieveUpdateDeleteView(generics.RetrieveUpdateDestroyAPIView):
+    """
+    this is the church view and only admins are allowd to create and update and delete the 
+    rest can only read
+    """
     permission_classes = [IsVerifiedAdminOrReadOnly]
     queryset = Church.objects.all()
     serializer_class = ChurchSerializer
@@ -705,6 +721,9 @@ class ChurchRetrieveUpdateDeleteView(generics.RetrieveUpdateDestroyAPIView):
 
 
 class EventListCreateView(generics.ListCreateAPIView):
+    """
+    Event view
+    """
     permission_classes = [IsVerifiedAdminOrReadOnly]
     queryset = Event.objects.all()
     serializer_class = EventSerializer
@@ -712,6 +731,9 @@ class EventListCreateView(generics.ListCreateAPIView):
 
 
 class EventRetrieveUpdateDeleteView(generics.RetrieveUpdateDestroyAPIView):
+    """
+    Event detail view
+    """
     permission_classes = [IsVerifiedAdminOrReadOnly]
     queryset = Event.objects.all()
     serializer_class = EventSerializer
@@ -719,6 +741,9 @@ class EventRetrieveUpdateDeleteView(generics.RetrieveUpdateDestroyAPIView):
 
 
 class MinistryListCreateView(generics.ListCreateAPIView):
+    """
+    Ministry view
+    """
     permission_classes = [IsVerifiedAdminOrReadOnly]
     queryset = Ministry.objects.all()
     serializer_class = MinistrySerializer
@@ -726,6 +751,9 @@ class MinistryListCreateView(generics.ListCreateAPIView):
 
 
 class MinistryRetrieveUpdateDeleteView(generics.RetrieveUpdateDestroyAPIView):
+    """
+    ministry detail view
+    """
     permission_classes = [IsVerifiedAdminOrReadOnly]
     queryset = Ministry.objects.all()
     serializer_class = MinistrySerializer
@@ -733,6 +761,10 @@ class MinistryRetrieveUpdateDeleteView(generics.RetrieveUpdateDestroyAPIView):
 
 
 class ImageListCreateView(generics.ListCreateAPIView):
+    """
+    
+    image view
+    """
     permission_classes = [IsVerifiedAdminOrReadOnly]
     queryset = Image.objects.all()
     serializer_class = ImageSerializer
@@ -740,6 +772,9 @@ class ImageListCreateView(generics.ListCreateAPIView):
 
 
 class ImageRetrieveUpdateDeleteView(generics.RetrieveUpdateDestroyAPIView):
+    """
+    Image Detail view
+    """
     permission_classes = [IsVerifiedAdminOrReadOnly]
     queryset = Image.objects.all()
     serializer_class = ImageSerializer
@@ -747,6 +782,9 @@ class ImageRetrieveUpdateDeleteView(generics.RetrieveUpdateDestroyAPIView):
 
 
 class VideoListCreateView(generics.ListCreateAPIView):
+    """
+    video view
+    """
     permission_classes = [IsVerifiedAdminOrReadOnly]
     queryset = Video.objects.all()
     serializer_class = VideoSerializer
@@ -754,6 +792,9 @@ class VideoListCreateView(generics.ListCreateAPIView):
 
 
 class VideoRetrieveUpdateDeleteView(generics.RetrieveUpdateDestroyAPIView):
+    """
+    video detail view
+    """
     permission_classes = [IsVerifiedAdminOrReadOnly]
     queryset = Video.objects.all()
     serializer_class = VideoSerializer
@@ -761,12 +802,18 @@ class VideoRetrieveUpdateDeleteView(generics.RetrieveUpdateDestroyAPIView):
 
 
 class PrayerRequestListCreateView(generics.ListCreateAPIView):
+    """
+    makesure only  the owner and admin can read the prayer item
+    """
     queryset = PrayerRequest.objects.all()
     serializer_class = PrayerRequestSerializer
     parser_classes = (MultiPartParser, FormParser, JSONParser)
 
 
 class PrayerRequestRetrieveUpdateDeleteView(generics.RetrieveUpdateDestroyAPIView):
+    """"
+    prayer request detail view
+    """
     permission_classes = [IsAuthenticatedAndIsOwnerOrReadOnly]
     queryset = PrayerRequest.objects.all()
     serializer_class = PrayerRequestSerializer
@@ -774,6 +821,9 @@ class PrayerRequestRetrieveUpdateDeleteView(generics.RetrieveUpdateDestroyAPIVie
 
 
 class ChurchOfficialListCreateView(generics.ListCreateAPIView):
+    """"
+    church official view
+    """
     permission_classes = [IsVerifiedAdminOrReadOnly]
     queryset = ChurchOfficial.objects.all()
     serializer_class = ChurchOfficialSerializer
@@ -781,6 +831,9 @@ class ChurchOfficialListCreateView(generics.ListCreateAPIView):
 
 
 class ChurchOfficialRetrieveUpdateDeleteView(generics.RetrieveUpdateDestroyAPIView):
+    """
+    church officials detail view
+    """
     permission_classes = [IsVerifiedAdminOrReadOnly]
     queryset = ChurchOfficial.objects.all()
     serializer_class = ChurchOfficialSerializer
@@ -788,6 +841,9 @@ class ChurchOfficialRetrieveUpdateDeleteView(generics.RetrieveUpdateDestroyAPIVi
 
 
 class SermonListCreateView(generics.ListCreateAPIView):
+    """
+    sermons view
+    """
     permission_classes = [IsVerifiedAdminOrReadOnly]
     queryset = Sermon.objects.all()
     serializer_class = SermonSerializer
@@ -795,6 +851,9 @@ class SermonListCreateView(generics.ListCreateAPIView):
 
 
 class SermonRetrieveUpdateDeleteView(generics.RetrieveUpdateDestroyAPIView):
+    """
+    sermons detail view
+    """
     permission_classes = [IsVerifiedAdminOrReadOnly]
     queryset = Sermon.objects.all()
     serializer_class = SermonSerializer
@@ -802,7 +861,13 @@ class SermonRetrieveUpdateDeleteView(generics.RetrieveUpdateDestroyAPIView):
 
 
 class SendEmailView(APIView):
+    """
+    sending emails to users
+    """
     def post(self, request, *args, **kwargs):
+        """
+        function for sending  the emails
+        """
         try:
             # Get all users
             users = UserProfile.objects.all()

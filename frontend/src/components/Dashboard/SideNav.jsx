@@ -13,6 +13,9 @@ import Ministries from "./Ministries/Ministries";
 import Events from "./Events/Events";
 import Gallery from "./Gallery/Gallery";
 import Members from "./members/Members";
+import Videos from "./Videos/Videos";
+import Sermons from "./sermons/Sermons";
+import Officials from "./officials/Officials";
 
 const SideNav = () => {
   const [selectedComponent, setSelectedComponent] = useState(null);
@@ -33,6 +36,12 @@ const SideNav = () => {
         return <Members />;
       case "Events":
         return <Events />;
+      case "Officials":
+        return <Officials />;
+      case "Sermons":
+        return <Sermons />;
+      case "Videos":
+        return <Videos />;
       default:
         return <ChurchAdmin />;
     }
@@ -76,6 +85,24 @@ const SideNav = () => {
             </li>
             <li onClick={() => handleComponentClick("Events")}>
               <p>Events</p>
+              <div className="icon">
+                <MdEvent />
+              </div>
+            </li>
+            <li onClick={() => handleComponentClick("Sermons")}>
+              <p>Sermons</p>
+              <div className="icon">
+                <MdEvent />
+              </div>
+            </li>
+            <li onClick={() => handleComponentClick("Videos")}>
+              <p>Videos</p>
+              <div className="icon">
+                <MdEvent />
+              </div>
+            </li>
+            <li onClick={() => handleComponentClick("Officials")}>
+              <p>Officials</p>
               <div className="icon">
                 <MdEvent />
               </div>

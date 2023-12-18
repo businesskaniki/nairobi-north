@@ -15,7 +15,6 @@ const Churches = () => {
     dispatch(fetchEvents());
   }, [dispatch]);
 
-  console.log(useSelector((state) => state));
 
   if (churchesData.loading) {
     return <Loading />; // Show loading component while data is being fetched

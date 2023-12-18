@@ -95,7 +95,7 @@
 .church-form-container {
   overflow-y: scroll;
   width: 50%;
-  background-color: rgb(235, 235, 235);
+  background-color: rgb(249, 249, 249);
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -115,4 +115,29 @@
   letter-spacing: 0em;
   text-transform: none;
   padding: 2%;
+}
+
+
+@import url("https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,700;0,900;1,400;1,700;1,900&family=Orbitron:wght@400;500;600;700;800;900&family=Pacifico&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Titan+One&display=swap");
+
+.form {
+  width: 500px;
+}
+
+.label {
+  display: none;
+}
+
+.formgroup {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+.input {
+  background-color: white;
+  font-size: 1em;
+  padding: 1em;
+  width: 100%;
+  border-radius: 5px;
+  margin-bottom: 5px;
 }

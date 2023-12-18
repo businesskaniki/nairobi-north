@@ -5,7 +5,6 @@ import { FaRegArrowAltCircleRight } from "react-icons/fa";
 
 const Landing = () => {
   const handleClick = () => {
-    console.log("hye");
   };
   return (
     <div className="landing-container">
