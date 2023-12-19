@@ -18,12 +18,12 @@ export const getImages = createAsyncThunk(GET_IMAGES, async () => {
 export const addImage = createAsyncThunk(ADD_IMAGE, async (image) => {
   try {
     const formData = new FormData();
-    formData.append("name", image.name);
+    formData.append("church", image.church);
     formData.append("description", image.description);
+    formData.append("image",image.image)
+    formData.append("miistries",image.ministries)
 
-    if (image.file) {
-      formData.append("file", image.file);
-    }
+   
 
     const response = await apiRequest(`${BASE_URL}${imageEndpoint}`, "post", formData);
     return response;

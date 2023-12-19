@@ -1,9 +1,224 @@
-import React from 'react'
+import React, { useCallback, useState, useEffect } from "react";
+import { useDropzone } from "react-dropzone";
+import { useDispatch, useSelector } from "react-redux";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
+import { MdDelete } from "react-icons/md";
+import { GrUpdate } from "react-icons/gr";
+import { IoIosAddCircle } from "react-icons/io";
+import { getImages, addImage } from "../../../redux/Images/images";
+import Button from "../../ReusableComponents/Button";
+import "../../../styles/ChurchAdmin.css";
 
 const Videos = () => {
-  return (
-    <div>Videos</div>
-  )
-}
+  const [submitStatus, setSubmitStatus] = useState(null);
+  const [formData, setFormData] = useState({
+    image: "",
+    description: "",
+    ministries: "",
+    church: "",
+  });
 
-export default Videos
+  const [selectedImages, setSelectedImages] = useState([]);
+
+  const dispatch = useDispatch();
+  const churches = useSelector((state) => state.churches.churches);
+  const ministries = useSelector((state) => state.ministries.ministries);
+  const images = useSelector((state) => state.images.images);
+  const loading = useSelector((state) => state.churches.loading);
+  const err = useSelector((state) => state.addchurch.error);
+
+  const onDrop = useCallback((acceptedFiles, rejectedFiles) => {
+    acceptedFiles.forEach((file) => {
+      setSelectedImages((prevState) => [...prevState, file]);
+    });
+  }, []);
+
+  const {
+    getRootProps,
+    getInputProps,
+    isDragActive,
+    isDragAccept,
+    isDragReject,
+  } = useDropzone({ onDrop });
+
+  useEffect(() => {
+    if (!images.length) {
+      dispatch(getImages());
+    }
+  }, [dispatch, images.length]);
+
+  const navigate = useNavigate();
+
+  const handleDivClick = () => {
+    navigate("/churches/22");
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: value,
+    }));
+  };
+
+  const handleFileChange = (e) => {
+    const name = e.target.name;
+    const files = e.target.files[0];
+    setFormData({ ...formData, [name]: files });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(addImage(formData))
+      .then(() => {
+        setFormData("");
+        setSubmitStatus("success");
+      })
+      .catch(() => {
+        setSubmitStatus("error");
+      });
+  };
+
+  useEffect(() => {
+    if (submitStatus === "success") {
+      toast.success("Form submitted successfully!");
+    } else if (submitStatus === "error") {
+      toast.error("Failed to submit form");
+    }
+  }, [submitStatus]);
+  return (
+    <div className="dashboard-churches-container">
+      <div className="church-cards-container">
+        {images.map((image) => (
+          <div className="church-card" onClick={handleDivClick}>
+            <div className="card-image">
+              <img src={image.image} alt="church backgroud" />
+            </div>
+            <div className="card-body">
+              <div className="card-footer">
+                <Button
+                  children={"delete"}
+                  icon={<MdDelete />}
+                  className={"deletebtn"}
+                />
+                <Button
+                  children={"edit"}
+                  style={{ backgroundColor: "skyblue" }}
+                  icon={<GrUpdate />}
+                />
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+      <div className="church-form-container">
+        <h3>Add a new video</h3>
+        <form
+          onSubmit={handleSubmit}
+          className="form"
+          encType="multipart/form-data"
+        >
+          <div className="ddcontainer">
+            <div className="drop" {...getRootProps()}>
+              <input onChange={handleFileChange} {...getInputProps()} />
+              {isDragActive ? (
+                <p>Drop file(s) here ...</p>
+              ) : (
+                <p>Drag and drop file(s) here, or click to select files</p>
+              )}
+            </div>
+            <div className="selected_images">
+              {selectedImages.length > 0 &&
+                selectedImages.map((image, index) => (
+                  <img
+                    src={`${URL.createObjectURL(image)}`}
+                    key={index}
+                    alt=""
+                  />
+                ))}
+            </div>
+          </div>
+          <div className="formgroup">
+            <label className="label" htmlFor="description">
+              description
+            </label>
+            <input
+              type="text"
+              id="description"
+              name="description"
+              value={formData.description}
+              onChange={handleChange}
+              className="input"
+              placeholder="wht was the event"
+              required
+            />
+          </div>
+          <div className="formgroup">
+            <label className="label" htmlFor="description_2">
+              Church
+            </label>
+            <select
+              name="church"
+              id="church"
+              className="input"
+              required
+              onChange={handleChange}
+            >
+              <option value="">Which church does the image belong</option>
+              {churches.map((church) => (
+                <option key={church.id} value={church.id}>
+                  {church.name}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="formgroup">
+            <label className="label" htmlFor="description_2">
+              ministry
+            </label>
+            <select
+              name="ministries"
+              id="ministries"
+              className="input"
+              required
+              onChange={handleChange}
+            >
+              <option value="">Which ministry does the image belong</option>
+              {ministries.map((ministry) => (
+                <option key={ministry.id} value={ministry.id}>
+                  {ministry.name}
+                  hh
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div className="formgroup">
+            <label className="label" htmlFor="image">
+              background_image
+            </label>
+            <input
+              type="file"
+              id="image"
+              name="image"
+              onChange={handleFileChange}
+              className="input"
+              placeholder="select a good image"
+              required
+            />
+          </div>
+          <Button
+            children={"submit"}
+            type={"submit"}
+            icon={<IoIosAddCircle />}
+          />
+        </form>
+        <ToastContainer />
+      </div>
+    </div>
+  );
+};
+
+export default Videos;

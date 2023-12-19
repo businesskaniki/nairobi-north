@@ -5,8 +5,10 @@ import { MdDashboard } from "react-icons/md";
 import { FaTachometerAlt, FaChurch } from "react-icons/fa";
 import { RiGroup2Fill } from "react-icons/ri";
 import { GrGallery } from "react-icons/gr";
-import { FaPeopleGroup } from "react-icons/fa6";
+import { FaPeopleGroup,FaBookBible } from "react-icons/fa6";
 import { MdEvent } from "react-icons/md";
+import { AiOutlineUserAdd } from "react-icons/ai";
+import { CiVideoOn } from "react-icons/ci";
 import "../../styles/SideNav.css";
 import ChurchAdmin from "./churches/ChurchAdmin";
 import Ministries from "./Ministries/Ministries";
@@ -92,19 +94,19 @@ const SideNav = () => {
             <li onClick={() => handleComponentClick("Sermons")}>
               <p>Sermons</p>
               <div className="icon">
-                <MdEvent />
+                <FaBookBible />
               </div>
             </li>
             <li onClick={() => handleComponentClick("Videos")}>
               <p>Videos</p>
               <div className="icon">
-                <MdEvent />
+                <CiVideoOn />
               </div>
             </li>
             <li onClick={() => handleComponentClick("Officials")}>
               <p>Officials</p>
               <div className="icon">
-                <MdEvent />
+                <AiOutlineUserAdd />
               </div>
             </li>
 

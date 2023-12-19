@@ -62,7 +62,7 @@ input,
   border-radius: 5px;
   margin-bottom: 5px;
 }
-button {
+.button {
   background-color: #c7940a;
   color: #ffffff;
 }

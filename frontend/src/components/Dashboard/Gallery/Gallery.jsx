@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { MdDelete } from "react-icons/md";
 import { GrUpdate } from "react-icons/gr";
 import { IoIosAddCircle } from "react-icons/io";
-import { getImages,addImage } from "../../../redux/Images/images";
+import { getImages, addImage } from "../../../redux/Images/images";
 import Button from "../../ReusableComponents/Button";
 import "../../../styles/ChurchAdmin.css";
 
@@ -22,16 +22,15 @@ const Gallery = () => {
   const dispatch = useDispatch();
   const churches = useSelector((state) => state.churches.churches);
   const ministries = useSelector((state) => state.ministries.ministries);
-  const images = useSelector((state) => state.images.images)
+  const images = useSelector((state) => state.images.images);
   const loading = useSelector((state) => state.churches.loading);
   const err = useSelector((state) => state.addchurch.error);
-  console.log(ministries);
 
   useEffect(() => {
     if (!images.length) {
       dispatch(getImages());
     }
-  }, [dispatch,images]);
+  }, [dispatch, images.length]);
 
   const navigate = useNavigate();
 
@@ -51,12 +50,10 @@ const Gallery = () => {
     const name = e.target.name;
     const files = e.target.files[0];
     setFormData({ ...formData, [name]: files });
-    
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(formData)
     dispatch(addImage(formData))
       .then(() => {
         setFormData("");
@@ -66,8 +63,6 @@ const Gallery = () => {
         setSubmitStatus("error");
       });
   };
-
-  console.log(formData)
 
 
   useEffect(() => {
@@ -120,7 +115,7 @@ const Gallery = () => {
               value={formData.description}
               onChange={handleChange}
               className="input"
-              placeholder="Describe briefly the Ministry"
+              placeholder="wht was the event"
               required
             />
           </div>
@@ -128,10 +123,16 @@ const Gallery = () => {
             <label className="label" htmlFor="description_2">
               Church
             </label>
-            <select name="church" id="church" className="input" required onChange={handleChange}>
+            <select
+              name="church"
+              id="church"
+              className="input"
+              required
+              onChange={handleChange}
+            >
               <option value="">Which church does the image belong</option>
               {churches.map((church) => (
-                <option value={church.id}  >
+                <option key={church.id} value={church.id}>
                   {church.name}
                 </option>
               ))}
@@ -141,11 +142,17 @@ const Gallery = () => {
             <label className="label" htmlFor="description_2">
               ministry
             </label>
-            <select name="ministries" id="ministries" className="input" required onChange={handleChange}>
+            <select
+              name="ministries"
+              id="ministries"
+              className="input"
+              required
+              onChange={handleChange}
+            >
               <option value="">Which ministry does the image belong</option>
               {ministries.map((ministry) => (
-                <option value={ministry.id}  >
-                  {ministries.name}
+                <option key={ministry.id} value={ministry.id}>
+                  {ministry.name}
                 </option>
               ))}
             </select>

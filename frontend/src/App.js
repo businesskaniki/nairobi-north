@@ -20,6 +20,7 @@ import Ministries from "./components/ministries/Ministries";
 import Events from "./components/events/Events";
 import Gallery from "./components/sermons/Sermons";
 import AdminChurchDetail from "./components/Dashboard/churches/AdminChurchDetail";
+import Church from "./components/churches/Church";
 import FAQ from "./components/FAQ/Faq";
 
 function App() {
@@ -41,10 +42,13 @@ function Content() {
   const isAdmin = localStorage.getItem("user");
   const location = useLocation();
   const isDashboardRoute = location.pathname === "/dashboard";
+  const isChurchPage = location.pathname.startsWith('/church/') && location.pathname.split('/').length === 3;
+
 
   return (
     <>
-      {!isDashboardRoute && <Nav />}
+      {!isDashboardRoute && !isChurchPage && <Nav />}
+      
       <div className="Content">
         <Routes>
           <Route exact path="/" element={<Home />} />
@@ -56,9 +60,9 @@ function Content() {
           <Route path="/ministries" Component={Ministries} />
           <Route path="/events" Component={Events} />
           <Route path="/sermons" Component={Gallery} />
-          <Route path="/church:detail" Component={<AdminChurchDetail />} />
+          <Route path="/church/:uuid" Component={Church} />
           <Route path="/reset_password/confirm" Component={ResetPasswordForm} />
-          <Route path="/settings/:uuid" element={<ProfileSettings />} />
+          <Route path="/settings/:id" Component={ProfileSettings } />
           <Route
             path="/dashboard"
             element={

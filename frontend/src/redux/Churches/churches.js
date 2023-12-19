@@ -6,6 +6,7 @@ import {
   ADD_CHURCH,
   EDIT_CHURCH,
   DELETE_CHURCH,
+  GET_CHURCH
 } from "../constants";
 const churchEndpoint = "church/";
 
@@ -83,6 +84,14 @@ export const deleteChurch = createAsyncThunk(DELETE_CHURCH, async (id) => {
   const response = await apiRequest(
     `${BASE_URL}${churchEndpoint}/${id}`,
     "delete"
+  );
+  return response;
+});
+
+export const getchurch= createAsyncThunk(GET_CHURCH, async (id) => {
+  const response = await apiRequest(
+    `${BASE_URL}${churchEndpoint}${id}`,
+    "get"
   );
   return response;
 });

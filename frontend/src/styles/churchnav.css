@@ -1,0 +1,17 @@
+.church-nav {
+    height: 12vh;
+    background-color: skyblue;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.church-ul-menu  ul{
+    display: flex;
+    gap: 30px;
+    align-items: center;
+}
+
+.church-ul-menu ul li {
+    cursor: pointer;
+}
