@@ -1,21 +1,21 @@
-import React, { useEffect, useState } from 'react';
-import Cookies from 'js-cookie';
+import React, { useEffect} from 'react';
+import { useSelector } from 'react-redux';
 
 const AuthChecker = ({ compo, logins }) => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const isloggedIn = useSelector((state) => state.auth.loggedIn);
 
   useEffect(() => {
     const checkLoginStatus = () => {
-      const loggedIn = Cookies.get('ac-tok-en') !== undefined;
-      setIsLoggedIn(loggedIn);
+      const loggedIn = isloggedIn;
+      console.log(loggedIn);
     };
 
     // Check login status on component mount
     checkLoginStatus();
-  }, []);
+  }, [isloggedIn]);
 
   return (
-    <div>{isLoggedIn ? compo : logins}</div>
+    <div>{isloggedIn ? compo : logins}</div>
   );
 };
 

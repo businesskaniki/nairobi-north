@@ -5,7 +5,7 @@ import { FaGripLinesVertical } from "react-icons/fa";
 
 const AboutUs = () => {
   return (
-    <div className="about-container">
+    <div id="About" className="about-container">
       <div className="about-wraper">
         <div className="text-container">
           <p className="welcome-txt">Welcome</p>

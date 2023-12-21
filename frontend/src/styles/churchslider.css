@@ -1,4 +1,61 @@
+/* churchslider.css */
+
 .churchslider-container {
+    position: relative;
     height: 88vh;
     background-color: black;
-}
+  }
+  
+  .slider {
+    position: relative;
+    width: 100%;
+    height: 100%; /* Ensures the slider fills the container */
+    overflow: hidden;
+  }
+  
+  .slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    background-size: cover;
+    background-position: center;
+  }
+  
+  .slide.active {
+    display: block;
+  }
+  
+  .slide img {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center; /* Center the image */
+  }
+  
+  /* Style for the prev and next buttons */
+  #home-section button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    z-index: 1;
+    font-size: 40px;
+    background-color: transparent;
+  }
+  
+  #home-section button:first-child {
+    left: 10px;
+  }
+  
+  #home-section button:last-child {
+    right: 10px;
+  }
+  

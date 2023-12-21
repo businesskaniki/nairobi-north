@@ -1,17 +1,20 @@
 .church-nav {
-    height: 12vh;
-    background-color: skyblue;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
+  height: 12vh;
+  background-color: skyblue;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  /* position: fixed;
+  top: 0;
+  width: 100%; */
 }
 
-.church-ul-menu  ul{
-    display: flex;
-    gap: 30px;
-    align-items: center;
+.church-ul-menu ul {
+  display: flex;
+  gap: 30px;
+  align-items: center;
 }
 
 .church-ul-menu ul li {
-    cursor: pointer;
+  cursor: pointer;
 }

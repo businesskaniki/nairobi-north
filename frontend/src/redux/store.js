@@ -9,6 +9,7 @@ import prayeReducer from "./prayerRequests/prayeReducer";
 import sermonsReducer from "./Sermons/sermonsReducer";
 import addchurchReducer from "./Churches/addchurchReducer";
 import ChurchReducer from "./Churches/ChurchReducer";
+import authReducer from "./Login/Login";
 
 const rootReducer = combineReducers({
   churches: churchReducers,
@@ -19,7 +20,8 @@ const rootReducer = combineReducers({
   ministries: ministriesReducer,
   prayers: prayeReducer,
   sermons: sermonsReducer,
-  church :ChurchReducer
+  church :ChurchReducer,
+  auth: authReducer,
 });
 const store = configureStore({ reducer: rootReducer, middleware: [thunk] });
 
