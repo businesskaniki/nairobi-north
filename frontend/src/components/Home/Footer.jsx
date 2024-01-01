@@ -4,7 +4,7 @@ import "../../styles/footer.css";
 
 const Footer = () => {
   return (
-    <footer>
+    <footer id="contact">
       <div class="row primary">
         <div class="column about">
           <h3>Pefa Nairobi North</h3>

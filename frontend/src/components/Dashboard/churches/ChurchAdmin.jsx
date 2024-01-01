@@ -81,8 +81,9 @@ const ChurchAdmin = () => {
   return (
     <div className="dashboard-churches-container">
       <div className="church-cards-container">
-        {churches.map((church) => (
-          <div className="church-card" onClick={handleDivClick}>
+        {Array.isArray(churches) && churches.length > 0 ? (
+          churches.map((church) => (
+            <div className="church-card" onClick={handleDivClick} key={church.id}>
             <div className="card-image">
               <img src={church.background_image_1} alt="church backgroud" />
             </div>
@@ -103,7 +104,10 @@ const ChurchAdmin = () => {
               </div>
             </div>
           </div>
-        ))}
+          ))
+        ) : (
+          <p>No churches available</p>
+        )}
       </div>
       <div className="church-form-container">
         <h3>Add a new Church</h3>

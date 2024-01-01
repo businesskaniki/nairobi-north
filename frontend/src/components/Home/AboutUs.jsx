@@ -1,9 +1,11 @@
-import React from "react";
+import React,{useEffect} from "react";
 import "../../styles/aboutus.css";
 import bible from "../../Assets/bible.jpeg";
 import { FaGripLinesVertical } from "react-icons/fa";
 
 const AboutUs = () => {
+
+  
   return (
     <div id="About" className="about-container">
       <div className="about-wraper">

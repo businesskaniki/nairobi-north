@@ -1,3 +1,6 @@
+import Cookies from 'js-cookie';
+
+
 const LOGIN = 'LOGIN';
 const LOGOUT = 'LOGOUT';
 
@@ -12,7 +15,7 @@ export const login = (userData) => ({
   });
 
   const initialState = {
-    loggedIn: false,
+    loggedIn: Cookies.get('ac-tok-en'),
     userData: null,
   };
   

@@ -51,7 +51,7 @@ function Content() {
       
       <div className="Content">
         <Routes>
-          <Route exact path="/" element={<Home />} />
+          <Route exact path="/" Component={Home} />
           <Route path="/register" Component={Register} />
           <Route path="/FAQ" Component={FAQ} />
           <Route path="/churches" Component={Churches} />

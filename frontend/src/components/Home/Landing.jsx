@@ -2,9 +2,13 @@ import React from "react";
 import "../../styles/landing.css";
 import Button from "../ReusableComponents/Button";
 import { FaRegArrowAltCircleRight } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 const Landing = () => {
-  const handleClick = () => {
+  const navigate = useNavigate();
+  const handleClick = (link) => {
+    console.log("click");
+    navigate(link);
   };
   return (
     <div className="landing-container">
@@ -25,7 +29,7 @@ const Landing = () => {
             icon={<FaRegArrowAltCircleRight />}
             type={"button"}
             children={"Our Churches"}
-            onClick={handleClick}
+            onClick={handleClick("/churches")}
             style={{ backgroundColor: "white", color: "white" }}
           />
         </div>
