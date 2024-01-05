@@ -9,7 +9,7 @@ export const fetchEvents = createAsyncThunk(GET_EVENT, async () => {
 });
 
 export const addEvent = createAsyncThunk(ADD_EVENT, async (event, id) => {
-  return apiRequest(`${BASE_URL}event/${id}`, 'post', event);
+  return apiRequest(`${BASE_URL}event/`, 'post', event);
 });
 
 export const editEvent = createAsyncThunk(EDIT_EVENT, async (event, id) => {

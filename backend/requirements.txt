@@ -30,3 +30,5 @@ psycopg2-binary
 django
 djangorestframework-simplejwt
 drf-yasg
+django-redis
+celery

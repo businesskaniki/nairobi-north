@@ -181,9 +181,9 @@ class Church(models.Model):
 
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=100)
-    about = models.CharField(max_length=50)
+    about = models.TextField()
     location = models.CharField(max_length=100)
-    founding_year = models.PositiveIntegerField()
+    founding_year = models.CharField(max_length=10)
     description_1 = models.TextField()
     description_2 = models.TextField()
     description_3 = models.TextField()

@@ -31,3 +31,5 @@ export const GET_SERMONS = "churches/GET_SERMONS";
 export const ADD_SERMON = "churches/ADD_CHURCH_OFFICIAL";
 export const DELETE_SERMON = "churches/DELETE_SERMON";
 export const  EDIT_SERMON = "churches/  EDIT_SERMON";
+export const GET_CHURCH = "churches/GET_CHURCH";
+

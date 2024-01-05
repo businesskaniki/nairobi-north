@@ -1,8 +1,8 @@
 """
 Module: email_util
 This module provides utility classes and functions for
- sending emails in a separate thread using Django's 
- EmailMessage and threading.
+sending emails in a separate thread using Django's 
+EmailMessage and threading.
 """
 
 import threading
@@ -31,18 +31,19 @@ class EmailThread(threading.Thread):
 
 
 class Util:
-    """utill class"""
+    """Utility class"""
 
     @staticmethod
     def send_email(data):
         """
-        Send an email with the provided data.
+        Send an HTML email with the provided data.
 
-        :param data: A dictionary containing email_subject, email_body, and to_email.
+        :param data: A dictionary containing email_subject, email_body (HTML), and to_email.
         """
         email = EmailMessage(
             subject=data["email_subject"],
             body=data["email_body"],
             to=[data["to_email"]],
         )
+        email.content_subtype = "html"  
         EmailThread(email).start()
