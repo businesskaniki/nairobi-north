@@ -22,6 +22,9 @@ import Gallery from "./components/sermons/Sermons";
 import AdminChurchDetail from "./components/Dashboard/churches/AdminChurchDetail";
 import Church from "./components/churches/Church";
 import FAQ from "./components/FAQ/Faq";
+import AboutPage from "./components/Home/AboutPage";
+import MinistryDetail from "./components/Home/MinistryDetail";
+import PrayerRequestage from "./components/Home/PrayerRequestage";
 
 function App() {
   return (
@@ -63,6 +66,9 @@ function Content() {
           <Route path="/church/:uuid" Component={Church} />
           <Route path="/reset_password/confirm" Component={ResetPasswordForm} />
           <Route path="/settings/:id" Component={ProfileSettings } />
+          <Route path="/about" Component={AboutPage} />
+          <Route path="/ministries/:ministryName" Component={MinistryDetail} />
+          <Route path="/prayer_request" Component={PrayerRequestage} />
           <Route
             path="/dashboard"
             element={

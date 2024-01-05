@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { FaGripLinesVertical } from "react-icons/fa";
 import word from "../../Assets/word.jpeg";
 import "../../styles/onlineSermon.css";
@@ -27,7 +28,7 @@ const Sermons = () => {
               from God’s word, offer prayers, and worship through music.
             </p>
             <p className="online-sermon-link">
-              Worship Online
+              <Link to="/sermons">Worship Online</Link>
               <FaGripLinesVertical />
             </p>
           </div>

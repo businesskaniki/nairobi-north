@@ -2,6 +2,7 @@ import React from "react";
 import "../../styles/prayerRequest.css";
 import Button from "../ReusableComponents/Button";
 import { FaArrowRightLong } from "react-icons/fa6";
+import { Link } from "react-router-dom";
 
 const PrayerRequest = () => {
   return (
@@ -21,7 +22,7 @@ const PrayerRequest = () => {
             icon={<FaArrowRightLong />}
             style={{ backgroundColor: "white", color: "black" }}
             className={"prayerbtn"}
-            children={"pray for me"}
+            children={<Link to="/prayer_request">pray for me</Link>}
           />
         </div>
       </div>

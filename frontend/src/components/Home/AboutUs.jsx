@@ -1,4 +1,5 @@
-import React,{useEffect} from "react";
+import React from "react";
+import { Link } from "react-router-dom";
 import "../../styles/aboutus.css";
 import bible from "../../Assets/bible.jpeg";
 import { FaGripLinesVertical } from "react-icons/fa";
@@ -20,7 +21,7 @@ const AboutUs = () => {
             Jesus. It is our hope and prayer that we can help you to Know
             Christ, Grow together in faith, and Go serve the world.
           </h2>
-          <p className="about-link">About Us <FaGripLinesVertical /></p>
+          <p className="about-link"><Link to="/about">About Us</Link> <FaGripLinesVertical /></p>
         </div>
         <div className="image-div">
           <img src={bible} alt="bible" />

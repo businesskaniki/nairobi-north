@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { HashLink as Link } from "react-router-hash-link";
 import AuthChecker from "../../Helpers/AuthChecker";
 import LogoutButton from "../Auth/LogOut";
-import CustomLink from "../../Helpers/CustomLink";
 import "../../styles/nav.scss";
 
 const Nav = () => {
-  const navigate = useNavigate();
   const [isDropdownVisible, setDropdownVisible] = useState("notvisible");
   const username = "nicholas-maina";
 
@@ -32,19 +30,6 @@ const Nav = () => {
     });
   }, []);
 
-  
-
-  function navigateToHome() {
-    navigate("/"); // Navigates to the home route
-  }
-
-  const scrollToSection = (id) => {
-    navigateToHome(); // Navigates to home first
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
-  };
   return (
     <header>
       <nav className="navbar container">
@@ -55,7 +40,7 @@ const Nav = () => {
               <NavLink to="/">Home</NavLink>
             </li>
             <li>
-              <NavLink to=""></NavLink>
+              <NavLink to="about">About</NavLink>
             </li>
             <li>
               <Link smooth to="#contact">

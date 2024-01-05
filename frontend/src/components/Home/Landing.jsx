@@ -1,15 +1,10 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import "../../styles/landing.css";
 import Button from "../ReusableComponents/Button";
 import { FaRegArrowAltCircleRight } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
 
 const Landing = () => {
-  const navigate = useNavigate();
-  const handleClick = (link) => {
-    console.log("click");
-    navigate(link);
-  };
   return (
     <div className="landing-container">
       <div className="background-div"></div>
@@ -21,15 +16,13 @@ const Landing = () => {
           <Button
             icon={<FaRegArrowAltCircleRight />}
             type={"button"}
-            children={"New Here"}
-            onClick={handleClick}
+            children={<Link to="/about">New Here</Link>}
             style={{ backgroundColor: "skyblue", color: "black" }}
           />
           <Button
             icon={<FaRegArrowAltCircleRight />}
             type={"button"}
-            children={"Our Churches"}
-            onClick={handleClick("/churches")}
+            children={<Link to="/churches">our churches</Link>}
             style={{ backgroundColor: "white", color: "white" }}
           />
         </div>

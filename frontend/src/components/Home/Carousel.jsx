@@ -4,6 +4,7 @@ import poster from "../../Assets/NNE.jpg";
 import Button from "../ReusableComponents/Button";
 import { FaArrowRightLong } from "react-icons/fa6";
 import "../../styles/carousel.css";
+import { Link } from "react-router-dom";
 
 export const EventsCarousel = () => {
   const responsive = {
@@ -40,7 +41,7 @@ export const EventsCarousel = () => {
                 </p>
                 <Button
                   className={"btn"}
-                  children={"Upcoming Events"}
+                  children={<Link to="/events">Upcoming Events</Link>}
                   type={Button}
                   style={{ backgroundColor: "skyblue", color: "black" }}
                   icon={<FaArrowRightLong />}
