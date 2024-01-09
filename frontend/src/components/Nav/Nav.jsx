@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
-import { Link } from "react-scroll";
+import { HashLink as Link } from "react-router-hash-link";
 import AuthChecker from "../../Helpers/AuthChecker";
 import LogoutButton from "../Auth/LogOut";
 import "../../styles/nav.scss";
@@ -40,18 +40,15 @@ const Nav = () => {
               <NavLink to="/">Home</NavLink>
             </li>
             <li>
-              <Link className="links" to="#about" smooth={true} duration={500}>
-                About
+              <NavLink to="about">About</NavLink>
+            </li>
+            <li>
+              <Link smooth to="contact">
+                Contact
               </Link>
             </li>
             <li>
-              <Link to="#contact">Contact</Link>
-            </li>
-            <li>
               <NavLink to="churches">Churches</NavLink>
-            </li>
-            <li>
-              <NavLink to="ministries">Ministries</NavLink>
             </li>
             <li>
               <NavLink to="events">Events</NavLink>
@@ -61,6 +58,15 @@ const Nav = () => {
                 Sermons
               </NavLink>
             </li>
+            <AuthChecker
+              compo={
+                <li>
+                  <NavLink exact to="/dashboard">
+                    Dashboard
+                  </NavLink>
+                </li>
+              }
+            />
           </ul>
           <div className="navbar__buttons">
             <AuthChecker

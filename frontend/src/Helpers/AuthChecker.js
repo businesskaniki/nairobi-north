@@ -1,22 +1,22 @@
-import React from 'react';
-import Cookies from 'js-cookie';
+import React, { useEffect} from 'react';
+import { useSelector } from 'react-redux';
 
-const AuthChecker = ({ compo,logins }) => {
-  const isLoggedIn = Cookies.get('ac-tok-en') !== undefined;
+const AuthChecker = ({ compo, logins }) => {
+  const isloggedIn = useSelector((state) => state.auth.loggedIn);
 
-  if (isLoggedIn) {
-    return (
-      <div>
-        {compo}
-      </div>
-    );
-  } else {
-    return (
-      <div>
-        {logins}
-      </div>
-    );
-  }
+  useEffect(() => {
+    const checkLoginStatus = () => {
+      const loggedIn = isloggedIn;
+      console.log(loggedIn);
+    };
+
+    // Check login status on component mount
+    checkLoginStatus();
+  }, [isloggedIn]);
+
+  return (
+    <div>{isloggedIn ? compo : logins}</div>
+  );
 };
 
 export default AuthChecker;

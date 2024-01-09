@@ -1,15 +1,17 @@
 import { useRef, useState, useEffect } from "react";
+import { useDispatch } from 'react-redux';
 import { Link, Navigate } from "react-router-dom";
 import CryptoJS from "crypto-js";
 import Cookies from "js-cookie";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import { login } from "../../redux/Login/Login";
 import "../../styles/auth.css";
-
 import axios from "./axios";
 const LOGIN_URL = "login/";
+
 const Login = () => {
+  const dispatch = useDispatch();
   const emailRef = useRef(null);
   const errRef = useRef(null);
 
@@ -46,6 +48,7 @@ const Login = () => {
         accessToken,
         "accesstoken"
       ).toString();
+      dispatch(login(ciphtoken));
       Cookies.set("ac-tok-en", ciphtoken, { secure: true, sameSite: "none" });
       const user_id = data.id;
       const strId = user_id.toString();

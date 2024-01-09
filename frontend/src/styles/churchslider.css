@@ -1,0 +1,70 @@
+/* Styles for the landing page */
+@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&family=Merriweather:ital,wght@0,300;0,700;0,900;1,400;1,700;1,900&family=Orbitron:wght@400;500;600;700;800;900&family=Pacifico&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Titan+One&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;600;700&family=Merriweather:ital,wght@0,300;0,700;0,900;1,400;1,700;1,900&family=Orbitron:wght@400;500;600;700;800;900&family=Pacifico&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Titan+One&display=swap');
+
+.landing-page {
+  height: 100vh;
+  display: flex;
+  flex-direction: column; /* Ensure a vertical layout */
+  justify-content: center;
+  align-items: center;
+  padding-top: 3rem;
+}
+
+/* Background styling */
+.background {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+/* Overlay text styles */
+.overlay-text {
+  text-align: center;
+  width: 100%;
+  color: white; /* Text color */
+  height: 50vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.description {
+  font-size: 2em;
+  margin-bottom: 20px;
+  color: rgba(0,0, 0, .7);
+  text-transform: uppercase;
+  font-size: 1.15em;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0.5em;
+  font-family: "Roboto",sans-serif;
+  /* Add other text styles */
+}
+
+.line {
+  width: 50px;
+  border-bottom: 1px solid blue; /* Blue line */
+  margin: 0 auto;
+}
+
+.new-here-button {
+  padding: 10px 20px;
+  background-color: blue;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 20px; /* Add some space at the bottom */
+}
+
+.Jesus {
+  font-family: "Dancing Script", cursive;
+  font-size: 9em;
+}

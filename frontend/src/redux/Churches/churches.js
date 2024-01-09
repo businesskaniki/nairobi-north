@@ -6,11 +6,17 @@ import {
   ADD_CHURCH,
   EDIT_CHURCH,
   DELETE_CHURCH,
+  GET_CHURCH
 } from "../constants";
 const churchEndpoint = "church/";
 
 export const getChurches = createAsyncThunk(GET_CHURCHES, async () => {
-  const response = await apiRequest(`${BASE_URL}${churchEndpoint}`, 'get', null, false);
+  const response = await apiRequest(
+    `${BASE_URL}${churchEndpoint}`,
+    "get",
+    null,
+    false
+  );
   return response || [];
 });
 
@@ -27,15 +33,15 @@ export const addChurch = createAsyncThunk(ADD_CHURCH, async (church) => {
     formData.append("mission", church.mission);
     formData.append("vision", church.vision);
     formData.append("slogan", church.slogan);
-
-    if (church.background_image_1) {
-      formData.append("background_image_1", church.background_image_1);
-    }
-    if (church.background_image_2) {
-      formData.append("background_image_2", church.background_image_2);
-    }
-
-    const response = await apiRequest(`${BASE_URL}${churchEndpoint}`, "post", formData);
+    formData.append("background_image_1", church.background_image_1);
+    formData.append("background_image_2", church.background_image_2);
+    formData.append("background_image_3", church.background_image_3);
+    
+    const response = await apiRequest(
+      `${BASE_URL}${churchEndpoint}`,
+      "post",
+      formData
+    );
     return response;
   } catch (error) {
     throw error;
@@ -63,7 +69,11 @@ export const editChurch = createAsyncThunk(EDIT_CHURCH, async (church, id) => {
       formData.append("background_image_2", church.background_image_2);
     }
 
-    const response = await apiRequest(`${BASE_URL}${churchEndpoint}/${id}`, "patch", formData);
+    const response = await apiRequest(
+      `${BASE_URL}${churchEndpoint}/${id}`,
+      "patch",
+      formData
+    );
     return response;
   } catch (error) {
     throw error;
@@ -71,6 +81,17 @@ export const editChurch = createAsyncThunk(EDIT_CHURCH, async (church, id) => {
 });
 
 export const deleteChurch = createAsyncThunk(DELETE_CHURCH, async (id) => {
-  const response = await apiRequest(`${BASE_URL}${churchEndpoint}/${id}`, "delete");
+  const response = await apiRequest(
+    `${BASE_URL}${churchEndpoint}/${id}`,
+    "delete"
+  );
+  return response;
+});
+
+export const getchurch= createAsyncThunk(GET_CHURCH, async (id) => {
+  const response = await apiRequest(
+    `${BASE_URL}${churchEndpoint}${id}`,
+    "get"
+  );
   return response;
 });
