@@ -1,9 +1,12 @@
-import React from 'react'
+import React from "react";
+import { EventsCarousel } from "../../Home/Carousel";
 
 const Events = () => {
   return (
-    <div>Events</div>
-  )
-}
+    <section id="events-section">
+      <EventsCarousel />
+    </section>
+  );
+};
 
-export default Events
+export default Events;

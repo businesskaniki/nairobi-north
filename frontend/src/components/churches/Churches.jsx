@@ -13,14 +13,13 @@ const Churches = () => {
     dispatch(getChurches());
   }, [dispatch]);
 
-
+  console.log(churchesData);
   if (churchesData.loading) {
     return <Loading />;
   }
 
   return (
-    <div className="card-container">
-      <h2>Our churches</h2>
+    <div className="churches-container">
       {churchesData.churches.map((church) => (
         <ChurchComponent description={church.about} title={church.name} key={church.id} id={church.id} />
       ))}

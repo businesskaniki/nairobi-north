@@ -1,0 +1,79 @@
+#next-step-section {
+  height: 80vh;
+  background-color: black;
+  padding: 5% 0;
+}
+
+.next-step-wraper {
+  margin: 0 10%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 50px;
+}
+
+.next-step-heading-div h3 {
+  text-align: center;
+  color: rgb(255, 255, 255);
+  margin-top: 0.35em;
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 3em;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: 0.05em;
+  margin-right: calc(0.05em * -1);
+  text-transform: none;
+}
+
+.next-step-heading-div h6 {
+  text-align: center;
+  letter-spacing: 0.1em;
+  margin-right: calc(0.1em * -1);
+  color: #ef3340;
+  font-size: 1em;
+  font-weight: 400;
+  line-height: 1.1;
+  text-transform: uppercase;
+  font-family: "Roboto", sans-serif;
+}
+
+.next-step-cards {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  width: 100%;
+}
+
+.next-step-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 300px;
+}
+
+.next-step-card h2 {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 2em;
+  font-weight: 400;
+  text-transform: capitalize;
+  text-align: center;
+  color: rgb(255, 255, 255);
+}
+
+.next-step-card p {
+  font-weight: 400;
+  text-align: center;
+  color: rgb(255, 255, 255);
+  font-size: 1em;
+  text-transform: none;
+  font-family: "Roboto", sans-serif;
+  font-style: normal;
+  --gap: 40px;
+  line-height: 1.6;
+  letter-spacing: 0em;
+  font-size: 1em;
+  text-transform: none;
+}

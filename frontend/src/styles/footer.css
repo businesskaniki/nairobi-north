@@ -101,6 +101,9 @@ div.social {
   font-size: 0.9em;
   text-align: right;
 }
+.footer-input {
+  background-color: white;
+}
 @media screen and (max-width: 850px) {
   .row.primary {
     grid-template-columns: 1fr;

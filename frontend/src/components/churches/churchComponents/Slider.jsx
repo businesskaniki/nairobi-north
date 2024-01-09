@@ -1,37 +1,26 @@
 import React, { useState } from "react";
+import Button from "../../ReusableComponents/Button";
 import "../../../styles/churchslider.css";
-import { FaCircleArrowLeft,FaCircleArrowRight } from "react-icons/fa6";
+import ime from "../../../Assets/churchbg.png";
+const ChurchSlider = () => {
+  const [image, setImage] = useState(ime); // Replace with your image URL
 
-const ChurchSlider = ({ images,text }) => {
-  const [currentSlide, setCurrentSlide] = useState(0);
-
-  const nextSlide = () => {
-    setCurrentSlide((prevSlide) =>
-      prevSlide === images.length - 1 ? 0 : prevSlide + 1
-    );
-  };
-
-  const prevSlide = () => {
-    setCurrentSlide((prevSlide) =>
-      prevSlide === 0 ? images.length - 1 : prevSlide - 1
-    );
-  };
+  const [text, setText] = useState("Welcome to Our Church!");
 
   return (
-    <div id="home-section" className="churchslider-container">
-      <button onClick={prevSlide}><FaCircleArrowLeft /></button>
-      <div className="slider">
-        {images.map((image, index) => (
-          <div
-            key={index}
-            className={index === currentSlide ? "slide active" : "slide"}
-            style={{ backgroundImage: `url(${image})` }}
-          >
-            {text}
-          </div>
-        ))}
+    <div className="landing-page">
+      {/* Background image */}
+      <div className="background" style={{ backgroundImage: `url(${image})` }}>
+        {/* Overlay text */}
+        <div className="overlay-text">
+          <h1 className="description">{text}</h1>
+          <h1 className="Jesus">Jesus the light</h1>
+          <Button
+            children={"New Here!"}
+            style={{ backgroundColor: "skyblue", color: "black" }}
+          />
+        </div>
       </div>
-      <button onClick={nextSlide}><FaCircleArrowRight /></button>
     </div>
   );
 };

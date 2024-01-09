@@ -43,7 +43,7 @@ const Nav = () => {
               <NavLink to="about">About</NavLink>
             </li>
             <li>
-              <Link smooth to="#contact">
+              <Link smooth to="contact">
                 Contact
               </Link>
             </li>
