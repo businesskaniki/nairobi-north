@@ -26,7 +26,6 @@ const Events= () => {
   const events = useSelector((state) => state.events.events);
   const loading = useSelector((state) => state.churches.loading);
   const err = useSelector((state) => state.addchurch.error);
-  console.log(events);
 
   useEffect(() => {
     if (!events.length) {

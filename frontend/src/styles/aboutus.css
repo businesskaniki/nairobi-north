@@ -1,20 +1,20 @@
 @import url("https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,700;0,900;1,400;1,700;1,900&family=Orbitron:wght@400;500;600;700;800;900&family=Pacifico&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Titan+One&display=swap");
 
-.about-container {
+.aboutus-container {
   background-color: white;
   padding: 1% 0;
 }
 
-.about-wraper {
+.aboutus-wraper {
   padding: 2% 10%;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
-.text-container {
+.aboutus-text-container {
   width: 50%;
 }
-.welcome-txt {
+.aboutus-welcome-txt {
   color: #6b63a0;
   font-weight: 400;
   letter-spacing: 0.1em;
@@ -23,7 +23,7 @@
   line-height: 1.1;
   text-transform: uppercase;
 }
-.about-heading {
+.aboutus-heading {
   color: rgb(0, 0, 0);
   font-weight: 800;
   font-size: 3em;
@@ -35,7 +35,7 @@
   width: 70%;
   padding: 2% 0;
 }
-.about-paragraph {
+.aboutus-paragraph {
   font-weight: 400;
   color: rgb(0, 0, 0);
   font-family: "Poppins", sans-serif;
@@ -49,7 +49,7 @@
   width: 90%;
   padding-bottom: 1%;
 }
-.about-link {
+.aboutus-link {
   color: rgb(166, 166, 166);
   font-size: 0.85em;
   font-style: normal;
@@ -62,14 +62,14 @@
   cursor: pointer;
 }
 
-.image-div {
+.aboutus-image-div {
   width: 40%;
   display: flex;
   align-items: center;
   flex-basis: calc(50% - clamp(0px,var(--gap),9999px));
 }
 
-.image-div img {
+.aboutus-image-div img {
   display: block;
   max-width: 100%;
   height: auto;

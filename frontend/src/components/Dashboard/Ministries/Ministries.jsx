@@ -25,7 +25,6 @@ const Ministries = () => {
   const ministries = useSelector((state) => state.ministries.ministries);
   const loading = useSelector((state) => state.churches.loading);
   const err = useSelector((state) => state.addchurch.error);
-  console.log(ministries);
 
   useEffect(() => {
     if (!ministries.length) {

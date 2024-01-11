@@ -13,7 +13,6 @@ const Churches = () => {
     dispatch(getChurches());
   }, [dispatch]);
 
-  console.log(churchesData);
   if (churchesData.loading) {
     return <Loading />;
   }

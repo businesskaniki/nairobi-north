@@ -6,9 +6,9 @@ import { Link } from "react-router-dom";
 
 const PrayerRequest = () => {
   return (
-    <div class="prcontainer">
-      <div class="bottom-div"></div>
-      <div class="top-div">
+    <div className="prcontainer">
+      <div className="bottom-div"></div>
+      <div className="top-div">
         <div className="prayers-text-div">
           <h6 className="prayer-title">Prayer Request</h6>
           <h2 className="prayer-heading">How can we be praying with you?</h2>

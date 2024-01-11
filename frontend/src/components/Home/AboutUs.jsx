@@ -8,12 +8,12 @@ const AboutUs = () => {
 
   
   return (
-    <div id="About" className="about-container">
-      <div className="about-wraper">
-        <div className="text-container">
-          <p className="welcome-txt">Welcome</p>
-          <h2 className="about-heading">We Are Glad You're Here</h2>
-          <h2 className="about-paragraph">
+    <div id="About" className="aboutus-container">
+      <div className="aboutus-wraper">
+        <div className="aboutus-text-container">
+          <p className="aboutus-welcome-txt">Welcome</p>
+          <h2 className="aboutus-heading">We Are Glad You're Here</h2>
+          <h2 className="aboutus-paragraph">
             We are a community of unlikely friends following Jesus together. In
             a divided world filled with tension, we feel called to create a rare
             place where relationships are formed that don't make sense according
@@ -21,9 +21,9 @@ const AboutUs = () => {
             Jesus. It is our hope and prayer that we can help you to Know
             Christ, Grow together in faith, and Go serve the world.
           </h2>
-          <p className="about-link"><Link to="/about">About Us</Link> <FaGripLinesVertical /></p>
+          <p className="aboutus-link"><Link to="/about">About Us</Link> <FaGripLinesVertical /></p>
         </div>
-        <div className="image-div">
+        <div className="aboutus-image-div">
           <img src={bible} alt="bible" />
         </div>
       </div>

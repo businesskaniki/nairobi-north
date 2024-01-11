@@ -64,6 +64,7 @@ function Content() {
           <Route path="/events" Component={Events} />
           <Route path="/sermons" Component={Gallery} />
           <Route path="/church/:uuid" Component={Church} />
+          <Route path="/church/:uuid/Events" Component={Events} />
           <Route path="/reset_password/confirm" Component={ResetPasswordForm} />
           <Route path="/settings/:id" Component={ProfileSettings } />
           <Route path="/about" Component={AboutPage} />

@@ -1,6 +1,7 @@
 import React from "react";
 import aboutImage from "../../../Assets/aboutchurch.jpg";
 import "../../../styles/getconnected.css";
+import { Link } from "react-router-dom";
 
 const GetConnected = () => {
   const backgroundStyles = {
@@ -35,7 +36,7 @@ const GetConnected = () => {
       <div className="church-ministries">
         {ministries.map((ministry, index) => (
           <div key={index} className="box">
-            <p>{ministry.nam}</p>
+            <Link to="/churches">{ministry.nam}</Link>
           </div>
         ))}
       </div>

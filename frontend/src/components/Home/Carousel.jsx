@@ -6,7 +6,7 @@ import { FaArrowRightLong } from "react-icons/fa6";
 import "../../styles/carousel.css";
 import { Link } from "react-router-dom";
 
-export const EventsCarousel = () => {
+export const EventsCarousel = ({link}) => {
   const responsive = {
     desktop: {
       breakpoint: { max: 3000, min: 1024 },
@@ -41,8 +41,8 @@ export const EventsCarousel = () => {
                 </p>
                 <Button
                   className={"btn"}
-                  children={<Link to="/events">Upcoming Events</Link>}
-                  type={Button}
+                  children={<Link to={link}>Upcoming Events</Link>}
+                  type={"Button"}
                   style={{ backgroundColor: "skyblue", color: "black" }}
                   icon={<FaArrowRightLong />}
 

@@ -37,23 +37,23 @@ const Sermons = () => {
   return (
   
         <>
-        <div class="videos">
-          <div class="videos__container">
+        <div className="videos">
+          <div className="videos__container">
             <VideoPlayer media={vid} />
 
-            <div class="video">
-              <div class="video__thumbnail">
+            <div className="video">
+              <div className="video__thumbnail">
                 <img
                   src="https://img.youtube.com/vi/YpTmcCBBdTE/maxresdefault.jpg"
                   alt="" />
               </div>
-              <div class="video__details">
-                <div class="author">
+              <div className="video__details">
+                <div className="author">
                   <img
                     src="http://aninex.com/images/srvc/web_de_icon.png"
                     alt="" />
                 </div>
-                <div class="title">
+                <div className="title">
                   <h3>
                     Build A Password Generator with React JS - Beginners
                     Tutorial
@@ -64,19 +64,19 @@ const Sermons = () => {
               </div>
             </div>
 
-            <div class="video">
-              <div class="video__thumbnail">
+            <div className="video">
+              <div className="video__thumbnail">
                 <img
                   src="https://img.youtube.com/vi/46cXFUzR9XM/maxresdefault.jpg"
                   alt="" />
               </div>
-              <div class="video__details">
-                <div class="author">
+              <div className="video__details">
+                <div className="author">
                   <img
                     src="https://yt3.ggpht.com/ytc/AAUvwnh53ZRIGnyzC28QrfuggCINb3cfNbNWo4Uc6qR9=s48-c-k-c0x00ffffff-no-rj"
                     alt="" />
                 </div>
-                <div class="title">
+                <div className="title">
                   <h3>
                     Bella Ciao Full Song | La Casa De Papel | Money Heist |
                     Netflix India
@@ -87,19 +87,19 @@ const Sermons = () => {
               </div>
             </div>
 
-            <div class="video">
-              <div class="video__thumbnail">
+            <div className="video">
+              <div className="video__thumbnail">
                 <img
                   src="https://img.youtube.com/vi/d2na6sCyM5Q/maxresdefault.jpg"
                   alt="" />
               </div>
-              <div class="video__details">
-                <div class="author">
+              <div className="video__details">
+                <div className="author">
                   <img
                     src="https://yt3.ggpht.com/ytc/AAUvwnhESPVEatju_1yE-03-KLeSrnSLc5yy0RcvhPd5Lg=s48-c-k-c0x00ffffff-no-rj"
                     alt="" />
                 </div>
-                <div class="title">
+                <div className="title">
                   <h3>DON'T EVER GIVE UP - Elon Musk (Motivational Video)</h3>
                   <a href=""> Chispa Motivation</a>
                   <span>10M Views • 1 Month Ago</span>
@@ -107,19 +107,19 @@ const Sermons = () => {
               </div>
             </div>
 
-            <div class="video">
-              <div class="video__thumbnail">
+            <div className="video">
+              <div className="video__thumbnail">
                 <img
                   src="https://img.youtube.com/vi/2Ji-clqUYnA/maxresdefault.jpg"
                   alt="" />
               </div>
-              <div class="video__details">
-                <div class="author">
+              <div className="video__details">
+                <div className="author">
                   <img
                     src="https://yt3.ggpht.com/ytc/AAUvwniaHN7MZyFEiNvdHuKMzIWnDF604Z2--O4GCMq-FA=s48-c-k-c0x00ffffff-no-rj"
                     alt="" />
                 </div>
-                <div class="title">
+                <div className="title">
                   <h3>Javascript Fundamentals</h3>
                   <a href="">Coding Addict</a>
                   <span>179K • 8 Months Ago</span>
@@ -127,19 +127,19 @@ const Sermons = () => {
               </div>
             </div>
 
-            <div class="video">
-              <div class="video__thumbnail">
+            <div className="video">
+              <div className="video__thumbnail">
                 <img
                   src="https://img.youtube.com/vi/3PHXvlpOkf4/maxresdefault.jpg"
                   alt="" />
               </div>
-              <div class="video__details">
-                <div class="author">
+              <div className="video__details">
+                <div className="author">
                   <img
                     src="https://yt3.ggpht.com/ytc/AAUvwnifaQZvAunS0OFb2y_cieoVjLCVjqQW8Exf3BC1gg=s48-c-k-c0x00ffffff-no-rj"
                     alt="" />
                 </div>
-                <div class="title">
+                <div className="title">
                   <h3>
                     Build 15 JavaScript Projects - Vanilla JavaScript Course
                   </h3>
@@ -149,19 +149,19 @@ const Sermons = () => {
               </div>
             </div>
 
-            <div class="video">
-              <div class="video__thumbnail">
+            <div className="video">
+              <div className="video__thumbnail">
                 <img
                   src="https://img.youtube.com/vi/CVClHLwv-4I/maxresdefault.jpg"
                   alt="" />
               </div>
-              <div class="video__details">
-                <div class="author">
+              <div className="video__details">
+                <div className="author">
                   <img
                     src="https://yt3.ggpht.com/ytc/AAUvwnhIz_0Su6HhW6Ym50QCroJCAnF10X9xnnMDboN2=s48-c-k-c0x00ffffff-no-rj"
                     alt="" />
                 </div>
-                <div class="title">
+                <div className="title">
                   <h3>Build Real Time Face Detection With JavaScript</h3>
                   <a href=""> Web Dev Simplified </a>
                   <span>875K Views • 1 Year Ago</span>
@@ -169,19 +169,19 @@ const Sermons = () => {
               </div>
             </div>
 
-            <div class="video">
-              <div class="video__thumbnail">
+            <div className="video">
+              <div className="video__thumbnail">
                 <img
                   src="https://img.youtube.com/vi/ulprqHHWlng/maxresdefault.jpg"
                   alt="" />
               </div>
-              <div class="video__details">
-                <div class="author">
+              <div className="video__details">
+                <div className="author">
                   <img
                     src="https://yt3.ggpht.com/ytc/AAUvwnifaQZvAunS0OFb2y_cieoVjLCVjqQW8Exf3BC1gg=s48-c-k-c0x00ffffff-no-rj"
                     alt="" />
                 </div>
-                <div class="title">
+                <div className="title">
                   <h3>AWS Basics for Beginners - Full Course</h3>
                   <a href=""> freeCodeCamp.org </a>
                   <span>36K Views • 1 Day Ago</span>
@@ -189,19 +189,19 @@ const Sermons = () => {
               </div>
             </div>
 
-            <div class="video">
-              <div class="video__thumbnail">
+            <div className="video">
+              <div className="video__thumbnail">
                 <img
                   src="https://img.youtube.com/vi/PpXUTUXU7Qc/maxresdefault.jpg"
                   alt="" />
               </div>
-              <div class="video__details">
-                <div class="author">
+              <div className="video__details">
+                <div className="author">
                   <img
                     src="http://aninex.com/images/srvc/web_de_icon.png"
                     alt="" />
                 </div>
-                <div class="title">
+                <div className="title">
                   <h3>
                     Top 5 Programming Languages to Learn in 2021 | Best
                     Programming Languages to Learn
@@ -212,19 +212,19 @@ const Sermons = () => {
               </div>
             </div>
 
-            <div class="video">
-              <div class="video__thumbnail">
+            <div className="video">
+              <div className="video__thumbnail">
                 <img
                   src="https://img.youtube.com/vi/YpTmcCBBdTE/maxresdefault.jpg"
                   alt="" />
               </div>
-              <div class="video__details">
-                <div class="author">
+              <div className="video__details">
+                <div className="author">
                   <img
                     src="http://aninex.com/images/srvc/web_de_icon.png"
                     alt="" />
                 </div>
-                <div class="title">
+                <div className="title">
                   <h3>
                     Build A Password Generator with React JS - Beginners
                     Tutorial
@@ -235,19 +235,19 @@ const Sermons = () => {
               </div>
             </div>
 
-            <div class="video">
-              <div class="video__thumbnail">
+            <div className="video">
+              <div className="video__thumbnail">
                 <img
                   src="https://img.youtube.com/vi/46cXFUzR9XM/maxresdefault.jpg"
                   alt="" />
               </div>
-              <div class="video__details">
-                <div class="author">
+              <div className="video__details">
+                <div className="author">
                   <img
                     src="https://yt3.ggpht.com/ytc/AAUvwnh53ZRIGnyzC28QrfuggCINb3cfNbNWo4Uc6qR9=s48-c-k-c0x00ffffff-no-rj"
                     alt="" />
                 </div>
-                <div class="title">
+                <div className="title">
                   <h3>
                     Bella Ciao Full Song | La Casa De Papel | Money Heist |
                     Netflix India
@@ -258,19 +258,19 @@ const Sermons = () => {
               </div>
             </div>
 
-            <div class="video">
-              <div class="video__thumbnail">
+            <div className="video">
+              <div className="video__thumbnail">
                 <img
                   src="https://img.youtube.com/vi/d2na6sCyM5Q/maxresdefault.jpg"
                   alt="" />
               </div>
-              <div class="video__details">
-                <div class="author">
+              <div className="video__details">
+                <div className="author">
                   <img
                     src="https://yt3.ggpht.com/ytc/AAUvwnhESPVEatju_1yE-03-KLeSrnSLc5yy0RcvhPd5Lg=s48-c-k-c0x00ffffff-no-rj"
                     alt="" />
                 </div>
-                <div class="title">
+                <div className="title">
                   <h3>DON'T EVER GIVE UP - Elon Musk (Motivational Video)</h3>
                   <a href=""> Chispa Motivation</a>
                   <span>10M Views • 1 Month Ago</span>
@@ -278,19 +278,19 @@ const Sermons = () => {
               </div>
             </div>
 
-            <div class="video">
-              <div class="video__thumbnail">
+            <div className="video">
+              <div className="video__thumbnail">
                 <img
                   src="https://img.youtube.com/vi/2Ji-clqUYnA/maxresdefault.jpg"
                   alt="" />
               </div>
-              <div class="video__details">
-                <div class="author">
+              <div className="video__details">
+                <div className="author">
                   <img
                     src="https://yt3.ggpht.com/ytc/AAUvwniaHN7MZyFEiNvdHuKMzIWnDF604Z2--O4GCMq-FA=s48-c-k-c0x00ffffff-no-rj"
                     alt="" />
                 </div>
-                <div class="title">
+                <div className="title">
                   <h3>Javascript Fundamentals</h3>
                   <a href="">Coding Addict</a>
                   <span>179K • 8 Months Ago</span>
@@ -298,19 +298,19 @@ const Sermons = () => {
               </div>
             </div>
 
-            <div class="video">
-              <div class="video__thumbnail">
+            <div className="video">
+              <div className="video__thumbnail">
                 <img
                   src="https://img.youtube.com/vi/3PHXvlpOkf4/maxresdefault.jpg"
                   alt="" />
               </div>
-              <div class="video__details">
-                <div class="author">
+              <div className="video__details">
+                <div className="author">
                   <img
                     src="https://yt3.ggpht.com/ytc/AAUvwnifaQZvAunS0OFb2y_cieoVjLCVjqQW8Exf3BC1gg=s48-c-k-c0x00ffffff-no-rj"
                     alt="" />
                 </div>
-                <div class="title">
+                <div className="title">
                   <h3>
                     Build 15 JavaScript Projects - Vanilla JavaScript Course
                   </h3>
@@ -320,19 +320,19 @@ const Sermons = () => {
               </div>
             </div>
 
-            <div class="video">
-              <div class="video__thumbnail">
+            <div className="video">
+              <div className="video__thumbnail">
                 <img
                   src="https://img.youtube.com/vi/CVClHLwv-4I/maxresdefault.jpg"
                   alt="" />
               </div>
-              <div class="video__details">
-                <div class="author">
+              <div className="video__details">
+                <div className="author">
                   <img
                     src="https://yt3.ggpht.com/ytc/AAUvwnhIz_0Su6HhW6Ym50QCroJCAnF10X9xnnMDboN2=s48-c-k-c0x00ffffff-no-rj"
                     alt="" />
                 </div>
-                <div class="title">
+                <div className="title">
                   <h3>Build Real Time Face Detection With JavaScript</h3>
                   <a href=""> Web Dev Simplified </a>
                   <span>875K Views • 1 Year Ago</span>
@@ -340,19 +340,19 @@ const Sermons = () => {
               </div>
             </div>
 
-            <div class="video">
-              <div class="video__thumbnail">
+            <div className="video">
+              <div className="video__thumbnail">
                 <img
                   src="https://img.youtube.com/vi/ulprqHHWlng/maxresdefault.jpg"
                   alt="" />
               </div>
-              <div class="video__details">
-                <div class="author">
+              <div className="video__details">
+                <div className="author">
                   <img
                     src="https://yt3.ggpht.com/ytc/AAUvwnifaQZvAunS0OFb2y_cieoVjLCVjqQW8Exf3BC1gg=s48-c-k-c0x00ffffff-no-rj"
                     alt="" />
                 </div>
-                <div class="title">
+                <div className="title">
                   <h3>AWS Basics for Beginners - Full Course</h3>
                   <a href=""> freeCodeCamp.org </a>
                   <span>36K Views • 1 Day Ago</span>
@@ -360,19 +360,19 @@ const Sermons = () => {
               </div>
             </div>
 
-            <div class="video">
-              <div class="video__thumbnail">
+            <div className="video">
+              <div className="video__thumbnail">
                 <img
                   src="https://img.youtube.com/vi/PpXUTUXU7Qc/maxresdefault.jpg"
                   alt="" />
               </div>
-              <div class="video__details">
-                <div class="author">
+              <div className="video__details">
+                <div className="author">
                   <img
                     src="http://aninex.com/images/srvc/web_de_icon.png"
                     alt="" />
                 </div>
-                <div class="title">
+                <div className="title">
                   <h3>
                     Top 5 Programming Languages to Learn in 2021 | Best
                     Programming Languages to Learn
@@ -383,19 +383,19 @@ const Sermons = () => {
               </div>
             </div>
 
-            <div class="video">
-              <div class="video__thumbnail">
+            <div className="video">
+              <div className="video__thumbnail">
                 <img
                   src="https://img.youtube.com/vi/YpTmcCBBdTE/maxresdefault.jpg"
                   alt="" />
               </div>
-              <div class="video__details">
-                <div class="author">
+              <div className="video__details">
+                <div className="author">
                   <img
                     src="http://aninex.com/images/srvc/web_de_icon.png"
                     alt="" />
                 </div>
-                <div class="title">
+                <div className="title">
                   <h3>
                     Build A Password Generator with React JS - Beginners
                     Tutorial
@@ -406,19 +406,19 @@ const Sermons = () => {
               </div>
             </div>
 
-            <div class="video">
-              <div class="video__thumbnail">
+            <div className="video">
+              <div className="video__thumbnail">
                 <img
                   src="https://img.youtube.com/vi/46cXFUzR9XM/maxresdefault.jpg"
                   alt="" />
               </div>
-              <div class="video__details">
-                <div class="author">
+              <div className="video__details">
+                <div className="author">
                   <img
                     src="https://yt3.ggpht.com/ytc/AAUvwnh53ZRIGnyzC28QrfuggCINb3cfNbNWo4Uc6qR9=s48-c-k-c0x00ffffff-no-rj"
                     alt="" />
                 </div>
-                <div class="title">
+                <div className="title">
                   <h3>
                     Bella Ciao Full Song | La Casa De Papel | Money Heist |
                     Netflix India
@@ -429,19 +429,19 @@ const Sermons = () => {
               </div>
             </div>
 
-            <div class="video">
-              <div class="video__thumbnail">
+            <div className="video">
+              <div className="video__thumbnail">
                 <img
                   src="https://img.youtube.com/vi/d2na6sCyM5Q/maxresdefault.jpg"
                   alt="" />
               </div>
-              <div class="video__details">
-                <div class="author">
+              <div className="video__details">
+                <div className="author">
                   <img
                     src="https://yt3.ggpht.com/ytc/AAUvwnhESPVEatju_1yE-03-KLeSrnSLc5yy0RcvhPd5Lg=s48-c-k-c0x00ffffff-no-rj"
                     alt="" />
                 </div>
-                <div class="title">
+                <div className="title">
                   <h3>DON'T EVER GIVE UP - Elon Musk (Motivational Video)</h3>
                   <a href=""> Chispa Motivation</a>
                   <span>10M Views • 1 Month Ago</span>
@@ -449,19 +449,19 @@ const Sermons = () => {
               </div>
             </div>
 
-            <div class="video">
-              <div class="video__thumbnail">
+            <div className="video">
+              <div className="video__thumbnail">
                 <img
                   src="https://img.youtube.com/vi/2Ji-clqUYnA/maxresdefault.jpg"
                   alt="" />
               </div>
-              <div class="video__details">
-                <div class="author">
+              <div className="video__details">
+                <div className="author">
                   <img
                     src="https://yt3.ggpht.com/ytc/AAUvwniaHN7MZyFEiNvdHuKMzIWnDF604Z2--O4GCMq-FA=s48-c-k-c0x00ffffff-no-rj"
                     alt="" />
                 </div>
-                <div class="title">
+                <div className="title">
                   <h3>Javascript Fundamentals</h3>
                   <a href="">Coding Addict</a>
                   <span>179K • 8 Months Ago</span>
@@ -469,19 +469,19 @@ const Sermons = () => {
               </div>
             </div>
 
-            <div class="video">
-              <div class="video__thumbnail">
+            <div className="video">
+              <div className="video__thumbnail">
                 <img
                   src="https://img.youtube.com/vi/3PHXvlpOkf4/maxresdefault.jpg"
                   alt="" />
               </div>
-              <div class="video__details">
-                <div class="author">
+              <div className="video__details">
+                <div className="author">
                   <img
                     src="https://yt3.ggpht.com/ytc/AAUvwnifaQZvAunS0OFb2y_cieoVjLCVjqQW8Exf3BC1gg=s48-c-k-c0x00ffffff-no-rj"
                     alt="" />
                 </div>
-                <div class="title">
+                <div className="title">
                   <h3>
                     Build 15 JavaScript Projects - Vanilla JavaScript Course
                   </h3>
@@ -491,19 +491,19 @@ const Sermons = () => {
               </div>
             </div>
 
-            <div class="video">
-              <div class="video__thumbnail">
+            <div className="video">
+              <div className="video__thumbnail">
                 <img
                   src="https://img.youtube.com/vi/CVClHLwv-4I/maxresdefault.jpg"
                   alt="" />
               </div>
-              <div class="video__details">
-                <div class="author">
+              <div className="video__details">
+                <div className="author">
                   <img
                     src="https://yt3.ggpht.com/ytc/AAUvwnhIz_0Su6HhW6Ym50QCroJCAnF10X9xnnMDboN2=s48-c-k-c0x00ffffff-no-rj"
                     alt="" />
                 </div>
-                <div class="title">
+                <div className="title">
                   <h3>Build Real Time Face Detection With JavaScript</h3>
                   <a href=""> Web Dev Simplified </a>
                   <span>875K Views • 1 Year Ago</span>
@@ -511,19 +511,19 @@ const Sermons = () => {
               </div>
             </div>
 
-            <div class="video">
-              <div class="video__thumbnail">
+            <div className="video">
+              <div className="video__thumbnail">
                 <img
                   src="https://img.youtube.com/vi/ulprqHHWlng/maxresdefault.jpg"
                   alt="" />
               </div>
-              <div class="video__details">
-                <div class="author">
+              <div className="video__details">
+                <div className="author">
                   <img
                     src="https://yt3.ggpht.com/ytc/AAUvwnifaQZvAunS0OFb2y_cieoVjLCVjqQW8Exf3BC1gg=s48-c-k-c0x00ffffff-no-rj"
                     alt="" />
                 </div>
-                <div class="title">
+                <div className="title">
                   <h3>AWS Basics for Beginners - Full Course</h3>
                   <a href=""> freeCodeCamp.org </a>
                   <span>36K Views • 1 Day Ago</span>

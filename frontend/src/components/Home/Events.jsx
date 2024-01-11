@@ -6,7 +6,7 @@ const Events = () => {
     <div className="events-container">
       <div className="events-wraper">
         <div className="events-carousel">
-          <EventsCarousel />
+          <EventsCarousel link="/events" />
         </div>
       </div>
     </div>
