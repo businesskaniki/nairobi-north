@@ -7,7 +7,6 @@ const AuthChecker = ({ compo, logins }) => {
   useEffect(() => {
     const checkLoginStatus = () => {
       const loggedIn = isloggedIn;
-      console.log(loggedIn);
     };
 
     // Check login status on component mount

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Button from "../../ReusableComponents/Button";
 import "../../../styles/churchslider.css";
 import ime from "../../../Assets/churchbg.png";
+import { Link } from "react-router-dom";
 const ChurchSlider = () => {
   const [image, setImage] = useState(ime); // Replace with your image URL
 
@@ -16,7 +17,7 @@ const ChurchSlider = () => {
           <h1 className="description">{text}</h1>
           <h1 className="Jesus">Jesus the light</h1>
           <Button
-            children={"New Here!"}
+            children={<Link to="/about">New Here!</Link>}
             style={{ backgroundColor: "skyblue", color: "black" }}
           />
         </div>

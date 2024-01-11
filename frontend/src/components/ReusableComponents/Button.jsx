@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const Button = ({ onClick, type, children, hover,className,icon, style, ...rest }) => {
+const Button = ({ onClick, buttonType, children, hover,className,icon, style, ...rest }) => {
   const buttonStyles = {
     padding: "14px 20px",
     borderRadius: "8px",
@@ -31,28 +31,31 @@ const Button = ({ onClick, type, children, hover,className,icon, style, ...rest 
   return (
     <button
       onClick={onClick}
-      type={type}
+      type={buttonType}
       className={className}
       style={{ ...buttonStyles }}
       {...rest}
     >
-      <p style={{...pstyles}}>{children}{icon}</p>
+      <p style={{ ...pstyles }}>
+        {children}
+        {icon}
+      </p>
     </button>
   );
 };
 
 Button.propTypes = {
   onClick: PropTypes.func,
-  type: PropTypes.oneOf(["button", "submit", "reset"]),
+  buttonType: PropTypes.oneOf(["button", "submit", "reset"]),
   children: PropTypes.node.isRequired,
   className: PropTypes.string,
   style: PropTypes.object,
 };
 
 Button.defaultProps = {
-  type: "button",
+  buttonType: "button",
   className: "",
   style: {},
 };
 
-export default Button;
+export default Button; 

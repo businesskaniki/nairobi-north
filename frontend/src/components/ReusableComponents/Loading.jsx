@@ -3,48 +3,48 @@ import "../../styles/loading.css"
 
 const Loading = () => {
   return (
-    <div class="loadrow">
-      <div class="container">
-        <div class="grid-row grid-4-4">
-          <div class="cards">
-            <div class="card_image loading"></div>
-            <div class="card_title loading"></div>
-            <div class="card_description loading"></div>
+    <div className="loadrow">
+      <div className="container">
+        <div className="grid-row grid-4-4">
+          <div className="cards">
+            <div className="card_image loading"></div>
+            <div className="card_title loading"></div>
+            <div className="card_description loading"></div>
           </div>
-          <div class="cards">
-            <div class="card_image loading"></div>
-            <div class="card_title loading"></div>
-            <div class="card_description loading"></div>
+          <div className="cards">
+            <div className="card_image loading"></div>
+            <div className="card_title loading"></div>
+            <div className="card_description loading"></div>
           </div>
-          <div class="cards">
-            <div class="card_image loading"></div>
-            <div class="card_title loading"></div>
-            <div class="card_description loading"></div>
+          <div className="cards">
+            <div className="card_image loading"></div>
+            <div className="card_title loading"></div>
+            <div className="card_description loading"></div>
           </div>
-          <div class="cards">
-            <div class="card_image loading"></div>
-            <div class="card_title loading"></div>
-            <div class="card_description loading"></div>
+          <div className="cards">
+            <div className="card_image loading"></div>
+            <div className="card_title loading"></div>
+            <div className="card_description loading"></div>
           </div>
-          <div class="cards">
-            <div class="card_image loading"></div>
-            <div class="card_title loading"></div>
-            <div class="card_description loading"></div>
+          <div className="cards">
+            <div className="card_image loading"></div>
+            <div className="card_title loading"></div>
+            <div className="card_description loading"></div>
           </div>
-          <div class="cards">
-            <div class="card_image loading"></div>
-            <div class="card_title loading"></div>
-            <div class="card_description loading"></div>
+          <div className="cards">
+            <div className="card_image loading"></div>
+            <div className="card_title loading"></div>
+            <div className="card_description loading"></div>
           </div>
-          <div class="cards">
-            <div class="card_image loading"></div>
-            <div class="card_title loading"></div>
-            <div class="card_description loading"></div>
+          <div className="cards">
+            <div className="card_image loading"></div>
+            <div className="card_title loading"></div>
+            <div className="card_description loading"></div>
           </div>
-          <div class="cards">
-            <div class="card_image loading"></div>
-            <div class="card_title loading"></div>
-            <div class="card_description loading"></div>
+          <div className="cards">
+            <div className="card_image loading"></div>
+            <div className="card_title loading"></div>
+            <div className="card_description loading"></div>
           </div>
         </div>
       </div>

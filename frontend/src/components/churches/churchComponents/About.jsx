@@ -1,11 +1,13 @@
 import React from "react";
 import about from "../../../Assets/About.png";
 import "../../../styles/Aboutchurch.css";
+import Button from "../../ReusableComponents/Button";
+import { Link } from "react-router-dom";
 
 const About = () => {
   return (
-    <div class="about-container" id="about-us-section">
-      <div class="text-part">
+    <div className="about-container" id="about-us-section">
+      <div className="text-part">
         <p className="welcome">Welcome</p>
         <h3>Join us this Sunday</h3>
         <p className="about_p">
@@ -19,10 +21,10 @@ const About = () => {
           unfamiliar with Christianity, or whether you’ve been doing this for a
           while, we are all on a journey of learning and growing together.
         </p>
-        <button>About us</button>
+        <Button children={<Link to="/about" >AboutUs</Link>} />
       </div>
-      <div class="image-part">
-        <img src={about} alt="About us" class="about-image" />
+      <div className="image-part">
+        <img src={about} alt="About us" className="about-image" />
       </div>
     </div>
   );

@@ -3,6 +3,7 @@ import Button from "../../ReusableComponents/Button";
 import { FaArrowRight } from "react-icons/fa6";
 import backgroundImage from "../../../Assets/serom.png";
 import "../../../styles/churchsermons.css";
+import { Link } from "react-router-dom";
 
 const OnlineSermons = () => {
   return (
@@ -28,7 +29,7 @@ const OnlineSermons = () => {
           and hope this option is a great alternative for when you’re unable
           to make it in person.
         </p>
-        <Button children={<h6>watch Now!</h6>}  icon={<FaArrowRight />}/>
+        <Button children={<Link to="/sermons">watch Now!</Link>}  icon={<FaArrowRight />}/>
       </div>
     </div>
   </section>
