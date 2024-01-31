@@ -1,4 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import axios from "axios";
 import apiRequest from "../../Helpers/ApiRequestSender";
 import {
   GET_CHURCHES,
@@ -88,10 +89,13 @@ export const deleteChurch = createAsyncThunk(DELETE_CHURCH, async (id) => {
   return response;
 });
 
-export const getchurch= createAsyncThunk(GET_CHURCH, async (id) => {
-  const response = await apiRequest(
-    `${BASE_URL}${churchEndpoint}${id}`,
-    "get"
-  );
-  return response;
+
+
+export const getchurch = createAsyncThunk(GET_CHURCH, async (id) => {
+  try {
+    const response = await axios.get(`${BASE_URL}${churchEndpoint}${id}`);
+    return response.data; // Adjust this based on your API response structure
+  } catch (error) {
+    throw error;
+  }
 });

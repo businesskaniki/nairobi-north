@@ -17,14 +17,15 @@ import Home from "./components/Home/Home";
 import ProfileSettings from "./components/profile/ProfileSettings";
 import Churches from "./components/churches/Churches";
 import Ministries from "./components/ministries/Ministries";
-import Events from "./components/events/Events";
+import Events from "./components/eventsPage/Events";
 import Gallery from "./components/sermons/Sermons";
 import AdminChurchDetail from "./components/Dashboard/churches/AdminChurchDetail";
 import Church from "./components/churches/Church";
 import FAQ from "./components/FAQ/Faq";
-import AboutPage from "./components/Home/AboutPage";
+import About from "./components/AboutPage/About";
 import MinistryDetail from "./components/Home/MinistryDetail";
 import PrayerRequestage from "./components/Home/PrayerRequestage";
+import DistrictContactUs from "./components/Home/DistrictContactUs";
 
 function App() {
   return (
@@ -55,6 +56,7 @@ function Content() {
       <div className="Content">
         <Routes>
           <Route exact path="/" Component={Home} />
+          <Route exact path="/contact_us" Component={DistrictContactUs} />
           <Route path="/register" Component={Register} />
           <Route path="/FAQ" Component={FAQ} />
           <Route path="/churches" Component={Churches} />
@@ -65,9 +67,10 @@ function Content() {
           <Route path="/sermons" Component={Gallery} />
           <Route path="/church/:uuid" Component={Church} />
           <Route path="/church/:uuid/Events" Component={Events} />
+          <Route path="/church/:uuid/about" Component={About} />
           <Route path="/reset_password/confirm" Component={ResetPasswordForm} />
           <Route path="/settings/:id" Component={ProfileSettings } />
-          <Route path="/about" Component={AboutPage} />
+          <Route path="/about" Component={About} />
           <Route path="/ministries/:ministryName" Component={MinistryDetail} />
           <Route path="/prayer_request" Component={PrayerRequestage} />
           <Route

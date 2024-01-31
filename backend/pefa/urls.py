@@ -5,6 +5,9 @@ This module contains Django views and URL configurations for handling user regis
 authentication, user profile management, and CRUD operations for Tag, Photo, and Video objects.
 """
 
+from django.conf import settings
+from django.conf.urls.static import static
+
 from django.urls import path, re_path
 from rest_framework_simplejwt.views import (
     TokenRefreshView,
@@ -128,3 +131,6 @@ urlpatterns = [
     ),
     path('send-emails/', SendEmailView.as_view(), name='send-emails'),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

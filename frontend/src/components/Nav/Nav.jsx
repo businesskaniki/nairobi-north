@@ -31,7 +31,7 @@ const Nav = () => {
   }, []);
 
   return (
-    <header>
+    <header className="navheader">
       <nav className="navbar container">
         <h4>Pefa Nairobi North</h4>
         <div className="navbar__menu">
@@ -43,7 +43,7 @@ const Nav = () => {
               <NavLink to="about">About</NavLink>
             </li>
             <li>
-              <Link smooth to="contact">
+              <Link smooth to="contact_us">
                 Contact
               </Link>
             </li>

@@ -8,6 +8,7 @@ import "../../styles/churches.css";
 const Churches = () => {
   const dispatch = useDispatch();
   const churchesData = useSelector((state) => state.churches);
+  console.log(churchesData);
 
   useEffect(() => {
     dispatch(getChurches());
@@ -20,7 +21,7 @@ const Churches = () => {
   return (
     <div className="churches-container">
       {churchesData.churches.map((church) => (
-        <ChurchComponent description={church.about} title={church.name} key={church.id} id={church.id} />
+        <ChurchComponent description={church.about} title={church.name} key={church.id} id={church.id} image={church.background_image_1} />
       ))}
     </div>
   );

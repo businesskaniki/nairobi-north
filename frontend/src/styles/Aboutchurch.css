@@ -10,11 +10,13 @@
   padding: 0 10%;
   background-color: black;
   color: white;
+  width: 100%;
 }
 
 .text-part {
   flex: 1;
   padding: 20px;
+  width: 50%;
 }
 
 .welcome {
@@ -50,14 +52,20 @@
 }
 
 .image-part {
-  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 20px;
+  height:80%;
+  width: 50%;
 }
 
 .about-image {
-  width: 100%;
-  max-width: 100%;
-  height: auto;
+ width: auto;
+  height: 100%;
+}
+.about-image img {
+  width: 300px;
 }
 
 .about_p {

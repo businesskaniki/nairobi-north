@@ -1,81 +1,102 @@
 @import url("https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,700;0,900;1,400;1,700;1,900&family=Orbitron:wght@400;500;600;700;800;900&family=Pacifico&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Titan+One&display=swap");
 
 .card {
-    position: relative;
-    width: calc(25% - 20px); /* Adjust the width as needed */
-    margin: 10px;
-    display: inline-block;
-    vertical-align: top;
-    overflow: hidden;
-    border: 1px solid #ccc; /* Add border or any other styling you prefer */
-    min-height: 350px; /* Minimum height for the card */
-    background-color: #f9f9f9; /* Default background color */
-    border-radius: 4px;
-  }
-  
-  .card-image {
-    width: 100%;
-    display: block;
-    height: auto;
-  }
-  
-  .card-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between; /* Ensure space between elements */
-    align-items: center;
-    background-color: rgba(0, 0, 0, 0.5); /* Overlay color */
-    color: white; /* Text color on the overlay */
-    padding: 20px;
-    box-sizing: border-box;
-    opacity: 0;
-    transition: opacity 0.3s ease-in-out;
-  }
-  
-  .card:hover .card-overlay {
-    opacity: 1;
-  }
-  
-  .card-title {
-    font-size: 1.2em;
-    margin-bottom: auto; /* Push to the top */
-    text-transform: capitalize;
-    color: rgb(237, 228, 228);
-    font-family: "Poppins", sans-serif;
-  }
-  
-  .card-description {
-    font-size: 0.8em;
-    margin-bottom: auto; 
-    line-height: 1.5em;
-    font-family: "Poppins", sans-serif;
 
-  }
-  
-  .see-more-button {
-    width: 100%;
-    text-align: center;
-    padding: 10px;
-    background-color: #333;
-    color: white;
-    text-decoration: none;
-    transition: background-color 0.3s ease-in-out;
-    margin-top: auto; /* Push to the bottom */
-    font-family: "Poppins", sans-serif;
+  width: 300px;
 
-  }
-  
-  .see-more-button:hover {
-    background-color: #555;
-  }
-  
-  .card:hover {
-    transform: scale(1.03); /* Scale effect on hover */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Box shadow on hover */
-  }
-  
+  height: 400px; /* Set a fixed height */
+
+  border: 1px solid #ddd;
+
+  border-radius: 5px;
+
+  overflow: hidden; /* Hide any content that overflows */
+
+  /* margin: 20px auto; */
+
+  position: relative; /* Add this line */
+
+}
+
+
+.card-image {
+
+  width: 100%;
+
+  height: 200px;
+
+  object-fit: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.card-content {
+
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 20px;
+  box-sizing: border-box; /* Add this line */
+  background-color: tan;
+}
+
+
+.card-title {
+  display: flex;
+  align-items: flex-start;
+
+  margin: 0;
+
+  font-size: 24px;
+
+}
+
+
+.card-description {
+
+  margin: 10px 0;
+  text-align: left;
+
+  font-size: 16px;
+
+  height: 50px; /* Set a fixed height for the description */
+
+  overflow: hidden; /* Hide any content that overflows */
+
+}
+
+
+.card-button {
+
+  display: block;
+
+  width: 100%; /* Change this line */
+
+  margin: 0; /* Add this line */
+
+  padding: 20px;
+
+  background-color: #007bff;
+
+  color: #fff;
+
+  border: none;
+
+  border-radius: 0; /* Change this line */
+
+  cursor: pointer;
+
+  position: absolute; /* Add this line */
+
+  bottom: 0; /* Add this line */
+
+}
+
+
+.card-button:hover {
+
+  background-color: #0056b3;
+
+}
