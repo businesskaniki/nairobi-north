@@ -33,7 +33,7 @@ export const EventsCarousel = ({link}) => {
               <div className="events-content">
                 <p className="events-title">Upcoming Events</p>
                 <h4 className="events-heading">
-                  Here's what's happening next.
+                  Here's what's happening next at pefa Darasha.
                 </h4>
                 <p className="events-desc">
                   Church doesn’t just happen on Sundays. Find times and

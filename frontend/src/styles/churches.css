@@ -2,5 +2,6 @@
   margin: 5% 10%; /* 10% margin on the left and right */
   display: flex;
   flex-wrap: wrap; /* Allow items to wrap to the next row */
-  justify-content: center; /* Ensure space between items */
+  justify-content: flex-start; /* Ensure space between items */
+  gap: 20px;
 }

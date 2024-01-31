@@ -1,0 +1,153 @@
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Dancing+Script:wght@500;600;700&family=Merriweather:ital,wght@0,300;0,700;0,900;1,400;1,700;1,900&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Orbitron:wght@400;500;600;700;800;900&family=Pacifico&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Titan+One&display=swap");
+
+.about-our-mission-container {
+  background-color: black;
+}
+
+.about-container-wraper {
+  margin: 0 10%;
+}
+.about-our-mission-text-wraper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  padding: 3% 0;
+  width: 100%;
+}
+.about-our-mission-text {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: flex-start;
+}
+
+.about-us-sub-heading {
+  font-family: "Poppins", sans-serif;
+  font-size: 1em;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  margin-right: calc(0.1em * -1);
+  text-transform: uppercase;
+  color: #6b63a0;
+  line-height: 1.1;
+}
+
+.about-our-mission-text h2 {
+  color: rgb(255, 255, 255);
+  letter-spacing: 0.05em;
+  margin-right: calc(0.05em * -1);
+  font-family: "Poppins", sans-serif;
+  font-size: 3em;
+  font-weight: 800;
+  line-height: 1.1;
+  margin-top: 0.35em;
+  font-style: normal;
+  text-transform: none;
+  padding-bottom: 3%;
+}
+
+.about-us-text-desc {
+  font-weight: 400;
+  color: rgb(255, 255, 255);
+  line-height: 1.6;
+  font-family: "Poppins", sans-serif;
+  font-size: 1em;
+  font-style: normal;
+  font-weight: 400;
+  letter-spacing: 0em;
+  text-transform: none;
+  --gap: 40px;
+  padding-bottom: 4%;
+}
+
+.aboutus-page-link {
+  color: #9b51e0;
+  font-family: "Poppins", sans-serif;
+  font-size: 0.85em;
+  font-style: normal;
+  line-height: 1;
+  text-transform: uppercase;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+}
+
+.about-our-mission-image {
+  width: 100%;
+}
+
+.Leadership-container {
+  background-color: white;
+}
+
+.leadership-wraper {
+  margin: 0 10%;
+  text-align: center;
+  padding: 2% 0;
+}
+.leadership-subheading {
+  font-family: "Poppins", sans-serif;
+  font-size: 1em;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  margin-right: calc(0.1em * -1);
+  text-transform: uppercase;
+  color: #6b63a0;
+}
+
+.leadership-heading {
+  font-family: "Poppins", sans-serif;
+  font-size: 3em;
+  font-weight: 800;
+  line-height: 1.1;
+  margin-top: 0.35em;
+  font-style: normal;
+  text-transform: none;
+  letter-spacing: 0.05em;
+}
+
+.leadership-card {
+  width: 30%;
+  margin: 1%;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s;
+}
+
+.leadership-card:hover {
+  transform: scale(1.05);
+}
+
+.leadership-card img {
+  width: 100%;
+  height: auto;
+  border-bottom: 1px solid #ddd;
+}
+
+.leadership-card-content {
+  padding: 15px;
+}
+
+.leadership-card h2 {
+  margin: 0;
+  font-size: 1.2em;
+  color: #333;
+}
+
+.leadership-card p {
+  margin: 5px 0;
+  font-size: 0.9em;
+  color: #777;
+}
+
+@media (max-width: 768px) {
+  .card {
+    width: 100%;
+  }
+}
+
+.Leadership-container {
+  width: 100%;
+}

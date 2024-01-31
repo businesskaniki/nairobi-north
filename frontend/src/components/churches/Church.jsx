@@ -9,12 +9,13 @@ import GetConnected from "./churchComponents/GetConnected";
 import OnlineSermons from "./churchComponents/OnlineSermons";
 import NextStep from "./churchComponents/NextStep";
 import Events from "./churchComponents/Events";
-import Footer from '../Home/Footer'
+import Footer from "../Home/Footer";
 
 const Church = () => {
   const { uuid } = useParams();
   const dispatch = useDispatch();
   const church = useSelector((state) => state.church.church);
+  console.log(church);
 
   useEffect(() => {
     dispatch(getchurch(uuid));
@@ -29,9 +30,16 @@ const Church = () => {
   return (
     <div>
       <ChurchNav churchName={church.name} />
-      <ChurchSlider text={church.description_1} images={images} />
-      <About />
-      <GetConnected />
+      <ChurchSlider
+        text={church.description_1}
+        bgimage={church.background_image_3}
+      />
+      <About
+        ChurchName={church.name}
+        AboutChurch={church.about}
+        AboutImage={church.background_image_2 }
+      />
+      <GetConnected ministries={church.all_ministries} churchName={church.name} aboutImage={church.background_image_1} />
       <OnlineSermons />
       <NextStep />
       <Events />
